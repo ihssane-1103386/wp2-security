@@ -1,6 +1,6 @@
 body {
-            font-family: Nunito, Nunito;
-            background-color: #f2f2f2;
+            font-family: Nunito, Sans-serif;
+            background-color: #F2F6FF;
             margin: 0;
             padding: 0;
             display: flex;
@@ -8,6 +8,68 @@ body {
             align-items: center;
             height: 100vh;
             flex-direction: column;
+       }
+
+        .top-bar {
+           background-color: #F2F6FF;
+           position: fixed;
+           width: 100%;
+           top: 0;
+           left: 0;
+           padding: 15px;
+           z-index: 10;
+       }
+
+       .container-main {
+           max-width: 1200px;
+           margin: 0 auto;
+           display: flex;
+           justify-content: space-between;
+           align-items: center;
+       }
+
+       .left-side img {
+            width: 150px;
+            height: auto;
+       }
+
+       .main-navigation {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .main-navigation li {
+            margin: 0 20px;
+        }
+
+        .main-navigation a {
+            color: #041f74;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .button-container a {
+            margin-left: 15px;
+            color: white;
+            background-color: #3dbb56;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+
+       .button-container .button.two {
+            background-color: #041f74;
+        }
+
+        .button-container .button.one {
+            background-color: #3dbb56;
+        }
+
+        .button-container a:hover {
+            background-color: #2e9e47;
         }
 
         .login_form {
@@ -39,7 +101,7 @@ body {
             font-weight: bold;
             margin-bottom: 5px;
             display: block;
-            background-color: #8a79e0;
+            background-color: #041f74;
             color: white;
             padding: 5px;
             border-radius: 5px;
@@ -55,43 +117,28 @@ body {
         }
 
         .login_form .button {
-            background-color: #8a79e0;
+            background-color: #041f74;
             color: white;
             padding: 10px;
             border: none;
             border-radius: 5px;
             cursor: pointer;
             font-size: 16px;
-            font: Nunito;
             font-weight: bold;
         }
 
         .login_form .button:hover {
-            background-color: #55ad5b;
-
-        header {
-            position: absolute;
-            top: 100px
-            left: 100px
-            padding: 0px
-            float: left;
-            margin-right: 950px;
-            margin-bottom: 550px;
-
+            background-color: #3dbb56;
         }
 
-        header .logo {
-            width: 300px;
-            height: auto;
+        nav {
         }
-
         footer {
-            background-color: #f2f2f2;
+            background-color: #f2f6ff;
             padding: 20px;
             text-align: center;
         }
 
         footer a {
-        color: #55ad5b;
-        font: nunito;
+        color: #3dbb56;
         }
