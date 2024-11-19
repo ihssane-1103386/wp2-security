@@ -68,21 +68,22 @@ body {
         .login_form .button:hover {
             background-color: #55ad5b;
 
-                header {
+        header {
+            position: absolute;
             top: 100px
             left: 100px
-            padding: 100px
+            padding: 0px
             float: left;
             margin-right: 950px;
-            margin-bottom: 180px;
+            margin-bottom: 550px;
 
         }
 
         header .logo {
             width: 300px;
             height: auto;
-
         }
+
         footer {
             background-color: #f2f2f2;
             padding: 20px;
