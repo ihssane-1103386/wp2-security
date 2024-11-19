@@ -67,6 +67,21 @@ body {
 
         .login_form .button:hover {
             background-color: #55ad5b;
+
+                header {
+            top: 100px
+            left: 100px
+            padding: 100px
+            float: left;
+            margin-right: 950px;
+            margin-bottom: 180px;
+
+        }
+
+        header .logo {
+            width: 300px;
+            height: auto;
+
         }
         footer {
             background-color: #f2f2f2;
