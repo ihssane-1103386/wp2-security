@@ -1,5 +1,5 @@
 body {
-            font-family: Nunito, Sans-serif;
+            font-family: sans-serif, sans-serif;
             background-color: #F2F6FF;
             margin: 0;
             padding: 0;
@@ -11,7 +11,7 @@ body {
        }
 
         .top-bar {
-           background-color: #F2F6FF;
+           background-color: #FFFFFF;
            position: fixed;
            width: 100%;
            top: 0;
@@ -61,7 +61,7 @@ body {
         }
 
        .button-container .button.two {
-            background-color: #041f74;
+            background-color: #004df5;
         }
 
         .button-container .button.one {
