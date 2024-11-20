@@ -4,10 +4,12 @@ from flask import render_template
 app = Flask(__name__)
 
 @app.route("/")
-def test_file():
-    print(request.args.get("firstname"))
-    return render_template('Test.html')
+def inlog():
+    return render_template('inloggen.html')
 
+@app.route('/redacteur')
+def redacteur():
+    return render_template('redacteur.html')
 
 if __name__ == '__main__':
     app.run()
