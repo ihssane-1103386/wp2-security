@@ -23,6 +23,11 @@ body {
     margin: 0 15px;
 }
 
+.logo {
+    height: 50px;
+    width: auto;
+}
+
 .header div:first-child {
     display: flex;
     align-items: center;
