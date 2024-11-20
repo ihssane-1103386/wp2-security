@@ -1,0 +1,132 @@
+/* Algemene instellingen */
+body {
+    font-family: 'Nunito', sans-serif; /* Stijlrichtlijnen vermelden Nunito */
+    background-color: #F2F6FF; /* Lichtblauwe achtergrond zoals in stijlgids */
+    margin: 0;
+    padding: 0;
+    color: #041F74; /* Donkerblauwe kleur voor tekst */
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: white; /* Witte header */
+    padding: 20px 40px; /* Afstanden zoals in PDF */
+    color: #041F74;
+}
+
+.header img {
+    height: 50px;
+    width: auto;
+    display: block;
+    margin: 0 15px;
+}
+
+.logo {
+    height: 50px;
+    width: auto;
+}
+
+.header div:first-child {
+    display: flex;
+    align-items: center;
+    font-size: 24px; /* Tekstgrootte passend bij H2 */
+    font-weight: bold;
+}
+
+.header a.button {
+    text-decoration: none;
+    color: white;
+    background-color: #004DF5; /* Felblauwe knoppen */
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 18px;
+    margin-left: 15px;
+}
+
+.header a.button:hover {
+    background-color: #003BB3; /* Donkerdere blauwe hover kleur */
+}
+
+/* Container en tabellen */
+.container {
+    padding: 40px; /* Ruimte rondom de content */
+}
+
+.form-group {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+input[type="text"], select {
+    padding: 10px;
+    border: 1px solid #004DF5;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+button {
+    font-family: 'Nunito', sans-serif;
+    font-size: 18px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    background-color: #3DBB56; /* Groen voor primaire actieknoppen */
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #2A9142; /* Donkergroen bij hover */
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 30px;
+}
+
+table th, table td {
+    padding: 15px;
+    border: 1px solid #ddd;
+    text-align: left;
+}
+
+table th {
+    background-color: #004DF5;
+    color: white;
+    font-weight: bold;
+}
+
+table tr:nth-child(even) {
+    background-color: #F2F6FF; /* Afwisselende achtergrondkleuren */
+}
+
+/* Admin-only knoppen */
+.admin-only button {
+    background-color: #FF7972; /* Rood voor kritieke acties */
+}
+
+.admin-only button:hover {
+    background-color: #CC5A5A; /* Donkerrood hover */
+}
+
+/* Responsieve aanpassingen */
+@media (max-width: 768px) {
+    .header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .form-group {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    table th, table td {
+        font-size: 14px;
+    }
+}

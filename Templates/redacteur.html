@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Redacteuren</title>
+    <link rel="stylesheet" href="../static/css/style.css">
+</head>
+<body>
+    <header class="header">
+        <a href="https://www.test-correct.nl/welcome">
+            <img src="../static/assets/logo/testcorrect-logo.svg" alt="Test-Correct Logo" class="logo">
+        </a>
+        <nav>
+            <a href="#" class="button">Vragen</a>
+            <a href="#" class="button">AI Prompts</a>
+            <a href="#" class="button active">Redacteuren</a>
+        </nav>
+    </header>
+
+    <main class="container">
+        <h1>Redacteuren</h1>
+        <table class="redacteuren">
+            <thead>
+                <tr>
+                    <th>Redacteur</th>
+                    <th>Loginnaam</th>
+                    <th>Admin</th>
+                    <th class="admin-only">Acties</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Alex Karlas</td>
+                    <td>akarlas@test-correct.nl</td>
+                    <td><input type="checkbox" checked disabled></td>
+                    <td class="admin-only"><button class="button">Wijzig</button></td>
+                </tr>
+                <tr>
+                    <td>Robert Langeveld</td>
+                    <td>rlangeveld@test-correct.nl</td>
+                    <td><input type="checkbox" disabled></td>
+                    <td class="admin-only"><button class="button">Wijzig</button></td>
+                </tr>
+                <tr>
+                    <td>Mark Otting</td>
+                    <td>mark.otting@hr.nl</td>
+                    <td><input type="checkbox" disabled></td>
+                    <td class="admin-only"><button class="button">Wijzig</button></td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="button">
+            <button class="button">Nieuwe redacteur</button>
+        </div>
+    </main>
+</body>
+</html>
