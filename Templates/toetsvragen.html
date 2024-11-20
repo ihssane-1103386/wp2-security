@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Toetsvragen lijst</title>
+    <title> Toetsvragen lijst </title>
 </head>
 
 <style>
@@ -19,6 +19,7 @@
   cursor: pointer;
   font-family: nunito-bold, serif;
   transition-duration: 0.4s;
+  border-radius: 5px;
 }
 
 .button:hover {
@@ -26,10 +27,20 @@
   color: white;
 }
 
+
+.button:active {
+  background-color: #186825; /* Green */
+  color: white;
+  transition-duration: 0.2s;
+  margin: 3px 2px;
+}
+
+
 table {
   font-family: nunito-regular, serif; font-size: 15px;
   border-collapse: collapse;
   width: 100%;
+  margin: 4px 2px;
 }
 
 td, th {
@@ -48,32 +59,30 @@ tr:nth-child(even) {
 <button class="button"> Vragen </button>
 <button class="button"> Ai Promts </button>
 <button class="button"> Redacteuren </button>
-<!--<input type="button" class="button" value="Input Button">-->
 
+<h1 style="font-family:Nunito,serif; color:#041F74;"> Toetsvragen lijst </h1>
+<p style="font-family:Zilla slab,sans-serif; color:#041F74; margin: 4px 2px;" > Toetsvragen lijst </p>
 
-<h1 style="font-family:Nunito,serif; color:#041F74;"> Toetsvragen lijst</h1>
-<p style="font-family:Zilla slab,sans-serif;color:#041F74;">Toetsvragen lijst</p>
-
-<button type="button" style="font-family:Zilla slab,sans-serif;"> Ververs </button>
+<button type="button" style="font-family:Zilla slab,sans-serif; margin:4px 2px;" > Ververs </button>
 
 <table>
   <tr style="font-family: nunito-regular, serif; color:#041F74; font-size: 20px;">
-    <th>Vraag</th>
-    <th>vak</th>
-    <th>invoer datum</th>
-    <th>Taxonomie</th>
+    <th> Vraag</th>
+    <th> vak </th>
+    <th> Invoer datum </th>
+    <th> Taxonomie </th>
   </tr>
   <tr>
-    <td>Vraag 1</td>
-    <td>vak 1</td>
-    <td>18-11-2024</td>
-    <td><button type="button">Indexeer</button></td>
+    <td> Vraag 1 </td>
+    <td> Vak 1 </td>
+    <td> 18-11-2024 </td>
+    <td><button type="button"> Indexeer </button></td>
   </tr>
     <tr>
-    <td>Vraag 2</td>
-    <td>vak 2</td>
-    <td>18-11-2024</td>
-    <td><button type="button">Indexeer</button></td>
+    <td> Vraag 2 </td>
+    <td> Vak 2 </td>
+    <td> 18-11-2024 </td>
+    <td><button type="button"> Indexeer </button></td>
   </tr>
 </table>
 
