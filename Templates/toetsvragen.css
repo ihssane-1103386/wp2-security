@@ -1,0 +1,51 @@
+button {
+  text-align: left;
+  background-color: #3DBB56;
+  border: none;
+  color: white;
+  padding: 10px 32px;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 14px;
+  margin: 4px 2px;
+  cursor: pointer;
+  font-family: nunito-bold, serif;
+  transition-duration: 0.4s;
+  border-radius: 5px;
+}
+
+button:hover {
+  background-color: #259338;
+  color: white;
+}
+
+
+button:active {
+  background-color: #186825;
+  color: white;
+  transition-duration: 0.2s;
+  margin: 3px 2px;
+}
+
+
+table {
+  font-family: nunito-regular, serif; font-size: 15px;
+  border-collapse: collapse;
+  width: 95%;
+  margin: 4px 2px;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+
+text {
+    color: #041F74;
+    font-family: nunito, regular, serif; font-size: 20px
+}
