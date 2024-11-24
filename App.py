@@ -1,18 +1,8 @@
 import json, os
 from flask import Flask
 from flask import render_template
-from flask_cors import CORS
 
 app = Flask(__name__)
-CORS(app)
-
-# @app.route("/")
-# def inlog():
-#     return render_template('inloggen.html')
-#
-# @app.route('/redacteur')
-# def redacteur():
-#     return render_template('redacteur.html')
 
 @app.route("/")
 def toetsvragen():
@@ -25,6 +15,16 @@ def toetsvragen():
         print(f"Fout bij het openen van het JSON-bestand: {e}")
         vragen = []
     return render_template("toetsvragen.html", vragen=vragen)
+
+def toetsvragen_10():
+    vraag = toetsvragen()
+    for vraag in toetsvragen():
+        pagina = int(request.args.get("pagina", 1))
+        per_pagina = 10
+        if start is page 1:
+
+
+
 
 if __name__ == '__main__':
     app.run(debug=True)
