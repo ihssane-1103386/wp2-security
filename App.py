@@ -16,15 +16,12 @@ def toetsvragen():
         vragen = []
     return render_template("toetsvragen.html", vragen=vragen)
 
-def toetsvragen_10():
-    vraag = toetsvragen()
-    for vraag in toetsvragen():
-        pagina = int(request.args.get("pagina", 1))
-        per_pagina = 10
-        if start is page 1:
-
-
-
+# def toetsvragen_10():
+#     vraag = toetsvragen()
+#     for vraag in toetsvragen():
+#         pagina = int(request.args.get("pagina", 1))
+#         per_pagina = 10
+#         if start is page 1:
 
 if __name__ == '__main__':
     app.run(debug=True)
