@@ -1,5 +1,5 @@
-import json, os, jinja2
-from flask import Flask, request, jsonify
+import json, os
+from flask import Flask
 from flask import render_template
 from flask_cors import CORS
 

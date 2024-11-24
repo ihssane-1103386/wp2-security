@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title> Toetsvragen lijst </title>
-    <link rel="stylesheet" href="toetsvragen.css">
-<!--    <script src=""></script>-->
+<!--<link rel="stylesheet" href="toetsvragen.css">-->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/toetsvragen.css') }}">
 </head>
 <body>
     <button class="button"> Vragen </button>
@@ -15,7 +15,7 @@
         <button type="button" style="font-family:Zilla slab,sans-serif; margin:4px 2px;" > Ververs </button>
           <table>
             <thead>
-              <tr style="font-family: nunito-regular, serif; color:#041F74; font-size: 20px;">
+              <tr style="font-family: nunito-bold, serif; color:#041F74; font-size: 21px;">
                 <td>Vraag</td>
                 <td>vak</td>
                 <td>Invoer datum</td>
@@ -24,13 +24,10 @@
             </thead>
             <tbody>
               {% for vraag in vragen %}
-              <tr>
+              <tr style="font-family: nunito, serif; color:#041F74; font-size: 15px;">
                 <td>{{vraag.vraag}}</td>
                 <td>{{vraag.vak}}</td>
                 <td>{{vraag.datum if vraag.datum else "N/A"}}</td>
-<!--<td id="vraag"></td>-->
-<!--<td id="vak"></td>-->
-<!--<td id="datum"></td>-->
                 <td><button class="button"> Indexeer </button>
               </tr>
               {% else %}
@@ -40,16 +37,5 @@
               {% endfor %}
             </tbody>
           </table>
-<!--    <script>-->
-<!--    $(document).ready(function(){-->
-<!--      $.getJSON('http://127.0.0.1:5000/toetsvragen', function(data){-->
-<!--        $.each(data, function(key, value){-->
-<!--          $('vraag').append(value.vraag + "<br>");-->
-<!--          $('vak').append(value.vak + "<br>");-->
-<!--          $('datum').append(value.datum + "<br>");-->
-<!--        });-->
-<!--      });-->
-<!--    });-->
-<!--    </script>-->
 </body>
 </html>
