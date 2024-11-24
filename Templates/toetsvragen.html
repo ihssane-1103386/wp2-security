@@ -68,10 +68,10 @@ tr:nth-child(even) {
 
 <table>
   <tr style="font-family: nunito-regular, serif; color:#041F74; font-size: 20px;">
-    <th> Vraag</th>
-    <th> vak </th>
-    <th> Invoer datum </th>
-    <th> Taxonomie </th>
+    <td> Vraag</td>
+    <td> vak </td>
+    <td> Invoer datum </td>
+    <td> Taxonomie </td>
   </tr>
   <tr>
     <td> Vraag 1 </td>
@@ -88,4 +88,17 @@ tr:nth-child(even) {
 </table>
 
 </body>
+
+<script>
+  $(document).ready(function(){
+    $.getJSON('http://127.0.0.1:5000/toetsvragen', function(data){
+      $.each(data, function(key, value){
+        $('vraag').append(value.vraag + '<tr>');
+        $('vak').append(value.vak + '<br>');
+        $('datum').append(value.datum + '<br>');
+      });
+    });
+  });
+</script>
+
 </html>

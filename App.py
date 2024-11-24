@@ -1,23 +1,24 @@
-from flask import Flask, request
+import json
+from flask import Flask, request, jsonify
 from flask import render_template
+from flask_cors import CORS
 
 app = Flask(__name__)
+CORS(app)
 
-@app.route("/")
-def inlog():
-    return render_template('inloggen.html')
-
-@app.route('/redacteur')
-def redacteur():
-    return render_template('redacteur.html')
+# @app.route("/")
+# def inlog():
+#     return render_template('inloggen.html')
+#
+# @app.route('/redacteur')
+# def redacteur():
+#     return render_template('redacteur.html')
 
 @app.route("/toetsvragen")
 def toetsvragen():
-    print(request.args.get("naam zoeken in json file"))
-    print(request.args.get("categorie zoeken in json file"))
-    print(request.args.get("resultaten zoeken met/zonder taxonomie"))
-    print(request.args.get("10 questions from json file"))
-    return render_template('toetsvragen.html')
+    with open("static/assets/json files/questions_extract.json") as f:
+        questions = json.load(f)
+        return jsonify(questions), render_template('toetsvragen.html')
 
 if __name__ == '__main__':
     app.run()
