@@ -3,102 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <title> Toetsvragen lijst </title>
+    <link rel="stylesheet" href="toetsvragen.css">
+    <script src=""></script>
 </head>
-
-<style>
-
-.button {
-  text-align: left;
-  background-color: #3DBB56;
-  border: none;
-  color: white;
-  padding: 10px 32px;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 14px;
-  margin: 4px 2px;
-  cursor: pointer;
-  font-family: nunito-bold, serif;
-  transition-duration: 0.4s;
-  border-radius: 5px;
-}
-
-.button:hover {
-  background-color: #259338;
-  color: white;
-}
-
-
-.button:active {
-  background-color: #186825;
-  color: white;
-  transition-duration: 0.2s;
-  margin: 3px 2px;
-}
-
-
-table {
-  font-family: nunito-regular, serif; font-size: 15px;
-  border-collapse: collapse;
-  width: 95%;
-  margin: 4px 2px;
-}
-
-td, th {
-  border: 1px solid #dddddd;
-  text-align: left;
-  padding: 8px;
-}
-
-tr:nth-child(even) {
-  background-color: #dddddd;
-}
-</style>
-
 <body>
-
-<button class="button"> Vragen </button>
-<button class="button"> Ai Promts </button>
-<button class="button"> Redacteuren </button>
-
-<h1 style="font-family:Nunito,serif; color:#041F74;"> Toetsvragen lijst </h1>
-<p style="font-family:Zilla slab,sans-serif; color:#041F74; margin: 4px 2px;" > Toetsvragen lijst </p>
-
-<button type="button" style="font-family:Zilla slab,sans-serif; margin:4px 2px;" > Ververs </button>
-
-<table>
-  <tr style="font-family: nunito-regular, serif; color:#041F74; font-size: 20px;">
-    <td> Vraag</td>
-    <td> vak </td>
-    <td> Invoer datum </td>
-    <td> Taxonomie </td>
-  </tr>
-  <tr>
-    <td> Vraag 1 </td>
-    <td> Vak 1 </td>
-    <td> 18-11-2024 </td>
-    <td><button class="button"> Indexeer </button></td>
-  </tr>
-    <tr>
-    <td> Vraag 2 </td>
-    <td> Vak 2 </td>
-    <td> 18-11-2024 </td>
-    <td><button class="button"> Indexeer </button></td>
-  </tr>
-</table>
-
-</body>
-
-<script>
-  $(document).ready(function(){
-    $.getJSON('http://127.0.0.1:5000/toetsvragen', function(data){
-      $.each(data, function(key, value){
-        $('vraag').append(value.vraag + '<tr>');
-        $('vak').append(value.vak + '<br>');
-        $('datum').append(value.datum + '<br>');
+    <button class="button"> Vragen </button>
+    <button class="button"> Ai Promts </button>
+    <button class="button"> Redacteuren </button>
+      <h1 style="font-family:Nunito,serif; color:#041F74;"> Toetsvragen lijst </h1>
+      <p style="font-family:Zilla slab,sans-serif; color:#041F74; margin: 4px 2px;" > Toetsvragen lijst </p>
+        <button type="button" style="font-family:Zilla slab,sans-serif; margin:4px 2px;" > Ververs </button>
+          <table>
+            <thead>
+              <tr style="font-family: nunito-regular, serif; color:#041F74; font-size: 20px;">
+                <td>Vraag</td>
+                <td>vak</td>
+                <td>Invoer datum</td>
+                <td>Taxonomie</td>
+              </tr>
+            </thead>
+            <tbody>
+              {% for vraag in vragen %}
+              <tr>
+                <td id="vraag"></td>
+                <td id="Vak" ></td>
+                <td id="datum"></td>
+                <td><button class="button"> Indexeer </button>
+              </td>
+              {% endfor %}
+            </tbody>
+          </table>
+    <script>
+    $(document).ready(function(){
+      $.getJSON('http://127.0.0.1:5000/question_extract', function(data){
+        $.each(data, function(key, value){
+          $('vraag').append(value.vraag + "<br>");
+          $('vak').append(value.vak + "<br>");
+          $('datum').append(value.datum + "<br>");
+        });
       });
     });
-  });
-</script>
-
+    </script>
+</body>
 </html>

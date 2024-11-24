@@ -16,10 +16,9 @@ CORS(app)
 
 @app.route("/toetsvragen")
 def toetsvragen():
-    with (open("static/assets/json files/questions_extract.json") as f):
+    with open("static/assets/json files/questions_extract.json") as f:
         vragen = json.load(f)
-        return jsonify(vragen)
-    # , render_template('toetsvragen.html')
+    return render_template("toetsvragen.html", vragen=vragen)
 
 if __name__ == '__main__':
-    app.run()
+    app.run(debug=True)
