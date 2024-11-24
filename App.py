@@ -14,11 +14,16 @@ CORS(app)
 # def redacteur():
 #     return render_template('redacteur.html')
 
-@app.route("/toetsvragen")
+@app.route("/")
 def toetsvragen():
     json_path = os.path.join(app.root_path, 'static', 'assets', 'json files', 'questions_extract.json')
-    with open(json_path, 'r') as f:
-        vragen = json.load(f)
+
+    try:
+        with open(json_path, 'r') as f:
+            vragen = json.load(f)
+    except Exception as e:
+        print(f"Fout bij het openen van het JSON-bestand: {e}")
+        vragen = []
     return render_template("toetsvragen.html", vragen=vragen)
 
 if __name__ == '__main__':

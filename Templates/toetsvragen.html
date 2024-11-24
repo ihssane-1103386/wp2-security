@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title> Toetsvragen lijst </title>
     <link rel="stylesheet" href="toetsvragen.css">
-    <script src=""></script>
+<!--    <script src=""></script>-->
 </head>
 <body>
     <button class="button"> Vragen </button>
@@ -25,24 +25,31 @@
             <tbody>
               {% for vraag in vragen %}
               <tr>
-                <td id="vraag"></td>
-                <td id="Vak" ></td>
-                <td id="datum"></td>
+                <td>{{vraag.vraag}}</td>
+                <td>{{vraag.vak}}</td>
+                <td>{{vraag.datum if vraag.datum else "N/A"}}</td>
+<!--<td id="vraag"></td>-->
+<!--<td id="vak"></td>-->
+<!--<td id="datum"></td>-->
                 <td><button class="button"> Indexeer </button>
-              </td>
+              </tr>
+              {% else %}
+              <tr>
+                  <td colspan="4">geen vragen beschikbaar</td>
+              </tr>
               {% endfor %}
             </tbody>
           </table>
-    <script>
-    $(document).ready(function(){
-      $.getJSON('http://127.0.0.1:5000/toetsvragen', function(data){
-        $.each(data, function(key, value){
-          $('vraag').append(value.vraag + "<br>");
-          $('vak').append(value.vak + "<br>");
-          $('datum').append(value.datum + "<br>");
-        });
-      });
-    });
-    </script>
+<!--    <script>-->
+<!--    $(document).ready(function(){-->
+<!--      $.getJSON('http://127.0.0.1:5000/toetsvragen', function(data){-->
+<!--        $.each(data, function(key, value){-->
+<!--          $('vraag').append(value.vraag + "<br>");-->
+<!--          $('vak').append(value.vak + "<br>");-->
+<!--          $('datum').append(value.datum + "<br>");-->
+<!--        });-->
+<!--      });-->
+<!--    });-->
+<!--    </script>-->
 </body>
 </html>
