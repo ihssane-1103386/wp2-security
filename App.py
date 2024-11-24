@@ -1,4 +1,4 @@
-import json
+import json, os, jinja2
 from flask import Flask, request, jsonify
 from flask import render_template
 from flask_cors import CORS
@@ -16,7 +16,8 @@ CORS(app)
 
 @app.route("/toetsvragen")
 def toetsvragen():
-    with open("static/assets/json files/questions_extract.json") as f:
+    json_path = os.path.join(app.root_path, 'static', 'assets', 'json files', 'questions_extract.json')
+    with open(json_path, 'r') as f:
         vragen = json.load(f)
     return render_template("toetsvragen.html", vragen=vragen)
 
