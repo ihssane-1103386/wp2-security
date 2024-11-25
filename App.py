@@ -42,18 +42,18 @@ app = Flask(__name__)
 def toetsvragen():
     try:
         with open('static/assets/json files/questions_extract.json') as f:
-            vragen = json.load(f)
+          vragen = json.load(f)
 
-        page = int(request.args.get('page', 1))
+          page = int(request.args.get('page', 1))
 
-        per_page = 10
-        start = (page - 1) * per_page
-        end = start + per_page
+          per_page = 10
+          start = (page - 1) * per_page
+          end = start + per_page
 
-        vragen_pagina = vragen[start:end]
+          vragen_pagina = vragen[start:end]
 
-        next_page = page + 1 if end < len(vragen) else None
-        prev_page = page - 1 if start > 0 else None
+          next_page = page + 1 if end < len(vragen) else None
+          prev_page = page - 1 if start > 0 else None
 
         return render_template('toetsvragen.html', vragen=vragen_pagina,
                                page=page, next_page=next_page, prev_page=prev_page)

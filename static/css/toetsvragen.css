@@ -58,6 +58,7 @@
 .pagination a {
     padding: 10px;
     text-decoration: none;
+    color:blue;
     margin: 5px;
     border: 1px solid #ddd;
     border-radius: 5px;

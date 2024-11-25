@@ -37,5 +37,25 @@
               {% endfor %}
             </tbody>
           </table>
+          <div class="pagination">
+            {% if prev_page %}
+            <a href="{{ url_for('toetsvragen', page=prev_page) }}">Vorige</a>
+            {% endif %}
+
+            {% for num in range(1, (vragen|length // 10) + 2) %}
+            <a href="{{ url_for('toetsvragen', page=num) }}">{{ num }}</a>
+            {% endfor %}
+
+<!--            {% for num in range(1, total_pages + 1) %}-->
+<!--            <a href="{{ url_for('toetsvragen', page=num) }}"-->
+<!--            {% if num == request.args.get('page', 1, type=int) %} class="active" {% endif %}>-->
+<!--            {{ num }}-->
+<!--            </a>-->
+<!--            {% endfor %}-->
+
+            {% if next_page %}
+            <a href="{{ url_for('toetsvragen', page=next_page) }}">Volgende</a>
+            {% endif %}
+          </div>
 </body>
 </html>
