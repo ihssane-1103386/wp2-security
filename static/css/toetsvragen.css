@@ -1,4 +1,4 @@
-button {
+.button {
   text-align: left;
   background-color: #3DBB56;
   border: none;
@@ -14,13 +14,13 @@ button {
   border-radius: 5px;
 }
 
-button:hover {
+.button:hover {
   background-color: #259338;
   color: white;
 }
 
 
-button:active {
+.button:active {
   background-color: #186825;
   color: white;
   transition-duration: 0.2s;
@@ -28,24 +28,46 @@ button:active {
 }
 
 
-table {
+.table {
   font-family: nunito-regular, serif; font-size: 15px;
   border-collapse: collapse;
   width: 95%;
   margin: 4px 2px;
 }
 
-td, th {
+.td, th {
   border: 1px solid #dddddd;
   text-align: left;
   padding: 8px;
 }
 
-tr:nth-child(even) {
+.tr:nth-child(even) {
   background-color: #ededed;
 }
 
-text {
+.text {
     color: #041F74;
     font-family: nunito, regular, serif; font-size: 20px
+}
+
+.pagination {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.pagination a {
+    padding: 10px;
+    text-decoration: none;
+    margin: 5px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.pagination a:hover {
+    background-color: #f0f0f0;
+}
+
+.pagination a.active {
+    background-color: #041F74;
+    color: white;
 }
