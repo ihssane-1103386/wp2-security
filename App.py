@@ -38,7 +38,7 @@ app = Flask(__name__)
 #                            next_page=next_page,
 #                            prev_page=prev_page)
 
-@app.route("/")
+@app.route("/", endpoint="toetsvragen")
 def toetsvragen():
     try:
         with open('static/assets/json files/questions_extract.json') as f:
@@ -55,8 +55,10 @@ def toetsvragen():
           next_page = page + 1 if end < len(vragen) else None
           prev_page = page - 1 if start > 0 else None
 
+          total_pages = (len(vragen) + per_page - 1) // per_page
+
         return render_template('toetsvragen.html', vragen=vragen_pagina,
-                               page=page, next_page=next_page, prev_page=prev_page)
+                               page=page, next_page=next_page, prev_page=prev_page, total_pages=total_pages)
     except Exception as e:
         print(f"Fout tijdens het verwerken van de vragen: {e}")
         return "Interne serverfout", 500
