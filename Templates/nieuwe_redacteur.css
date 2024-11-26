@@ -74,6 +74,58 @@ body {
             background-color: #2e9e47;
         }
 
+        .toggle-switch {
+            position: relative;
+            display: inline-block;
+            width: 55px;
+            height: 25px;
+        }
+
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: 0.4s;
+            border-radius: 25px;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 19px;
+            width: 19px;
+            left: 3px;
+            bottom: 3px;
+            background-color: white;
+            transition: 0.2s;
+            border-radius: 50%;
+        }
+
+        input:checked + .slider {
+            background-color: #3dbb56;
+        }
+
+        input:checked + .slider:before {
+            transform: translateX(25px);
+        }
+
+        span {
+            font-size: 17px;
+            font-weight: bold;
+            color: #041F74;
+            margin-left: 5px;
+        }
+
         .login_form {
             background-color: #ffffff;
             padding: 20px;
@@ -110,7 +162,7 @@ body {
         }
 
         .login_form .field input {
-            width: 100%;
+            width: 95%;
             padding: 10px;
             border: 1px solid #ccc;
             border-radius: 5px;
@@ -127,6 +179,7 @@ body {
             cursor: pointer;
             font-size: 16px;
             font-weight: bold;
+            margin-top: 14px;
         }
 
         .login_form .button:hover {
@@ -135,7 +188,7 @@ body {
 
         nav {
         }
-        
+
         footer {
             background-color: #f2f6ff;
             padding: 20px;
