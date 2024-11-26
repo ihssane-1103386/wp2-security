@@ -46,13 +46,14 @@
                 <label for="password">Wachtwoord</label>
                 <input type="password" id="password" name="password" placeholder="Uw wachtwoord" required="">
             </div>
-            <div class="field">
-                <label for="admin">Admin</label>
-                <label class="toggleswitch">
-                    <input type="checkbox" id="admin" name="admin">
-                    <span class="slider"></span>
-                </label>
-            </div>
+            <div class="toggle-container">
+            <span>Admin</span>
+            <label class="toggle-switch">
+                <input type="checkbox" id="admin" name="is_admin">
+                <span class="slider"></span>
+            </label>
+            <button type="submit">Redacteur toevoegen </button>
+        </div>
             <button class="button" type="submit">Redacteur toevoegen</button>
         </form>
             </div>
