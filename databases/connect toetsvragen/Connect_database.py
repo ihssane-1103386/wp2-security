@@ -2,11 +2,11 @@ import sqlite3
 import json
 
 # Connecting the file with the database
-conn = sqlite3.connect('database_test.db')
+conn = sqlite3.connect('../database_test.db')
 cursor = conn.cursor()
 
 # Read the json file
-with open('questions_extract_test.json', 'r') as json_file:
+with open('../../static/assets/json files/questions_extract.json', 'r') as json_file:
     info = json.load(json_file)
 
 cursor.execute('''
