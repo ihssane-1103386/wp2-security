@@ -1,34 +1,48 @@
 import sqlite3
 import json
-from datetime import datetime
 
-# Test van ChatGPT voor opdracht 6
-conn = sqlite3.connect('database_test.db')  # Pas de bestandsnaam aan naar jouw database
+# Connecting the file with the database
+conn = sqlite3.connect('database_test.db')
 cursor = conn.cursor()
 
+# Read the json file
+with open('questions_extract_test.json', 'r') as json_file:
+    info = json.load(json_file)
 
 cursor.execute('''
     CREATE TABLE IF NOT EXISTS questions (
         questions_id TEXT PRIMARY KEY,
-        question TEXT,
-        date_created DATETIME DEFAULT CURRENT_TIMESTAMP
-    );
+        prompt_id TEXT,
+        user_id TEXT,
+        question TEXT NOT NULL,
+        taxonomy_bloom TEXT,
+        rtti TEXT,
+        exported BOOLEAN,
+        datum_created TEXT DEFAULT CURRENT_TIMESTAMP,
+        antwoord TEXT NOT NULL,
+        vak TEXT,
+        onderwijsniveau TEXT,
+        leerjaar INTEGER,
+        question_index INTEGER
+    )
 ''')
 
-# 3. Open het JSON-bestand en laad de data
-with open('questions_extract_test.json') as f:
-    vragen = json.load(f)
-
-for vraag in vragen:
-    question_id = vraag['question_id']  # Haal het question_id uit het JSON-object
-    vraag_tekst = vraag['vraag']  # Haal de vraagtekst uit het JSON-object
-
+for entry in info:
     cursor.execute('''
-        INSERT INTO questions (questions_id, question)
-        VALUES (?, ?)
-    ''', (question_id, vraag_tekst))
+    INSERT OR REPLACE INTO questions (questions_id, prompt_id, user_id, question, taxonomy_bloom, antwoord, vak, onderwijsniveau, leerjaar, question_index, datum)
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+    ''', (
+        entry['question_id'],
+        entry['vraag'],
+        entry['antwoord'],
+        entry['vak'],
+        entry['onderwijsniveau'],
+        entry['leerjaar'],
+        entry['question_index'],
+        entry.get('datum')
+    ))
 
 conn.commit()
 conn.close()
 
-print("Vragen succesvol toegevoegd!")
+print("Succesvol toegevoegd!")
