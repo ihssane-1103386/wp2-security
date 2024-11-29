@@ -1,3 +1,4 @@
+/*Button*/
 .button {
   text-align: left;
   background-color: #3DBB56;
@@ -9,7 +10,7 @@
   font-size: 14px;
   margin: 4px 2px;
   cursor: pointer;
-  font-family: nunito-bold, serif;
+  font-family:Nunito extrabold,sans-serif;
   transition-duration: 0.4s;
   border-radius: 5px;
 }
@@ -27,6 +28,7 @@
   margin: 3px 2px;
 }
 
+/*tabel*/
 
 .table {
   font-family: nunito-regular, serif; font-size: 15px;
@@ -45,11 +47,15 @@
   background-color: #ededed;
 }
 
+/*text*/
 .text {
     color: #041F74;
-    font-family: nunito, regular, serif; font-size: 20px
+    font-family: nunito, regular, serif;
+    font-size: 20px
 }
 
+
+/*pagina*/
 .pagination {
     margin-top: 20px;
     text-align: center;
@@ -71,4 +77,46 @@
 .pagination a.active {
     background-color: #041F74;
     color: white;
+}
+
+/*Menu Test-correct*/
+ul {
+    list-style-type: none;
+    margin: 25px;
+    padding: 0;
+    background-color: white;
+    overflow: hidden;
+    font-family: nunito-bold, serif;
+    font-size: 20px;
+}
+
+li {
+    display: inline;
+    float: left;
+}
+
+li a {
+    display: block;
+    color: #041F74;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-family: nunito-bold, serif;
+    font-size: 20px;
+}
+
+li b {
+    display: block;
+    color: #004DF5;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-family: nunito-bold, serif;
+    font-size: 20px;
+}
+
+li a:hover {
+    font-family: nunito-bold, serif;
+    font-size: 20px;
+    color: #004DF5 ;
 }
