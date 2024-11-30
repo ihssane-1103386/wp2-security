@@ -6,6 +6,16 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/toetsvragen.css') }}">
 </head>
 <body>
+    <ul class="ul">
+      <li class="li b"><a href="https://www.test-correct.nl/">TEST-CORRECT</a></li>
+      <li><a href="??">Oplossingen</a></li>
+      <li><a href="https://www.test-correct.nl/toetsplatform">Platform</a></li>
+      <li><a href="https://www.test-correct.nl/pakketten">Aanbod</a></li>
+      <li><a href="https://www.test-correct.nl/support">Over ons</a></li>
+      <li><a href="https://www.test-correct.nl/overons">Support</a></li>
+      <li><a href="??">Login</a></li>
+      <li><button class="button" style="font-family:Nunito extrabold,sans-serif; font-size: 17px; margin: 4px;">Boek online demo</button></li>
+    </ul>
     <button class="button"> Vragen </button>
     <button class="button"> Ai Promts </button>
     <button class="button"> Redacteuren </button>
@@ -27,7 +37,7 @@
                 <td>{{vraag.vraag}}</td>
                 <td>{{vraag.vak}}</td>
                 <td>{{vraag.datum if vraag.datum else "N/A"}}</td>
-                <td><button class="button"> Indexeer </button>
+                <td><button class="button"> Indexeer </button></td>
               </tr>
               {% else %}
               <tr>
