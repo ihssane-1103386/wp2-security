@@ -99,17 +99,7 @@ li a {
     display: block;
     color: #041F74;
     text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-    font-family:Nunito extrabold,sans-serif;
-    font-size: 17px;
-}
-
-li b {
-    display: block;
-    color: #004DF5;
-    text-align: center;
-    padding: 14px 16px;
+    padding: 10px 12px;
     text-decoration: none;
     font-family:Nunito extrabold,sans-serif;
     font-size: 17px;
