@@ -98,10 +98,10 @@ li {
 }
 
 li a {
-    display: block;
+    /*display: block;*/
     color: #041F74;
     text-align: center;
-    padding: 10px 12px;
+    padding: 25px 15px;
     text-decoration: none;
     font-family:Nunito extrabold,sans-serif;
     font-size: 18px;
@@ -111,4 +111,14 @@ li a:hover {
     font-family:Nunito extrabold,sans-serif;
     font-size: 18px;
     color: #004DF5 ;
+}
+
+li b {
+    /*display: block;*/
+    color: #041F74;
+    text-align: center;
+    padding: 10px 25px;
+    text-decoration: none;
+    font-family:Nunito extrabold,sans-serif;
+    font-size: 18px;
 }
