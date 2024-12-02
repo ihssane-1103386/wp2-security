@@ -17,12 +17,16 @@
 
 .button:hover {
   background-color: #259338;
+  /*background: linear-gradient(to right, #259338, #186825);*/
+  transition-duration: 0.4s;
   color: white;
+  box-shadow: 1px 1px 1px 1px rgba(85, 85, 85, 0.3);
 }
 
 
 .button:active {
   background-color: #186825;
+  /*outline: 2px #186825;*/
   color: white;
   transition-duration: 0.2s;
   margin: 3px 2px;
@@ -86,8 +90,6 @@ ul {
     padding: 0;
     background-color: white;
     overflow: hidden;
-    font-family: nunito-bold, serif;
-    font-size: 20px;
 }
 
 li {
@@ -102,11 +104,11 @@ li a {
     padding: 10px 12px;
     text-decoration: none;
     font-family:Nunito extrabold,sans-serif;
-    font-size: 17px;
+    font-size: 18px;
 }
 
 li a:hover {
     font-family:Nunito extrabold,sans-serif;
-    font-size: 17px;
+    font-size: 18px;
     color: #004DF5 ;
 }
