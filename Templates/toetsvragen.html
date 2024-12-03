@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title> Toetsvragen lijst </title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/toetsvragen.css') }}">
+</head>
+<body>
+    <ul class="ul">
+      <li><button style= "border: none; cursor: pointer; scale:95%;background:none;padding: 0 0;"><img src="static/assets/logo/testcorrect-logo.svg" alt="Link to test-correct homepage" href="https://www.test-correct.nl/" style= "border: none; cursor: pointer; scale:95%; background:none;"  ></button></li>
+<!--      <li><a href="https://www.test-correct.nl/">TEST-CORRECT</a></li>-->
+      <li><a href="??">Oplossingen</a></li>
+      <li><a href="https://www.test-correct.nl/toetsplatform">Platform</a></li>
+      <li><a href="https://www.test-correct.nl/pakketten">Aanbod</a></li>
+      <li><a href="https://www.test-correct.nl/support">Over ons</a></li>
+      <li><a href="https://www.test-correct.nl/overons">Support</a></li>
+      <li><a href="??">Login</a></li>
+      <li><button class="button" style="font-family:Nunito extrabold,sans-serif; font-size: 17px; margin: 4px;">Boek online demo</button></li>
+    </ul>
+    <button class="button"> Vragen </button>
+    <button class="button"> Ai Promts </button>
+    <button class="button"> Redacteuren </button>
+      <h1 style="font-family:Nunito,serif; color:#041F74;"> Toetsvragen lijst </h1>
+      <p style="font-family:Zilla slab,sans-serif; color:#041F74; margin: 4px 2px;" > Toetsvragen lijst </p>
+        <button class = "button" > Ververs </button>
+          <table>
+            <thead>
+              <tr style="font-family: nunito-bold, serif; color:#041F74; font-size: 21px;">
+                <td>Vraag</td>
+                <td>vak</td>
+                <td>Invoer datum</td>
+                <td>Taxonomie</td>
+              </tr>
+            </thead>
+            <tbody>
+              {% for vraag in vragen %}
+              <tr style="font-family: nunito, serif; color:#041F74; font-size: 15px;">
+                <td>{{vraag.vraag}}</td>
+                <td>{{vraag.vak}}</td>
+                <td>{{vraag.datum if vraag.datum else "N/A"}}</td>
+                <td><button class="button"> Indexeer </button></td>
+              </tr>
+              {% else %}
+              <tr>
+                  <td colspan="4">geen vragen beschikbaar</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+          <div class="pagination">
+            {% if prev_page %}
+                <a href="{{ url_for('toetsvragen', page=prev_page) }}">Vorige</a>
+            {% endif %}
+
+            {% for num in range(1, total_pages + 1) %}
+                <a href="{{ url_for('toetsvragen', page=num) }}"
+                  {% if num == page %} class="active" {% endif %}>
+                   {{ num }}
+                </a>
+            {% endfor %}
+
+            {% if next_page %}
+                <a href="{{ url_for('toetsvragen', page=next_page) }}">Volgende</a>
+            {% endif %}
+          </div>
+</body>
+</html>
