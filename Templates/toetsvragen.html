@@ -20,24 +20,24 @@
     <button class="button"> Vragen </button>
     <button class="button"> Ai Promts </button>
     <button class="button"> Redacteuren </button>
-      <h1 style="font-family:Nunito,serif; color:#041F74;"> Toetsvragen lijst </h1>
+      <h1 style="font-family:Nunito extrabold,sans-serif; color:#041F74;"> Toetsvragen lijst </h1>
       <p style="font-family:Zilla slab,sans-serif; color:#041F74; margin: 4px 2px;" > Toetsvragen lijst </p>
         <button class = "button" > Ververs </button>
           <table>
             <thead>
-              <tr style="font-family: nunito-bold, serif; color:#041F74; font-size: 21px;">
-                <td>Vraag</td>
-                <td>vak</td>
-                <td>Invoer datum</td>
-                <td>Taxonomie</td>
+              <tr style="font-family:Nunito extrabold,sans-serif; color:#041F74; font-size: 21px;">
+                <td style="padding: 5px;" >Vraag</td>
+                <td style="padding: 5px;" >vak</td>
+                <td style="padding: 5px;" >Invoer datum</td>
+                <td style="padding: 5px;" >Taxonomie</td>
               </tr>
             </thead>
             <tbody>
               {% for vraag in vragen %}
-              <tr style="font-family: nunito, serif; color:#041F74; font-size: 15px;">
-                <td>{{vraag.vraag}}</td>
-                <td>{{vraag.vak}}</td>
-                <td>{{vraag.datum if vraag.datum else "N/A"}}</td>
+              <tr style="font-family: nunito, serif; color:#041F74; font-size: 15px; margin: 10px;">
+                <td>{{ vraag[0] }}</td>
+                <td>{{ vraag[1] }}</td>
+                <td>{{ vraag[2] if vraag[2] else "N/A"}}</td>
                 <td><button class="button"> Indexeer </button></td>
               </tr>
               {% else %}
