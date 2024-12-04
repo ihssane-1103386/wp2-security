@@ -15,5 +15,9 @@ def redacteur():
 def vraag_indexeren():
     return render_template('vraag indexeren naar taxonomie.html')
 
+@app.route('/vraag_taxonomie_resultaat')
+def vraag_taxonomie_resultaat():
+    return render_template('vraag indexeren resultaat.html')
+
 if __name__ == '__main__':
     app.run()
