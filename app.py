@@ -15,13 +15,17 @@ def redacteur():
 def nieuwe_redacteur():
     return render_template('nieuwe_redacteur.html')
 
-@app.route('/vraag_indexeren')
-def vraag_indexeren():
-    return render_template('vraag indexeren naar taxonomie.html')
-
-@app.route('/vraag_taxonomie_resultaat')
+@app.route('/taxonomie_resultaat')
 def vraag_taxonomie_resultaat():
     return render_template('vraag indexeren resultaat.html')
+
+@app.route("/indexeren")
+def indexeren():
+    return render_template('vraag indexeren naar taxonomie.html')
+
+@app.route("/wijzig")
+def wijzig():
+    return render_template('wijzig_redacteuren.html')
 
 if __name__ == '__main__':
     app.run()
