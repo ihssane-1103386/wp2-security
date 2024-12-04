@@ -11,5 +11,9 @@ def inlog():
 def redacteur():
     return render_template('redacteur.html')
 
+@app.route('/vraag_indexeren')
+def vraag_indexeren():
+    return render_template('vraag indexeren naar taxonomie.html')
+
 if __name__ == '__main__':
     app.run()
