@@ -11,5 +11,9 @@ def inlog():
 def redacteur():
     return render_template('redacteur.html')
 
+@app.route("/nr")
+def nieuwe_redacteur():
+    return render_template('nieuwe_redacteur.html')
+
 if __name__ == '__main__':
     app.run()
