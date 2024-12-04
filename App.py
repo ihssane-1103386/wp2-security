@@ -24,11 +24,15 @@ def toetsvragen():
         total_vragen = cursor.fetchone()[0]
         total_pages = (total_vragen + per_page - 1) // per_page
 
+        # First_page = start
+        # Last_page = end + per_page
+
         next_page = page + 1 if end < total_vragen else None
         prev_page = page - 1 if start > 0 else None
 
+        # Ik probeer even wat, start en end kloppen niet.
         return render_template('toetsvragen.html', vragen=vragen_pagina,
-                               page=page, next_page=next_page, prev_page=prev_page, total_pages=total_pages)
+                               page=page, next_page=next_page, prev_page=prev_page, total_pages=total_pages, start=start, end=end)
     except Exception as e:
         print(f"Fout tijdens het verwerken van de vragen: {e}")
         return "Interne serverfout", 500

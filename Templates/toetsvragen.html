@@ -51,6 +51,10 @@
           <p></p>
 
           <div class="pagination">
+            {% if first_page %}
+                <a href="">Eerste pagina</a>
+            {% endif %}
+
             {% if prev_page %}
                 <a href="{{ url_for('toetsvragen', page=prev_page) }}">Vorige</a>
             {% endif %}
@@ -64,6 +68,10 @@
 
             {% if next_page %}
                 <a href="{{ url_for('toetsvragen', page=next_page) }}">Volgende</a>
+            {% endif %}
+
+            {% if last_page %}
+                <a href="">Laatste pagina</a>
             {% endif %}
           </div>
 </body>
