@@ -45,7 +45,7 @@
   border: 1px solid #dddddd;
   text-align: center;
   padding: 8px 8px;
-  margin: 6px;
+  margin: 6px 6px;
 }
 
 .tr:nth-child(even) {
