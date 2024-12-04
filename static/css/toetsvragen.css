@@ -1,6 +1,6 @@
 /*Button*/
 .button {
-  text-align: left;
+  text-align: right;
   background-color: #3DBB56;
   border: none;
   color: white;
@@ -8,7 +8,7 @@
   text-decoration: none;
   display: inline-block;
   font-size: 14px;
-  margin: 4px 2px;
+  /*margin: 4px 2px;*/
   cursor: pointer;
   font-family:Nunito extrabold,sans-serif;
   transition-duration: 0.4s;
@@ -22,7 +22,6 @@
   color: white;
   box-shadow: 1px 1px 1px 1px rgba(85, 85, 85, 0.3);
 }
-
 
 .button:active {
   background-color: #186825;
