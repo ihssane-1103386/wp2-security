@@ -36,7 +36,11 @@
                     <td>{{ prompt['user_id'] }}</td>
                     <td>{{ prompt['questions_count'] }}</td>
                     <td>{{ prompt['questions_correct'] }}</td>
-
+                    <td>
+                        <a href="/prompts/prompt_details/{{ loop.index }}" class="button">Details</a>
+                    </td>
+                </tr>
+                {% endfor %}
             </tbody>
         </table>
         <div class="button">
