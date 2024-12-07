@@ -1,7 +1,7 @@
 /*Button*/
 .button {
   text-align: right;
-  background-color: #3DBB56;
+  background-color: #3dbb56;
   border: none;
   color: white;
   padding: 10px 32px;
@@ -9,6 +9,7 @@
   display: inline-block;
   font-size: 14px;
   /*margin: 4px 2px;*/
+  /*margin: auto;*/
   cursor: pointer;
   font-family:Nunito extrabold,sans-serif;
   transition-duration: 0.4s;
@@ -31,6 +32,40 @@
   /*margin: 3px 2px;*/
 }
 
+/*Button*/
+.second-button {
+  text-align: right;
+  background-color: #041df5;
+  border: none;
+  color: white;
+  padding: 10px 32px;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 14px;
+  /*margin: 4px 2px;*/
+  /*margin: auto;*/
+  cursor: pointer;
+  font-family:Nunito extrabold,sans-serif;
+  transition-duration: 0.4s;
+  border-radius: 5px;
+}
+
+.second-button:hover {
+  background-color: #041F74;
+  /*background: linear-gradient(to right, #259338, #186825);*/
+  transition-duration: 0.4s;
+  color: white;
+  box-shadow: 1px 1px 1px 1px rgba(85, 85, 85, 0.3);
+}
+
+.second-button:active {
+  background-color: #041F74;
+  /*outline: 2px #186825;*/
+  color: white;
+  transition-duration: 0.2s;
+  /*margin: 3px 2px;*/
+}
+
 /*tabel*/
 
 .table {
@@ -38,6 +73,7 @@
   border-collapse: collapse;
   width: 95%;
   margin: 4px 2px;
+  /*padding: 5px 5px;  */
   text-align: center;
 }
 
@@ -108,7 +144,7 @@ li a {
     /*display: block;*/
     color: #041F74;
     text-align: center;
-    padding: 25px 15px;
+    /*padding: 25px 15px;*/
     text-decoration: none;
     font-family:Nunito extrabold,sans-serif;
     font-size: 18px;
