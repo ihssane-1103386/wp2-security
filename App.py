@@ -1,7 +1,6 @@
-import json, sqlite3
+import sqlite3
 from flask import Flask
 from flask import render_template, request
-import json
 
 app = Flask(__name__)
 
@@ -17,22 +16,31 @@ def toetsvragen():
         start = (page - 1) * per_page
         end = start + per_page
 
-        cursor.execute("SELECT question, vak, date_created FROM questions LIMIT ? OFFSET ?", (per_page,start))
-        vragen_pagina = cursor.fetchall()
+        cursor.execute("SELECT question, vak, date_created, taxonomy_bloom FROM questions LIMIT ? OFFSET ?", (per_page,start))
+        question_page = cursor.fetchall()
 
         cursor.execute("SELECT COUNT(*) FROM questions")
-        total_vragen = cursor.fetchone()[0]
-        total_pages = (total_vragen + per_page - 1) // per_page
+        total_questions = cursor.fetchone()[0]
+        total_pages = (total_questions + per_page - 1) // per_page
 
-        # First_page = start
-        # Last_page = end + per_page
-
-        next_page = page + 1 if end < total_vragen else None
+        next_page = page + 1 if end < total_questions else None
         prev_page = page - 1 if start > 0 else None
 
-        # Ik probeer even wat, start en end kloppen niet.
-        return render_template('toetsvragen.html', vragen=vragen_pagina,
-                               page=page, next_page=next_page, prev_page=prev_page, total_pages=total_pages, start=start, end=end)
+        show_first = page > 5
+        show_last = page < total_questions - 5
+        if total_pages <= 10:
+            page_numbers = list(range(1, 11))
+        else:
+            if page <= 5:
+                page_numbers = list(range(1, 6)) + ['...'] + [total_pages]
+            elif page >= total_pages - 4:
+                page_numbers = [1, '...'] + list(range(total_pages - 4, total_pages + 1))
+            else:
+                page_numbers = [1, '...'] + list(range(page - 2, page + 3)) + ['...'] + [total_pages]
+
+        return render_template('toetsvragen.html', vragen=question_page,
+                               page=page, next_page=next_page, prev_page=prev_page, total_pages=total_pages, page_numbers=page_numbers, show_first=show_first, show_last=show_last)
+
     except Exception as e:
         print(f"Fout tijdens het verwerken van de vragen: {e}")
         return "Interne serverfout", 500
