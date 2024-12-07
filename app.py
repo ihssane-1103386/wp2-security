@@ -30,7 +30,11 @@ def wijzig():
 
 @app.route("/ai_prompts")
 def ai_prompts():
+    conn = sqlite3.connect('databases/database.db')
+    conn.row_factory = sqlite3.Row
+    cursor = conn.cursor()
     return render_template('ai_prompts.html')
+
 
 
 if __name__ == '__main__':
