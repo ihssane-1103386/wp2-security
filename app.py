@@ -27,5 +27,10 @@ def indexeren():
 def wijzig():
     return render_template('wijzig_redacteuren.html')
 
+@app.route("/ai_prompts")
+def ai_prompts():
+    return render_template('ai_prompts.html')
+
+
 if __name__ == '__main__':
     app.run()
