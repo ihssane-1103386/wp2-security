@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AI Prompts</title>
-    <link rel="stylesheet" href="../static/css/style.css">
+    <link rel="stylesheet" href="../static/css/ai_prompts.css">
 </head>
 <body>
     <header class="header">
@@ -37,14 +37,14 @@
                     <td>{{ prompt['questions_count'] }}</td>
                     <td>{{ prompt['questions_correct'] }}</td>
                     <td>
-                        <a href="/prompts/prompt_details/{{ loop.index }}" class="button">Details</a>
+                        <a href="/prompt_details/{{ prompt['id'] }}" class="button">Details</a>
                     </td>
                 </tr>
                 {% endfor %}
             </tbody>
         </table>
         <div class="button">
-            <button class="button">Nieuwe prompt toevoegen</button>
+            <a href="/prompt_toevoegen/{{ prompt['id'] }}" class="button">Nieuwe prompt toevoegen</a>
         </div>
 
 
