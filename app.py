@@ -33,6 +33,15 @@ def ai_prompts():
     conn = sqlite3.connect('databases/database.db')
     conn.row_factory = sqlite3.Row
     cursor = conn.cursor()
+
+
+    cursor.execute('''
+            SELECT prompt, user_id, questions_count, questions_correct
+            FROM prompts
+        ''')
+    prompts = cursor.fetchall()
+
+
     return render_template('ai_prompts.html')
 
 
