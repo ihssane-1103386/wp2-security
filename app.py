@@ -41,6 +41,7 @@ def ai_prompts():
         ''')
     prompts = cursor.fetchall()
 
+    conn.close()
 
     return render_template('ai_prompts.html')
 
