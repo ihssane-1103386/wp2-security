@@ -43,7 +43,7 @@ def ai_prompts():
 
     conn.close()
 
-    return render_template('ai_prompts.html')
+    return render_template('ai_prompts.html', prompts=prompts)
 
 
 
