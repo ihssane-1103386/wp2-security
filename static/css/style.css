@@ -28,6 +28,38 @@ body {
     width: auto;
 }
 
+.container-main {
+           max-width: 1200px;
+           margin: 0 auto;
+           display: flex;
+           justify-content: space-between;
+           align-items: center;
+       }
+
+       .left-side img {
+            width: 230px;
+            height: auto;
+       }
+
+       .main-navigation {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .main-navigation li {
+            margin: 0 20px;
+        }
+
+        .main-navigation a {
+            color: #041f74;
+            text-decoration: none;
+            font-size: 19px;
+            font-weight: bold;
+            font-family: Nunito, sans-serif;
+        }
+
 .header div:first-child {
     display: flex;
     align-items: center;
