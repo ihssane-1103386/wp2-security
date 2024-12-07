@@ -9,7 +9,8 @@
     <ul class="ul">
       <li>
           <button style= "border: none; cursor: pointer; scale:95%; background:none;">
-              <img src="static/assets/logo/testcorrect-logo.svg" alt="Link to test-correct homepage" href="https://www.test-correct.nl/" style= "border: none; cursor: pointer; scale:95%; background:none; align-items: center;"  >
+              <img src="static/assets/logo/testcorrect-logo.svg" alt="Link to test-correct homepage" style= "border: none; cursor: pointer; scale:95%; background:none; align-items: center;"  >
+                <a href=""></a>
           </button>
       </li>
       <li style="padding:10px"><a href="??">Oplossingen</a></li>
@@ -48,11 +49,17 @@
                 <td style="padding:5px">{{ vraag[0] }}</td>
                 <td style="padding:5px">{{ vraag[1] }}</td>
                 <td style="padding:5px">{{ vraag[2] if vraag[2] else "N/A"}}</td>
-                <td style="padding:5px"><button class="button"> Indexeer </button></td>
+                <td>
+                    {% if vraag[3] %}
+                    <button class="button">Wijzigen</button>
+                    {% else %}
+                    <button class="button">Indexeer</button>
+                    {% endif %}
+                </td>
               </tr>
               {% else %}
               <tr>
-                  <td colspan="4">geen vragen beschikbaar</td>
+                  <td colspan="4">Geen vragen beschikbaar.</td>
               </tr>
               {% endfor %}
             </tbody>
