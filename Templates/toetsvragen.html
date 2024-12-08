@@ -28,15 +28,43 @@
       <li style="padding:0"><button class="button" style="font-family:Nunito extrabold,sans-serif; font-size: 17px;">Boek online demo</button>
       </li>
     </ul>
+
     <a href="{{ url_for('toetsvragen') }}" class="button" style="text-align: right;">Vragen</a>
     <a href="{{ url_for('inlog') }}" class="button" style="text-align: right;">AI Prompts</a>
     <a href="{{ url_for('inlog') }}" class="button" style="text-align: right;">Redacteuren</a>
+
     <h1 style="font-family:Nunito extrabold,sans-serif; color:#041F74;"> Toetsvragen lijst </h1>
+
     <p style="font-family:Zilla slab,sans-serif; color:#041F74; margin: 4px 2px;" > Toetsvragen lijst </p>
-    <form action="{{ url_for('toetsvragen') }}" method="GET" style="display: inline;">
-         <input type="hidden" name="page" value="{{ page }}">
-         <button class="button" type="submit" style="text-align: right;">Ververs</button>
+
+    <form action="{{ url_for('toetsvragen') }}" methode="GET">
+        <div style="margin-bottom:10px;">
+            <label for="search">Zoekwoord:</label>
+            <input type="text" id="search" name="search" value="{{ request.args.get('search','') }}" placeholder="Zoek vraag...">
+        </div>
+
+        <div style="margin-bottom:10px">
+            <label for="vak">Filter per vak:</label>
+            <select id="vak" name="vak">
+                <option value="">Alle vakken</option>
+                {% for v in unieke_vakken %}
+                <option value="{{ v }}" {% if v == request.args.get(vak) %}selected{% endif %}>{{ v }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div style="margin-bottom: 10px;">
+            <label for="taxonomie">Toon vragen met taxonomie:</label>
+            <input type="checkbox" id="taxonomie" name="taxonomie" value="1" {% if request.args.get(taxonomie) %}checked{% endif %}>
+        </div>
+
+
+        <div>
+            <button type="submit" class="button">Zoek</button>
+            <a href="{{ url_for('toetsvragen') }}" class="button">Ververs</a>
+        </div>
     </form>
+
     <table>
       <thead>
         <tr style="font-family:Nunito extrabold,sans-serif; color:#041F74; font-size: 21px;">
@@ -95,7 +123,7 @@
             <a href="{{ url_for('toetsvragen', page=next_page) }}">Volgende</a>
         {% endif %}
 
-        {% if last_page %}
+        {% if show_last %}
             <a href="{{ url_for('toetsvragen', page=total_pages) }}">Laatste pagina</a>
         {% endif %}
       </div>

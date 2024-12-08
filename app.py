@@ -13,7 +13,12 @@ def toetsvragen():
         # This is for searching in toetsvragen
         search = request.args.get("search", '').strip()
         vak = request.args.get("vak", '').strip()
-        taxonomie = request.args.get("taxonomie", '').strip()
+        taxonomie = request.args.get("taxonomie", '')
+
+        # This is for the page numbers
+        page = int(request.args.get('page', 1))
+        per_page = 10
+        start = (page - 1) * per_page
 
         query = "SELECT question, vak, date_created, taxonomy_bloom FROM questions WHERE 1=1"
         parameters = []
@@ -29,31 +34,35 @@ def toetsvragen():
         if taxonomie:
             query += " AND taxonomy_bloom IS NOT NULL"
 
-        count_query = f"SELECT COUNT(*) FROM ({query})"
-        cursor.execute(count_query, parameters)
-        total_questions = cursor.fetchone()[0]
+        query += " LIMIT ? OFFSET ?"
+        parameters.extend([per_page, start])
 
-        # This is for the page numbers
-        page = int(request.args.get('page', 1))
-
-        per_page = 10
-        start = (page - 1) * per_page
-        end = start + per_page
-
-        cursor.execute("SELECT question, vak, date_created, taxonomy_bloom FROM questions LIMIT ? OFFSET ?", (per_page,start))
+        cursor.execute(query, parameters)
         question_page = cursor.fetchall()
 
-        cursor.execute("SELECT COUNT(*) FROM questions")
+        count_query = "SELECT COUNT(*) FROM questions WHERE 1=1"
+        count_parameters = []  # Specifiek voor count_query
+        if search:
+            count_query += " AND question LIKE ?"
+            count_parameters.append(f"%{search}%")
+        if vak:
+            count_query += " AND vak = ?"
+            count_parameters.append(vak)
+        if taxonomie:
+            count_query += " AND taxonomy_bloom IS NOT NULL"
+
+        cursor.execute(count_query, count_parameters)
         total_questions = cursor.fetchone()[0]
+
         total_pages = (total_questions + per_page - 1) // per_page
+        next_page = page + 1 if page < total_pages else None
+        prev_page = page - 1 if page > 1 else None
 
-        next_page = page + 1 if end < total_questions else None
-        prev_page = page - 1 if start > 0 else None
+        show_first = page > 1
+        show_last = page < total_pages
 
-        show_first = page > 5
-        show_last = page < total_questions - 5
         if total_pages <= 10:
-            page_numbers = list(range(1, 11))
+            page_numbers = list(range(1, total_pages + 1))
         else:
             if page <= 5:
                 page_numbers = list(range(1, 6)) + ['...'] + [total_pages]
@@ -62,8 +71,11 @@ def toetsvragen():
             else:
                 page_numbers = [1, '...'] + list(range(page - 2, page + 3)) + ['...'] + [total_pages]
 
-        return render_template('toetsvragen.html', vragen=question_page,
-                               page=page, next_page=next_page, prev_page=prev_page, total_pages=total_pages, page_numbers=page_numbers, show_first=show_first, show_last=show_last, search=search, vak=vak, taxonomie=taxonomie)
+        cursor.execute("SELECT DISTINCT vak FROM questions")
+        unieke_vakken = [row[0] for row in cursor.fetchall()]
+
+        return (render_template
+            ('toetsvragen.html', vragen=question_page, page=page, next_page=next_page, prev_page=prev_page, total_pages=total_pages, page_numbers=page_numbers, show_first=show_first, show_last=show_last, search=search, vak=vak, taxonomie=taxonomie,unieke_vakken=unieke_vakken))
 
     except Exception as e:
         print(f"Fout tijdens het verwerken van de vragen: {e}")
