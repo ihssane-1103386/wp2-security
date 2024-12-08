@@ -1,5 +1,4 @@
-from flask import Flask, request
-from flask import render_template
+from flask import Flask, request, render_template, redirect, url_for
 import sqlite3
 
 app = Flask(__name__)
@@ -60,6 +59,7 @@ def prompt_details(prompts_id):
 
     cursor.execute('''
         SELECT 
+            prompts.prompts_id,
             prompts.prompt, 
             prompts.prompt_details, 
             users.display_name AS user_display_name, 
@@ -83,7 +83,18 @@ def prompt_details(prompts_id):
     else:
         return "Prompt not found", 404
 
+@app.route("/prompt_details/<int:prompts_id>/delete", methods=["POST"])
+def delete_prompt(prompts_id):
+    conn = sqlite3.connect('databases/database.db')
+    cursor = conn.cursor()
 
+
+    cursor.execute('DELETE FROM prompts WHERE prompts_id = ?', (prompts_id,))
+    conn.commit()
+    conn.close()
+
+
+    return redirect(url_for('ai_prompts'))
 
 if __name__ == '__main__':
     app.run()
