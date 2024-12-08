@@ -66,10 +66,11 @@
 }
 
 .td, th {
-  border: 1px solid #dddddd;
+  border: 1px solid #ffffff;
   text-align: center;
   padding: 8px 8px;
   margin: 6px 6px;
+  gap:10px
 }
 
 .tr:nth-child(even) {
@@ -119,10 +120,8 @@ li {
 }
 
 li a {
-    /*display: block;*/
     color: #041F74;
     text-align: center;
-    /*padding: 25px 15px;*/
     text-decoration: none;
     font-family:Nunito extrabold,sans-serif;
     font-size: 18px;
@@ -135,11 +134,36 @@ li a:hover {
 }
 
 li b {
-    /*display: block;*/
     color: #041F74;
     text-align: center;
     padding: 10px 25px;
     text-decoration: none;
     font-family:Nunito extrabold,sans-serif;
     font-size: 18px;
+}
+
+/*zoeken in tabel*/
+form {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+    padding: 10px;
+    background-color: #f1f1f1;
+    border: none;
+    border-radius: 5px;
+}
+
+form label {
+    display: inline-block;
+    margin-right: 10px;
+    font-weight: bold;
+}
+
+form input[type="text"],
+form select {
+    flex: 1;
+    padding: 8px;
+    font-size: 14px;
+    border: none;
+    border-radius: 5px;
 }
