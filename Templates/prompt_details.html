@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prompt Details</title>
+    <link rel="stylesheet" href="../static/css/ai_prompts.css">
+</head>
+<body>
+    <header class="header">
+        <a href="https://www.test-correct.nl/welcome">
+            <img src="../static/assets/logo/testcorrect-logo.svg" alt="Test-Correct Logo" class="logo">
+        </a>
+        <nav>
+            <a href="#" class="button">Vragen</a>
+            <a href="ai_prompts.html" class="button">AI Prompts</a>
+            <a href="redacteur.html" class="button">Redacteuren</a>
+        </nav>
+    </header>
+
+    <main class="container">
+        <h1>Prompt Details</h1>
+        <div class="details-container">
+            <p><strong>Prompt:</strong> {{ prompt['prompt'] }}</p>
+            <p><strong>Prompt details:</strong> {{ prompt['prompt_details'] }}</p>
+            <p><strong>Redacteur:</strong> {{ prompt['user_id'] }}</p>
+            <p><strong>Datum aangemaakt:</strong> {{ prompt['date_created'] }}</p>
+            <p><strong>Toetsvragen ingedeeld:</strong> {{ prompt['questions_count'] }}</p>
+            <p><strong>Correct:</strong> {{ prompt['questions_correct'] }}</p>
+            <p><strong>Incorrect:</strong> {{ prompt['questions_incorrect'] }}</p>
+        </div>
+        <a href="/ai_prompts" class="button">Terug naar overzicht</a>
+    </main>
+</body>
+</html>
