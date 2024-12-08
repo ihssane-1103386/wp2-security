@@ -1,5 +1,5 @@
 from flask import Flask, request, render_template, redirect, url_for
-import sqlite3
+from db_prompt_data import prompts_ophalen, prompt_details_ophalen, prompt_verwijderen
 
 app = Flask(__name__)
 
@@ -17,11 +17,11 @@ def nieuwe_redacteur():
 
 @app.route('/taxonomie_resultaat')
 def vraag_taxonomie_resultaat():
-    return render_template('vraag indexeren resultaat.html')
+    return render_template('vraag_indexeren_resultaat.html')
 
 @app.route("/indexeren")
 def indexeren():
-    return render_template('vraag indexeren naar taxonomie.html')
+    return render_template('vraag_indexeren_naar_taxonomie.html')
 
 @app.route("/wijzig")
 def wijzig():
@@ -29,71 +29,20 @@ def wijzig():
 
 @app.route("/ai_prompts")
 def ai_prompts():
-    conn = sqlite3.connect('databases/database.db')
-    conn.row_factory = sqlite3.Row
-    cursor = conn.cursor()
-
-    cursor.execute('''
-        SELECT 
-            prompts.prompts_id, 
-            prompts.prompt, 
-            users.display_name AS user_display_name, 
-            prompts.questions_count, 
-            prompts.questions_correct
-        FROM 
-            prompts
-        JOIN 
-            users ON prompts.user_id = users.user_id
-    ''')
-    prompts = cursor.fetchall()
-
-    conn.close()
-
+    prompts = prompts_ophalen()
     return render_template('ai_prompts.html', prompts=prompts)
 
 @app.route("/prompt_details/<int:prompts_id>")
 def prompt_details(prompts_id):
-    conn = sqlite3.connect('databases/database.db')
-    conn.row_factory = sqlite3.Row
-    cursor = conn.cursor()
-
-    cursor.execute('''
-        SELECT 
-            prompts.prompts_id,
-            prompts.prompt, 
-            prompts.prompt_details, 
-            users.display_name AS user_display_name, 
-            prompts.questions_count, 
-            prompts.questions_correct, 
-            prompts.questions_incorrect, 
-            prompts.date_created
-        FROM 
-            prompts
-        JOIN 
-            users ON prompts.user_id = users.user_id
-        WHERE 
-            prompts.prompts_id = ?
-    ''', (prompts_id,))
-    prompt = cursor.fetchone()
-
-    conn.close()
-
+    prompt = prompt_details_ophalen(prompts_id)
     if prompt:
         return render_template('prompt_details.html', prompt=prompt)
     else:
         return "Prompt not found", 404
 
 @app.route("/prompt_details/<int:prompts_id>/delete", methods=["POST"])
-def delete_prompt(prompts_id):
-    conn = sqlite3.connect('databases/database.db')
-    cursor = conn.cursor()
-
-
-    cursor.execute('DELETE FROM prompts WHERE prompts_id = ?', (prompts_id,))
-    conn.commit()
-    conn.close()
-
-
+def delete_prompt_route(prompts_id):
+    prompt_verwijderen(prompts_id)
     return redirect(url_for('ai_prompts'))
 
 if __name__ == '__main__':
