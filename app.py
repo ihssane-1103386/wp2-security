@@ -36,7 +36,7 @@ def ai_prompts():
 
 
     cursor.execute('''
-            SELECT prompt, user_id, questions_count, questions_correct
+            SELECT prompts_id, prompt, user_id, questions_count, questions_correct
             FROM prompts
         ''')
     prompts = cursor.fetchall()
@@ -44,6 +44,26 @@ def ai_prompts():
     conn.close()
 
     return render_template('ai_prompts.html', prompts=prompts)
+
+@app.route("/prompt_details/<int:prompts_id>")
+def prompt_details(prompts_id):
+    conn = sqlite3.connect('databases/database.db')
+    conn.row_factory = sqlite3.Row
+    cursor = conn.cursor()
+
+    cursor.execute('''
+        SELECT prompt, prompt_details, user_id, questions_count, questions_correct, questions_incorrect, date_created
+        FROM prompts
+        WHERE prompts_id = ?
+    ''', (prompts_id,))
+    prompt = cursor.fetchone()
+
+    conn.close()
+
+    if prompt:
+        return render_template('prompt_details.html', prompt=prompt)
+    else:
+        return "Prompt not found", 404
 
 
 
