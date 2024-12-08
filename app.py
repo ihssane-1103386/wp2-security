@@ -39,7 +39,7 @@ def taxonomie_wijzigen():
 
     return render_template('vraag geïndexeerd wijzigen.html', question=question)
 
-@app.route("/", endpoint="toetsvragen")
+@app.route("/toetsvragen")
 def toetsvragen():
     try:
         conn = sqlite3.connect('databases/database_toetsvragen.db')
