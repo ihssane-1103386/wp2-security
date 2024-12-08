@@ -34,11 +34,18 @@ def ai_prompts():
     conn.row_factory = sqlite3.Row
     cursor = conn.cursor()
 
-
     cursor.execute('''
-            SELECT prompts_id, prompt, user_id, questions_count, questions_correct
-            FROM prompts
-        ''')
+        SELECT 
+            prompts.prompts_id, 
+            prompts.prompt, 
+            users.display_name AS user_display_name, 
+            prompts.questions_count, 
+            prompts.questions_correct
+        FROM 
+            prompts
+        JOIN 
+            users ON prompts.user_id = users.user_id
+    ''')
     prompts = cursor.fetchall()
 
     conn.close()
@@ -52,9 +59,20 @@ def prompt_details(prompts_id):
     cursor = conn.cursor()
 
     cursor.execute('''
-        SELECT prompt, prompt_details, user_id, questions_count, questions_correct, questions_incorrect, date_created
-        FROM prompts
-        WHERE prompts_id = ?
+        SELECT 
+            prompts.prompt, 
+            prompts.prompt_details, 
+            users.display_name AS user_display_name, 
+            prompts.questions_count, 
+            prompts.questions_correct, 
+            prompts.questions_incorrect, 
+            prompts.date_created
+        FROM 
+            prompts
+        JOIN 
+            users ON prompts.user_id = users.user_id
+        WHERE 
+            prompts.prompts_id = ?
     ''', (prompts_id,))
     prompt = cursor.fetchone()
 
