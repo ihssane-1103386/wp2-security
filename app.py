@@ -8,11 +8,12 @@ app = Flask(__name__)
 @app.route("/", methods=['GET', 'POST'])
 def inlog():
     ingevulde_gebruikersnaam = ""
+    ingevulde_wachtwoord = ""
     if request.method == 'POST':
         ingevulde_gebruikersnaam = request.form.get('username')
         ingevulde_wachtwoord = request.form.get('password')
         return f"Welkom, {ingevulde_gebruikersnaam}!"
-    return render_template('inloggen.html', ingevulde_gebruikersnaam=ingevulde_gebruikersnaam)
+    return render_template('inloggen.html', ingevulde_gebruikersnaam=ingevulde_gebruikersnaam, ingevulde_wachtwoord=ingevulde_wachtwoord)
 
 @app.route('/redacteur')
 def redacteur():
