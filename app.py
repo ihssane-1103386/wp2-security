@@ -1,4 +1,3 @@
-import sqlite3
 from flask import Flask, request
 from flask import render_template
 
@@ -18,8 +17,11 @@ def nieuwe_redacteur():
 
 @app.route('/taxonomie_resultaat')
 def vraag_taxonomie_resultaat():
-    return render_template('vraag indexeren resultaat.html')
-
+    return render_template('vraag indexeren resultaat.html',
+                            vraag = "placeholder?",
+                            vak = "biologie",
+                            onderwijsniveau = "niveau 2",
+                            leerjaar = "leerjaar 1",)
 @app.route("/indexeren")
 def indexeren():
     vraag_id = request.args.get('vraag_id')
@@ -37,7 +39,12 @@ def taxonomie_wijzigen():
     cursor.execute("SELECT * FROM questions WHERE id = ?", (vraag_id,))
     question = cursor.fetchone()
 
-    return render_template('vraag geïndexeerd wijzigen.html', question=question)
+    return render_template('vraag indexeren naar taxonomie.html',
+                           vraag="placeholder?",
+                           vak="biologie",
+                           onderwijsniveau="niveau 2",
+                           leerjaar= "leerjaar 1",)
+
 
 @app.route("/toetsvragen")
 def toetsvragen():
@@ -79,6 +86,7 @@ def toetsvragen():
     except Exception as e:
         print(f"Fout tijdens het verwerken van de vragen: {e}")
         return "Interne serverfout", 500
+
 
 @app.route("/wijzig")
 def wijzig():

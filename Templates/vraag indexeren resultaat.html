@@ -7,9 +7,8 @@
 </head>
     <body>
         <header class="header">
-                <a href="../index.html">
-                    <img src="../assets/logo/logo_test-correct.svg" alt="Test-Correct Logo" class="logo">
-                </a>
+            <a href="../index.html">
+                <img src="../static/assets/logo/testcorrect-logo.svg" alt="Test-Correct Logo" class="logo">                </a>
                 <nav>
                     <a href="#" class="button">Vragen</a>
                     <a href="#" class="button">AI Prompts</a>
@@ -17,13 +16,13 @@
                 </nav>
         </header>
         <div class = "container">
-            <div>vraag: <span id="vraag"></span></div>
+            <div>vraag: <span id="vraag">{{ vraag }}</span></div>
             <br>
-            <div>vak: biologie</div>
+            <div>vak: {{ vak }}</div>
             <br>
-            <div>onderwijsniveau: niveau 2</div>
+            <div>onderwijsniveau: {{ onderwijsniveau }}</div>
             <br>
-            <div>leerjaar: 4</div>
+            <div>leerjaar: {{ leerjaar }}</div>
             <br>
             <form>
                 <label for="keuze">Keuze Taxonomie:</label>
