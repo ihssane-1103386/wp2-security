@@ -23,11 +23,13 @@ def redacteur():
 def nieuwe_redacteur():
     gebruikersnaam = ""
     email = ""
+    wachtwoord = ""
     if request.method == 'POST':
         gebruikersnaam = request.form.get('username')
         email = request.form.get('email')
+        wachtwoord = request.form.get('password')
         return f"{gebruikersnaam} toegevoegd!"
-    return render_template('nieuwe_redacteur.html', gebruikersnaam=gebruikersnaam, email=email)
+    return render_template('nieuwe_redacteur.html', gebruikersnaam=gebruikersnaam, email=email, wachtwoord=wachtwoord)
 
 @app.route('/taxonomie_resultaat')
 def vraag_taxonomie_resultaat():
