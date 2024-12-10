@@ -33,14 +33,14 @@
 </header>
 <h1>Nieuwe redacteur</h1>
 <div class="login_form">
-                <form action="login.php" method="POST">
+                <form action="/nr" method="POST">
             <div class="field">
                 <label for="username">Gebruikersnaam</label>
-                <input type="text" id="username" name="username" placeholder="Uw gebruikersnaam" required="">
+                <input type="text" id="username" name="username" placeholder="Uw gebruikersnaam" value="{{gebruikersnaam|default('')}}" required="">
             </div>
             <div class="field">
                     <label for="email">Email/login:</label>
-                    <input type="text" id="email" name="email" placeholder="Uw email" required="">
+                    <input type="text" id="email" name="email" placeholder="Uw email" value="{{email|default('')}}" required="">
             </div>
             <div class="field">
                 <label for="password">Wachtwoord</label>

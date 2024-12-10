@@ -18,9 +18,15 @@ def inlog():
 def redacteur():
     return render_template('redacteur.html')
 
-@app.route("/nr")
+@app.route("/nr", methods=['GET', 'POST'])
 def nieuwe_redacteur():
-    return render_template('nieuwe_redacteur.html')
+    gebruikersnaam = ""
+    email = ""
+    if request.method == 'POST':
+        gebruikersnaam = request.form.get('username')
+        email = request.form.get('email')
+        return f"{gebruikersnaam} toegevoegd!"
+    return render_template('nieuwe_redacteur.html', gebruikersnaam=gebruikersnaam, email=email)
 
 @app.route('/taxonomie_resultaat')
 def vraag_taxonomie_resultaat():
