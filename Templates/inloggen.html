@@ -36,7 +36,7 @@
                 <form action="login.php" method="POST">
             <div class="field">
                 <label for="username">Gebruikersnaam</label>
-                <input type="text" id="username" name="username" placeholder="Uw gebruikersnaam" required="">
+                <input type="text" id="username" name="username" placeholder="Uw gebruikersnaam" value="{{ingevulde_gebruikersnaam|default('') }}" required="">
             </div>
             <div class="field">
                 <label for="password">Wachtwoord</label>
