@@ -69,6 +69,10 @@ body {
         .button-container .button.one {
             background-color: #3dbb56;
         }
+        .button-container .button.three {
+            background-color: #3DBB56;
+            width: 95%;
+        }
 
         .button-container a:hover {
             background-color: #2e9e47;
