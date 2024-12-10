@@ -17,8 +17,11 @@ def nieuwe_redacteur():
 
 @app.route('/taxonomie_resultaat')
 def vraag_taxonomie_resultaat():
-    return render_template('vraag indexeren resultaat.html')
-
+    return render_template('vraag indexeren resultaat.html',
+                            vraag = "placeholder?",
+                            vak = "biologie",
+                            onderwijsniveau = "niveau 2",
+                            leerjaar = "leerjaar 1",)
 @app.route("/indexeren")
 def indexeren():
     return render_template('vraag indexeren naar taxonomie.html',
