@@ -23,6 +23,9 @@ def toetsvragen():
         query = "SELECT question, vak, date_created, taxonomy_bloom FROM questions WHERE 1=1"
         parameters = []
 
+        # Iets met previous page als de website ververst bij het zoeken?
+        # De zoekresultaten gelden maar per 10, ik wil alle vragen en het behouden, totdat er ververst wordt?
+
         if search:
             query += " AND question LIKE ?"
             parameters.append(f"%{search}%")
@@ -74,6 +77,10 @@ def toetsvragen():
         cursor.execute("SELECT DISTINCT vak FROM questions")
         unieke_vakken = [row[0] for row in cursor.fetchall()]
 
+        # Doorgeven van question_id nummer naar indexeren/wijzigen
+        # Question_query = "SELECT question_id FROM questions"
+        # request.args.get('question_id')
+
         return (render_template
             ('toetsvragen.html', vragen=question_page, page=page, next_page=next_page, prev_page=prev_page, total_pages=total_pages, page_numbers=page_numbers, show_first=show_first, show_last=show_last, search=search, vak=vak, taxonomie=taxonomie,unieke_vakken=unieke_vakken))
 
@@ -99,12 +106,12 @@ def vraag_taxonomie_resultaat():
 
 @app.route("/indexeren")
 def indexeren():
-    vraag_id = request.args.get('vraag_id')
+    question_id = request.args.get('question_id')
 
     conn = sqlite3.connect('databases/database_toetsvragen.db')
     cursor = conn.cursor()
 
-    cursor.execute("SELECT * FROM questions WHERE id = ?", (vraag_id,))
+    cursor.execute("SELECT question_id, question FROM questions WHERE question_id", (question_id,))
     question = cursor.fetchone()
 
     return render_template('vraag indexeren naar taxonomie.html', question=question)

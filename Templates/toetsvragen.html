@@ -82,9 +82,11 @@
          <td style="padding:5px">{{ vraag[2] if vraag[2] else "N/A"}}</td>
          <td>
             {% if vraag[3] %}
-            <button class="button">Wijzigen</button>
+<!--            <button class="button">Wijzigen</button>-->
+                <a href="{{ url_for('taxonomie_wijzigen') }}" class="button" >Wijzigen</a>
             {% else %}
-            <button class="button">Indexeer</button>
+<!--            <button class="button">Indexeer</button>-->
+                <a href="{{ url_for('indexeren') }}" class="button" >Indexeren</a>
             {% endif %}
          </td>
       </tr>
