@@ -21,7 +21,12 @@ def vraag_taxonomie_resultaat():
 
 @app.route("/indexeren")
 def indexeren():
-    return render_template('vraag indexeren naar taxonomie.html')
+    return render_template('vraag indexeren naar taxonomie.html',
+                           vraag="placeholder?",
+                           vak="biologie",
+                           onderwijsniveau="niveau 2",
+                           leerjaar= "leerjaar 1",)
+
 
 @app.route("/wijzig")
 def wijzig():
