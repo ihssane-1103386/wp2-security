@@ -15,6 +15,10 @@ def inlog():
         return f"Welkom, {ingevulde_gebruikersnaam}!"
     return render_template('inloggen.html', ingevulde_gebruikersnaam=ingevulde_gebruikersnaam, ingevulde_wachtwoord=ingevulde_wachtwoord)
 
+@app.route("/successvol_ingelogd")
+def success():
+    return render_template('successvol_ingelogd.html')
+
 @app.route('/redacteur')
 def redacteur():
     return render_template('redacteur.html')
