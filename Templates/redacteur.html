@@ -1,22 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Redacteuren</title>
-    <link rel="stylesheet" href="../static/css/style.css">
-</head>
-<body>
-    <header class="header">
-        <a href="https://www.test-correct.nl/welcome">
-            <img src="../static/assets/logo/testcorrect-logo.svg" alt="Test-Correct Logo" class="logo">
-        </a>
-        <nav>
-            <a href="#" class="button">Vragen</a>
-            <a href="#" class="button">AI Prompts</a>
-            <a href="#" class="button active">Redacteuren</a>
-        </nav>
-    </header>
+{%  extends "base.html" %}
+{% block main %}
 
     <main class="container">
         <h1>Redacteuren</h1>
@@ -46,5 +29,4 @@
             <button class="button">Nieuwe redacteur</button>
         </div>
     </main>
-</body>
-</html>
+{% endblock %}
