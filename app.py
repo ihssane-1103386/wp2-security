@@ -12,7 +12,7 @@ def inlog():
     if request.method == 'POST':
         ingevulde_gebruikersnaam = request.form.get('username')
         ingevulde_wachtwoord = request.form.get('password')
-        return render_template('successvol_ingelogd.html', message = f"Welkom {ingevulde_gebruikersnaam}, ga snel aan de slag!", link ="/", ingevulde_wachtwoord=ingevulde_wachtwoord)
+        return render_template('successvol_ingelogd.html', message = f"Welkom {ingevulde_gebruikersnaam}, ga snel aan de slag!", link ="https://www.test-correct.nl/", ingevulde_wachtwoord=ingevulde_wachtwoord)
     return render_template('inloggen.html')
 
 @app.route("/successvol_ingelogd")
@@ -32,7 +32,7 @@ def nieuwe_redacteur():
         gebruikersnaam = request.form.get('username')
         email = request.form.get('email')
         wachtwoord = request.form.get('password')
-        return render_template('successvol_ingelogd.html', message=f"{gebruikersnaam} succesvol toegevoegd! Klik hieronder om verder te gaan!", link="/", gebruikersnaam=gebruikersnaam, email=email, wachtwoord=wachtwoord)
+        return render_template('successvol_ingelogd.html', message=f"{gebruikersnaam} succesvol toegevoegd! Klik hieronder om verder te gaan!", link="https://www.test-correct.nl/", gebruikersnaam=gebruikersnaam, email=email, wachtwoord=wachtwoord)
     return render_template('nieuwe_redacteur.html')
 
 @app.route('/taxonomie_resultaat')
