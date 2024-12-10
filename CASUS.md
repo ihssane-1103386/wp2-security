@@ -51,15 +51,16 @@ Een voorbeeld van hoe het CRUD proces rondom de prompts te maken is te vinden in
 ### Export functie
 Bij het exporteren worden alle beoordeelde vragen en de taxonomieën per vraag opgeslagen in json formaat.
 - Er is een pagina die de beoordeelde vragen toont. Op deze pagina kun je kiezen om alles of een deel van de beoordeelde vragen te exporteren.
-Een voorbeeld van de export ziet er als volgt uit: 
+Een voorbeeld van de export ziet er als volgt uit:
+
 ```json
-[ 
+[
   {
     "question_id": "636634A859744F76A723244C27E9606D",
-    "question": "Hoe ziet de aminozuurvolgorde eruit van een eiwitketen die met dit RNA wordt opgebouwd, te beginnen vanaf de linkerkant (5'-kant)?",
+    "vraag": "Hoe ziet de aminozuurvolgorde eruit van een eiwitketen die met dit RNA wordt opgebouwd, te beginnen vanaf de linkerkant (5'-kant)?",
     "taxonomie": "Onthouden",
     "rtti": "Reproductie"
-   }
+  }
 ]
 ```
 

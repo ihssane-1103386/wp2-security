@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title> Toetsvragen lijst </title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/toetsvragen.css') }}">
+</head>
+<body>
+    <ul class="ul">
+      <li>
+          <button style= "border: none; cursor: pointer; scale:95%; background:none;">
+              <img src="static/assets/logo/testcorrect-logo.svg" alt="Link to test-correct homepage" style= "border: none; cursor: pointer; scale:95%; background:none; align-items: center;"  >
+                <a href=""></a>
+          </button>
+      </li>
+      <li style="padding:10px"><a href="??">Oplossingen</a></li>
+      <li style="padding:10px"><a href="https://www.test-correct.nl/toetsplatform">Platform</a></li>
+      <li style="padding:10px"><a href="https://www.test-correct.nl/pakketten">Aanbod</a></li>
+      <li style="padding:10px"><a href="https://www.test-correct.nl/support">Over ons</a></li>
+      <li style="padding:10px"><a href="https://www.test-correct.nl/overons">Support</a></li>
+      <li
+        style="color: #041F74; font-family:nunito, regular, serif; font-size:18px;padding:50px">
+        <img src="static/assets/icons/telefoon_icoon.png" alt="Telefoonnummer" style="width:19PX; height:17px;text-align: center;">
+        010 7171 171
+      </li>
+      <li style="padding:25px"><button class="second-button" style="font-family:Nunito extrabold,sans-serif; font-size: 17px;">Login</button>
+      </li>
+      <li style="padding:0"><button class="button" style="font-family:Nunito extrabold,sans-serif; font-size: 17px;">Boek online demo</button>
+      </li>
+    </ul>
+    <button class="button" style=" text-align: right; "><a> href="{{ url_for('toetsvragen') }}"</a> Vragen </button>
+    <button class="button" style=" text-align: right; "><a> href="{{ url_for('Ai prompts') }}"</a> Ai Promts </button>
+    <button class="button" style=" text-align: right; "><a> href="{{ url_for('wijzig_redacteuren') }}"</a> Redacteuren </button>
+      <h1 style="font-family:Nunito extrabold,sans-serif; color:#041F74;"> Toetsvragen lijst </h1>
+      <p style="font-family:Zilla slab,sans-serif; color:#041F74; margin: 4px 2px;" > Toetsvragen lijst </p>
+        <button class = "button" > Ververs </button>
+          <table>
+            <thead>
+              <tr style="font-family:Nunito extrabold,sans-serif; color:#041F74; font-size: 21px;">
+                <td style="padding: 5px;" >Vraag</td>
+                <td style="padding: 5px;" >vak</td>
+                <td style="padding: 5px;" >Invoer datum</td>
+                <td style="padding: 5px;" >Taxonomie</td>
+              </tr>
+            </thead>
+            <tbody>
+              {% for vraag in vragen %}
+              <tr style="font-family: nunito, serif; color:#041F74; font-size: 15px; margin: 10px;">
+                <td style="padding:5px">{{ vraag[0] }}</td>
+                <td style="padding:5px">{{ vraag[1] }}</td>
+                <td style="padding:5px">{{ vraag[2] if vraag[2] else "N/A"}}</td>
+                <td>
+                    {% if vraag[3] %}
+                    <button class="button">Wijzigen</button>
+                    {% else %}
+                    <button class="button">Indexeer</button>
+                    {% endif %}
+                </td>
+              </tr>
+              {% else %}
+              <tr>
+                  <td colspan="4">Geen vragen beschikbaar.</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+
+          <p></p>
+
+          <div class="pagination">
+            {% if show_first %}
+                <a href="{{ url_for('toetsvragen', page=1) }}">Eerste pagina</a>
+            {% endif %}
+
+            {% if prev_page %}
+                <a href="{{ url_for('toetsvragen', page=prev_page) }}">Vorige</a>
+            {% endif %}
+
+            {% for num in page_numbers %}
+              {% if num == '...' %}
+                 <span>...</span>
+
+              {% else %}
+                   <a href="{{ url_for('toetsvragen', page=num) }}"
+                      class="{% if num == page %}active{% endif %}">
+                      {{ num }}
+                   </a>
+              {% endif %}
+            {% endfor %}
+
+
+            {% if next_page %}
+                <a href="{{ url_for('toetsvragen', page=next_page) }}">Volgende</a>
+            {% endif %}
+
+            {% if last_page %}
+                <a href="{{ url_for('toetsvragen', page=total_pages) }}">Laatste pagina</a>
+            {% endif %}
+          </div>
+</body>
+</html>
