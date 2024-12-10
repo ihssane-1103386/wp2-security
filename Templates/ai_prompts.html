@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Prompts</title>
+    <link rel="stylesheet" href="../static/css/ai_prompts.css">
+</head>
+<body>
+    <header class="header">
+        <a href="https://www.test-correct.nl/welcome">
+            <img src="../static/assets/logo/testcorrect-logo.svg" alt="Test-Correct Logo" class="logo">
+        </a>
+        <nav>
+            <a href="#" class="button">Vragen</a>
+            <a href="/ai_prompts" class="button">AI Prompts</a>
+            <a href="/redacteur" class="button active">Redacteuren</a>
+        </nav>
+    </header>
+    <main class="container">
+        <h1>AI Prompts</h1>
+        <table class="AI Prompts">
+            <thead>
+                <tr>
+                    <th>Prompt</th>
+                    <th>Redacteur</th>
+                    <th>Toetsvragen ingedeeld</th>
+                    <th>Correct</th>
+                    <th>Acties</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for prompt in prompts %}
+                <tr>
+                    <td>{{ prompt['prompt'] }}</td>
+                    <td>{{ prompt['user_display_name'] }}</td>
+                    <td>{{ prompt['questions_count'] }}</td>
+                    <td>{{ prompt['questions_correct'] }}</td>
+                    <td>
+                        <a href="/prompt_details/{{ prompt['prompts_id'] }}" class="button active">details</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <div class="button">
+            <a href="/prompt_toevoegen"class="button">Nieuwe prompt toevoegen</a>
+        </div>
+
+
+    </main>
+
+</body>
+</html>

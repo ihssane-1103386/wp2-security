@@ -1,6 +1,7 @@
 import sqlite3
-from flask import Flask, request
-from flask import render_template
+
+from flask import Flask, request, render_template, redirect, url_for
+from db_prompt_data import prompts_ophalen, prompt_details_ophalen, prompt_verwijderen
 
 app = Flask(__name__)
 
@@ -18,8 +19,11 @@ def nieuwe_redacteur():
 
 @app.route('/taxonomie_resultaat')
 def vraag_taxonomie_resultaat():
-    return render_template('vraag indexeren resultaat.html')
-
+    return render_template('vraag indexeren resultaat.html',
+                            vraag = "placeholder",
+                            vak = "biologie",
+                            onderwijsniveau = "niveau 2",
+                            leerjaar = "leerjaar 1",)
 @app.route("/indexeren")
 def indexeren():
     vraag_id = request.args.get('vraag_id')
@@ -27,7 +31,11 @@ def indexeren():
     cursor = conn.cursor()
     cursor.execute("SELECT * FROM questions WHERE id = ?", (vraag_id,))
     question = cursor.fetchone()
-    return render_template('vraag indexeren naar taxonomie.html', question=question)
+    return render_template('vraag indexeren naar taxonomie.html',
+                           vraag= "placeholder", #julie, heb hier even iets veranderd om het te linken met de jinja code
+                           vak="biologie",
+                           onderwijsniveau="niveau 2",
+                           leerjaar="leerjaar 1", )
 
 @app.route("/taxonomie_wijzigen")
 def taxonomie_wijzigen():
@@ -37,7 +45,8 @@ def taxonomie_wijzigen():
     cursor.execute("SELECT * FROM questions WHERE id = ?", (vraag_id,))
     question = cursor.fetchone()
 
-    return render_template('vraag geïndexeerd wijzigen.html', question=question)
+    return render_template('taxonomie_wijzigen.html', question=question)
+
 
 @app.route("/toetsvragen")
 def toetsvragen():
@@ -80,9 +89,28 @@ def toetsvragen():
         print(f"Fout tijdens het verwerken van de vragen: {e}")
         return "Interne serverfout", 500
 
+
 @app.route("/wijzig")
 def wijzig():
     return render_template('wijzig_redacteuren.html')
+
+@app.route("/ai_prompts")
+def ai_prompts():
+    prompts = prompts_ophalen()
+    return render_template('ai_prompts.html', prompts=prompts)
+
+@app.route("/prompt_details/<int:prompts_id>")
+def prompt_details(prompts_id):
+    prompt = prompt_details_ophalen(prompts_id)
+    if prompt:
+        return render_template('prompt_details.html', prompt=prompt)
+    else:
+        return "Prompt not found", 404
+
+@app.route("/prompt_details/<int:prompts_id>/delete", methods=["POST"])
+def delete_prompt_route(prompts_id):
+    prompt_verwijderen(prompts_id)
+    return redirect(url_for('ai_prompts'))
 
 if __name__ == '__main__':
     app.run()
