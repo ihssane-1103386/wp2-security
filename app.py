@@ -18,7 +18,7 @@ def nieuwe_redacteur():
 @app.route('/taxonomie_resultaat')
 def vraag_taxonomie_resultaat():
     return render_template('vraag indexeren resultaat.html',
-                            vraag = "placeholder?",
+                            vraag = "placeholder",
                             vak = "biologie",
                             onderwijsniveau = "niveau 2",
                             leerjaar = "leerjaar 1",)
@@ -29,7 +29,11 @@ def indexeren():
     cursor = conn.cursor()
     cursor.execute("SELECT * FROM questions WHERE id = ?", (vraag_id,))
     question = cursor.fetchone()
-    return render_template('vraag indexeren naar taxonomie.html', question=question)
+    return render_template('vraag indexeren naar taxonomie.html',
+                           vraag= "placeholder", #julie, heb hier even iets veranderd om het te linken met de jinja code
+                           vak="biologie",
+                           onderwijsniveau="niveau 2",
+                           leerjaar="leerjaar 1", )
 
 @app.route("/taxonomie_wijzigen")
 def taxonomie_wijzigen():
@@ -39,11 +43,7 @@ def taxonomie_wijzigen():
     cursor.execute("SELECT * FROM questions WHERE id = ?", (vraag_id,))
     question = cursor.fetchone()
 
-    return render_template('vraag indexeren naar taxonomie.html',
-                           vraag="placeholder?",
-                           vak="biologie",
-                           onderwijsniveau="niveau 2",
-                           leerjaar= "leerjaar 1",)
+    return render_template('taxonomie_wijzigen.html', question=question)
 
 
 @app.route("/toetsvragen")
