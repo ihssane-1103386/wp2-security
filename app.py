@@ -32,7 +32,7 @@ def nieuwe_redacteur():
         gebruikersnaam = request.form.get('username')
         email = request.form.get('email')
         wachtwoord = request.form.get('password')
-        return render_template('successvol_ingelogd.html', message=f"Welkom {gebruikersnaam}, ga snel aan de slag!", link="/", gebruikersnaam=gebruikersnaam, email=email, wachtwoord=wachtwoord)
+        return render_template('successvol_ingelogd.html', message=f"{gebruikersnaam} succesvol toegevoegd! Klik hieronder om verder te gaan!", link="/", gebruikersnaam=gebruikersnaam, email=email, wachtwoord=wachtwoord)
     return render_template('nieuwe_redacteur.html')
 
 @app.route('/taxonomie_resultaat')
