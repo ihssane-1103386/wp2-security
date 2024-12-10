@@ -1,15 +1,27 @@
-from flask import Flask, request
-from flask import render_template
+from flask import Flask, request, render_template
+import sqlite3
 
 app = Flask(__name__)
+DATABASE_FILE = "databases/database.db"
 
 @app.route("/")
 def inlog():
     return render_template('inloggen.html')
 
+
+# redacteuren uit de database halen
+def get_redacteuren():
+    conn = sqlite3.connect(DATABASE_FILE)
+    cursor = conn.cursor()
+    cursor.execute("SELECT display_name, login, is_admin FROM users")
+    redacteuren = cursor.fetchall()
+    conn.close()
+    return redacteuren
+
 @app.route('/redacteur')
 def redacteur():
-    return render_template('redacteur.html')
+    redacteuren = get_redacteuren()
+    return render_template('redacteur.html', redacteuren=redacteuren)
 
 @app.route("/nr")
 def nieuwe_redacteur():
@@ -93,4 +105,4 @@ def wijzig():
     return render_template('wijzig_redacteuren.html')
 
 if __name__ == '__main__':
-    app.run()
+    app.run(debug=True)
