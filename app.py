@@ -5,9 +5,14 @@ from db_prompt_data import prompts_ophalen, prompt_details_ophalen, prompt_verwi
 
 app = Flask(__name__)
 
-@app.route("/")
+@app.route("/", methods=['GET', 'POST'])
 def inlog():
-    return render_template('inloggen.html')
+    ingevulde_gebruikersnaam = ""
+    if request.method == 'POST':
+        ingevulde_gebruikersnaam = request.form.get('username')
+        ingevulde_wachtwoord = request.form.get('password')
+        return f"Welkom, {ingevulde_gebruikersnaam}!"
+    return render_template('inloggen.html', ingevulde_gebruikersnaam=ingevulde_gebruikersnaam)
 
 @app.route('/redacteur')
 def redacteur():
