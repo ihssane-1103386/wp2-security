@@ -20,7 +20,7 @@
                     <td>
                         <input type="checkbox" {% if redacteur[2] %}checked{% endif %} disabled>
                     </td>
-                    <td class="admin-only"><button class="button">Wijzig</button></td>
+                    <td class="admin-only"><button onclick="window.location.href='{{ url_for('wijzig') }}';" class="button">Wijzig</button></td>
                 </tr>
                 {% endfor %}
             </tbody>
