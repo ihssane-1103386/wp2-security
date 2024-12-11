@@ -24,7 +24,7 @@ def toetsvragen():
         parameters = []
 
         # Iets met previous page als de website ververst bij het zoeken?
-        # De zoekresultaten gelden maar per 10, ik wil alle vragen en het behouden, totdat er ververst wordt?
+        # De zoekresultaten gelden per 10, ik wil alle vragen en het behouden, totdat er ververst wordt?
 
         if search:
             query += " AND question LIKE ?"
