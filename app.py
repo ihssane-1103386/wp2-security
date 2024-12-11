@@ -1,5 +1,5 @@
 from flask import Flask, request, render_template, redirect, url_for
-from db_prompt_data import prompts_ophalen, prompt_details_ophalen, prompt_verwijderen
+from model_prompts import prompts_ophalen, prompt_details_ophalen, prompt_verwijderen
 import sqlite3
 
 app = Flask(__name__)
