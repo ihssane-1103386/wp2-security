@@ -61,7 +61,10 @@ def nieuwe_redacteur():
                 (gebruikersnaam, wachtwoord, email, is_admin)
             )
             conn.commit()
-        except
+        except sqlite3.InternalError as error:
+            return f"Fout bij het toevoegen {error}", 400
+        finally:
+            conn.close()
         return render_template('successvol_ingelogd.html', message=f"{gebruikersnaam} is succesvol toegevoegd! Klik hieronder om verder te gaan!",
                                link='/toetsvragen', gebruikersnaam=gebruikersnaam, email=email, wachtwoord=wachtwoord)
     return render_template('nieuwe_redacteur.html')
