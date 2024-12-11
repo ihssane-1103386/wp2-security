@@ -14,8 +14,22 @@ def inlog():
         ingevulde_wachtwoord = request.form.get('password')
 
         conn = sqlite3.connect('databases/database.db')
-        cursor = con.cursor()
+        cursor = conn.cursor()
         cursor.execute = ("SELECT password, display_name, is_admin FROM users WHERE login = ?", (ingevulde_gebruikersnaam))
+        user = cursor.fetchone()
+        conn.close()
+
+        if user and user["password"] == ingevulde_wachtwoord:
+            if user["is_admin"]:
+                message= f"Welkom admin {user['display_name']}!"
+            else:
+                message = f"Welkom {user['display_name']}! Ga snel aan de slag!"
+            return render_template('successvol_ingelogd', message=message, link='/toetsvragen')
+        else:
+            return "Ongeldige gebruikersnaam of wachtwoord.", 401
+        return render_template('inloggen.html')
+
+
         return render_template('successvol_ingelogd.html', message = f"Welkom {ingevulde_gebruikersnaam}, ga snel aan de slag!",
                                link ='/toetsvragen', ingevulde_wachtwoord=ingevulde_wachtwoord)
     return render_template('inloggen.html')
