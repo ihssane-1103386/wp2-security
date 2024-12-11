@@ -15,7 +15,7 @@ def inlog():
 
         conn = sqlite3.connect('databases/database.db')
         cursor = con.cursor()
-        cursor.execute = ("SELECT password FROM ")
+        cursor.execute = ("SELECT password, display_name, is_admin FROM users WHERE login = ?", (ingevulde_gebruikersnaam))
         return render_template('successvol_ingelogd.html', message = f"Welkom {ingevulde_gebruikersnaam}, ga snel aan de slag!",
                                link ='/toetsvragen', ingevulde_wachtwoord=ingevulde_wachtwoord)
     return render_template('inloggen.html')
