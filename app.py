@@ -25,7 +25,7 @@ def inlog():
                 message= f"Welkom admin {user['display_name']}!"
             else:
                 message = f"Welkom {user['display_name']}! Ga snel aan de slag!"
-            return render_template('successvol_ingelogd', message=message, link='/toetsvragen')
+            return render_template('successvol_ingelogd.html', message=message, link='/toetsvragen')
         else:
             return "Ongeldige gebruikersnaam of wachtwoord.", 401
         return render_template('inloggen.html')
