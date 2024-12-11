@@ -14,12 +14,13 @@ def inlog():
         ingevulde_wachtwoord = request.form.get('password')
 
         conn = sqlite3.connect('databases/database.db')
+        conn.row_factory = sqlite3.Row
         cursor = conn.cursor()
         cursor.execute("SELECT password, display_name, is_admin FROM users WHERE login = ?", (ingevulde_gebruikersnaam,))
         user = cursor.fetchone()
         conn.close()
 
-        conn.row_factory = sqlite3.Row
+        if user and user["password"] == ingevulde_wachtwoord:
             if user["is_admin"]:
                 message= f"Welkom admin {user['display_name']}!"
             else:
@@ -32,7 +33,6 @@ def inlog():
 
         return render_template('successvol_ingelogd.html', message = f"Welkom {ingevulde_gebruikersnaam}, ga snel aan de slag!",
                                link ='/toetsvragen', ingevulde_wachtwoord=ingevulde_wachtwoord)
-    return render_template('inloggen.html')
 
 @app.route("/successvol_ingelogd")
 def success():
@@ -61,8 +61,8 @@ def nieuwe_redacteur():
                 (gebruikersnaam, wachtwoord, email, is_admin)
             )
             conn.commit()
-        except sqlite3.InternalError as error:
-            return f"Fout bij het toevoegen {error}", 400
+        except sqlite3.InternalError as e:
+            return f"Fout bij het toevoegen {e}", 400
         finally:
             conn.close()
         return render_template('successvol_ingelogd.html', message=f"{gebruikersnaam} is succesvol toegevoegd! Klik hieronder om verder te gaan!",
