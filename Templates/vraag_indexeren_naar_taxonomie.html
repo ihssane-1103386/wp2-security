@@ -27,14 +27,16 @@
         <div>leerjaar: {{ leerjaar }}</div>
         <br>
         <form>
-        <label for="keuze">prompt:</label>
+        <label for="keuze">Prompt:</label>
         <select id="keuze" name="keuze">
-            <option value="prompt 1">prompt v1</option>
+        {% for prompt in prompts %}
+            <option value="{{ prompt[0] }}">{{ prompt[1] }}</option>=naam-->
+        {% endfor %}
         </select>
-    </form>
+        </form>
         <br>
         <div class="button">
             <button class="button" onclick="window.location.href='/taxonomie_resultaat';">toepassen</button>
-    </div>
+        </div>
 </body>
 </html>
