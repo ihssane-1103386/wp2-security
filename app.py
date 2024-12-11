@@ -12,7 +12,8 @@ def inlog():
     if request.method == 'POST':
         ingevulde_gebruikersnaam = request.form.get('username')
         ingevulde_wachtwoord = request.form.get('password')
-        return render_template('successvol_ingelogd.html', message = f"Welkom {ingevulde_gebruikersnaam}, ga snel aan de slag!", link ="https://www.test-correct.nl/", ingevulde_wachtwoord=ingevulde_wachtwoord)
+        return render_template('successvol_ingelogd.html', message = f"Welkom {ingevulde_gebruikersnaam}, ga snel aan de slag!",
+                               link ="https://www.test-correct.nl/", ingevulde_wachtwoord=ingevulde_wachtwoord)
     return render_template('inloggen.html')
 
 @app.route("/successvol_ingelogd")
