@@ -118,7 +118,7 @@ if __name__ == "__main__":
     # Deze slashes komen uit de "Path" module. Dit is een module die je kan gebruiken
     # om paden te maken. Dit is handig omdat je dan niet zelf hoeft te kijken of je
     # een / (mac) of een \ (windows) moet gebruiken.
-    database_path = project_root / "databases" / "database.db"
+    database_path = project_root / "databases" / "niet gebruiken.db"
     database_generator = WP2DatabaseGenerator(
         database_path, overwrite=True, initial_data=True
     )
