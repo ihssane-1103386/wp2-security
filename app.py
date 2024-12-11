@@ -15,11 +15,11 @@ def inlog():
 
         conn = sqlite3.connect('databases/database.db')
         cursor = conn.cursor()
-        cursor.execute = ("SELECT password, display_name, is_admin FROM users WHERE login = ?", (ingevulde_gebruikersnaam))
+        cursor.execute("SELECT password, display_name, is_admin FROM users WHERE login = ?", (ingevulde_gebruikersnaam,))
         user = cursor.fetchone()
         conn.close()
 
-        if user and user["password"] == ingevulde_wachtwoord:
+        conn.row_factory = sqlite3.Row
             if user["is_admin"]:
                 message= f"Welkom admin {user['display_name']}!"
             else:
@@ -66,7 +66,7 @@ def nieuwe_redacteur():
         finally:
             conn.close()
         return render_template('successvol_ingelogd.html', message=f"{gebruikersnaam} is succesvol toegevoegd! Klik hieronder om verder te gaan!",
-                               link='/toetsvragen', gebruikersnaam=gebruikersnaam, email=email, wachtwoord=wachtwoord)
+                               link='/toetsvragen')
     return render_template('nieuwe_redacteur.html')
 
 @app.route('/taxonomie_resultaat')
