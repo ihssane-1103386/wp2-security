@@ -3,7 +3,7 @@ from model_prompts import prompts_ophalen, prompt_details_ophalen, prompt_verwij
 import sqlite3
 
 app = Flask(__name__)
-DATABASE_FILE = "databases/database.db"
+DATABASE_FILE = "databases/database_toetsvragen.db"
 
 @app.route("/")
 def inlog():
