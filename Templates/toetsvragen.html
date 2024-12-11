@@ -33,9 +33,7 @@
     <a href="{{ url_for('inlog') }}" class="button" style="text-align: right;">AI Prompts</a>
     <a href="{{ url_for('inlog') }}" class="button" style="text-align: right;">Redacteuren</a>
 
-    <h1 style="font-family:Nunito extrabold,sans-serif; color:#041F74;"> Toetsvragen lijst </h1>
-
-    <p style="font-family:Zilla slab,sans-serif; color:#041F74; margin: 4px 2px;" > Toetsvragen lijst </p>
+    <h2 style="font-family:Nunito extrabold,sans-serif; color:#041F74;"> Toetsvragen lijst </h2>
 
     <form action="{{ url_for('toetsvragen') }}" methode="GET">
         <div style="margin-bottom:10px;">
@@ -83,7 +81,7 @@
          <td>
             {% if vraag[3] %}
 <!--            <button class="button">Wijzigen</button>-->
-                <a href="{{ url_for('taxonomie_wijzigen') }}" class="button" >Wijzigen</a>
+                <a href="{{ url_for('vraag_taxonomie_resultaat') }}" class="button" >Wijzigen</a>
             {% else %}
 <!--            <button class="button">Indexeer</button>-->
                 <a href="{{ url_for('indexeren') }}" class="button" >Indexeren</a>

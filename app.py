@@ -116,18 +116,6 @@ def indexeren():
 
     return render_template('vraag indexeren naar taxonomie.html', question=question)
 
-@app.route("/taxonomie_wijzigen")
-def taxonomie_wijzigen():
-    vraag_id = request.args.get('vraag_id')
-
-    conn = sqlite3.connect('databases/database_toetsvragen.db')
-    cursor = conn.cursor()
-
-    cursor.execute("SELECT * FROM questions WHERE id = ?", (vraag_id,))
-    question = cursor.fetchone()
-
-    return render_template('vraag geïndexeerd wijzigen.html', question=question)
-
 @app.route("/wijzig")
 def wijzig():
     return render_template('wijzig_redacteuren.html')
