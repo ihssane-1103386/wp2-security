@@ -51,6 +51,17 @@ def nieuwe_redacteur():
         gebruikersnaam = request.form.get('username')
         email = request.form.get('email')
         wachtwoord = request.form.get('password')
+        is_admin = int(request.form.get('is_admin', 0))
+
+        conn = sqlite3.connect('databases/database.db')
+        cursor = conn.cursor()
+        try:
+            cursor.execute(
+                "INSERT INTO users (login, password, display_name, date_created, is_admin)  VALUES (?, ?, ?, datetime('now'), ?)",
+                (gebruikersnaam, wachtwoord, email, is_admin)
+            )
+            conn.commit()
+        except
         return render_template('successvol_ingelogd.html', message=f"{gebruikersnaam} is succesvol toegevoegd! Klik hieronder om verder te gaan!",
                                link='/toetsvragen', gebruikersnaam=gebruikersnaam, email=email, wachtwoord=wachtwoord)
     return render_template('nieuwe_redacteur.html')
