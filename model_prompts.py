@@ -1,7 +1,7 @@
 import sqlite3
 
 def verbinding_maken_database():
-    conn = sqlite3.connect('databases/database.db')
+    conn = sqlite3.connect('databases/database_toetsvragen.db')
     conn.row_factory = sqlite3.Row
     return conn
 

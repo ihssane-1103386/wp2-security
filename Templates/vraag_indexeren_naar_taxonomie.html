@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>vraag indexeren naar taxonomie</title>
+  <link rel="stylesheet" href="../static/css/style.css">
+</head>
+<body>
+    <header class="top-bar">
+        <div class="container-main">
+            <div class="left-side">
+                <a href="https://www.test-correct.nl/" class="site-logo">
+                    <img src="../static/assets/logo/testcorrect-logo.svg" alt="Logo">
+                </a>
+            </div>
+
+            <div class="menu-container">
+                <ul class="main-navigation">
+                    <li><a href="#">Oplossingen</a></li>
+                    <li><a href="https://www.test-correct.nl/toetsplatform">Toetsplatform</a></li>
+                    <li><a href="https://www.test-correct.nl/pakketten">Aanbod</a></li>
+                    <li><a href="https://www.test-correct.nl/support">Support</a></li>
+                    <li><a href="https://www.test-correct.nl/overons">Over</a></li>
+                </ul>
+            </div>
+
+            <div class="button-container">
+                <a href="https://www.test-correct.nl/welcome" class="button one">Probeer nu</a>
+                <a href="https://welcome.test-correct.nl/login" class="button two">Log in</a>
+            </div>
+        </div>
+    </header>
+    <div class = "container">
+        <div>vraag: <span id="vraag">{{ vraag }}</span></div>
+        <br>
+        <div>vak: {{ vak }}</div>
+        <br>
+        <div>onderwijsniveau: {{ onderwijsniveau }}</div>
+        <br>
+        <div>leerjaar: {{ leerjaar }}</div>
+        <br>
+        <form method="POST" action="{{ url_for('indexeren') }}">
+        <label for="keuze">Prompt:</label>
+        <select id="keuze" name="keuze">
+        {% for prompt in prompts %}
+            <option value="{{ prompt[0] }}">{{ prompt[1] }}</option>
+        {% endfor %}
+        </select>
+        <br><br>
+        <button type="submit" class="button">Toepassen</button>
+        </form>
+
+
+</body>
+</html>

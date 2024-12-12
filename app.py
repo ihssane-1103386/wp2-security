@@ -1,52 +1,73 @@
+from flask import Flask, request, render_template, redirect, url_for
+
+from lib.gpt.bloom_taxonomy import get_bloom_category
+from model_prompts import prompts_ophalen, prompt_details_ophalen, prompt_verwijderen
+from indexeer_page_db_connection import prompt_lijst, prompt_ophalen_op_id
 import sqlite3
 
-from flask import Flask, request, render_template, redirect, url_for
-from db_prompt_data import prompts_ophalen, prompt_details_ophalen, prompt_verwijderen
-
 app = Flask(__name__)
+DATABASE_FILE = "databases/database_toetsvragen.db"
 
 @app.route("/")
 def inlog():
     return render_template('inloggen.html')
 
+
+# redacteuren uit de database halen
+def get_redacteuren():
+    conn = sqlite3.connect(DATABASE_FILE)
+    cursor = conn.cursor()
+    cursor.execute("SELECT display_name, login, is_admin FROM users")
+    redacteuren = cursor.fetchall()
+    conn.close()
+    return redacteuren
+
 @app.route('/redacteur')
 def redacteur():
-    return render_template('redacteur.html')
+    redacteuren = get_redacteuren()
+    return render_template('redacteur.html', redacteuren=redacteuren)
 
 @app.route("/nr")
 def nieuwe_redacteur():
     return render_template('nieuwe_redacteur.html')
 
-@app.route('/taxonomie_resultaat')
-def vraag_taxonomie_resultaat():
-    return render_template('vraag indexeren resultaat.html',
-                            vraag = "placeholder",
-                            vak = "biologie",
-                            onderwijsniveau = "niveau 2",
-                            leerjaar = "leerjaar 1",)
-@app.route("/indexeren")
+
+@app.route('/indexeren', methods=["GET",'POST'])
 def indexeren():
-    vraag_id = request.args.get('vraag_id')
-    conn = sqlite3.connect('databases/database_toetsvragen.db')
-    cursor = conn.cursor()
-    cursor.execute("SELECT * FROM questions WHERE id = ?", (vraag_id,))
-    question = cursor.fetchone()
-    return render_template('vraag indexeren naar taxonomie.html',
-                           vraag= "placeholder", #julie, heb hier even iets veranderd om het te linken met de jinja code
+
+    prompts = prompt_lijst()
+    if request.method == 'POST':
+        vraag = request.form.get('vraag')
+        prompt_id = request.form.get('keuze')
+        return redirect(url_for('vraag_taxonomie_resultaat', vraag=vraag, prompt_id=prompt_id))
+
+    return render_template('vraag_indexeren_naar_taxonomie.html',
+                           vraag="placeholder",
                            vak="biologie",
                            onderwijsniveau="niveau 2",
-                           leerjaar="leerjaar 1", )
+                           leerjaar="leerjaar 1",
+                           prompts=prompts)
 
-@app.route("/taxonomie_wijzigen")
-def taxonomie_wijzigen():
-    vraag_id = request.args.get('vraag_id')
-    conn = sqlite3.connect('databases/database_toetsvragen.db')
-    cursor = conn.cursor()
-    cursor.execute("SELECT * FROM questions WHERE id = ?", (vraag_id,))
-    question = cursor.fetchone()
+@app.route('/taxonomie_resultaat', methods=["GET","POST"])
+def vraag_taxonomie_resultaat():
+    prompt_id = request.args.get('prompt_id', 'bloom')
+    prompt = prompt_ophalen_op_id(prompt_id)
+    question = "placeholder?"
+    gpt_choice = "dry_run"
+    ai_response = get_bloom_category(question, prompt, gpt_choice)
+    if not prompt:
+        return"prompt not found"
 
-    return render_template('taxonomie_wijzigen.html', question=question)
-
+    ai_niveau = ai_response.get("niveau", "geen antwoord")
+    ai_uitleg = ai_response.get("uitleg", "geen antwoord")
+    return render_template('vraag_indexeren_resultaat.html',
+                            vraag = question,
+                            vak = "biologie",
+                            onderwijsniveau = "niveau 2",
+                            leerjaar = "leerjaar 1",
+                            prompt = prompt[1],
+                            ai_niveau = ai_niveau,
+                            ai_uitleg = ai_uitleg)
 
 @app.route("/toetsvragen")
 def toetsvragen():
@@ -113,4 +134,4 @@ def delete_prompt_route(prompts_id):
     return redirect(url_for('ai_prompts'))
 
 if __name__ == '__main__':
-    app.run()
+    app.run(debug=True)
