@@ -4,12 +4,39 @@ from flask import render_template
 
 app = Flask(__name__)
 
-conn = sqlite3.connect('databases/database_toetsvragen.db')
-cursor = conn.cursor()
+def load_queries(path):
+    queries = {}
+    query_name = None
+    parameters = []
+
+    with open(path, 'r') as file:
+        for line in file:
+            line = line.strip()
+            if line.startswith('--[') and line.endswith(']'):
+                if query_name and parameters:
+                    queries[query_name] = ' '.join(parameters)
+                query_name = line[4:-1]
+                parameters = []
+            elif query_name:
+                parameters.append(line)
+
+        if query_name and parameters:
+            queries[query_name] = ' '.join(parameters)
+
+    return queries
 
 @app.route("/", endpoint="toetsvragen")
 def toetsvragen():
     try:
+        conn = sqlite3.connect('databases/database_toetsvragen.db')
+        cursor = conn.cursor()
+
+        queries = load_queries('static/toetsvragen_sql.sql')
+
+        normal_query = queries['normal_query']
+        count_query = queries['count_query']
+        distinct_query = queries['distinct_query']
+
         # This is for searching in toetsvragen
         search = request.args.get("search", '').strip()
         vak = request.args.get("vak", '').strip()
@@ -20,7 +47,7 @@ def toetsvragen():
         per_page = 10
         start = (page - 1) * per_page
 
-        # query = "SELECT question, vak, date_created, taxonomy_bloom FROM questions WHERE 1=1"
+        query = normal_query
         parameters = []
 
         # Iets met previous page als de website ververst bij het zoeken?
@@ -43,8 +70,9 @@ def toetsvragen():
         cursor.execute(query, parameters)
         question_page = cursor.fetchall()
 
-        # count_query = "SELECT COUNT(*) FROM questions WHERE 1=1"
+        count_query = count_query
         count_parameters = []
+
         if search:
             count_query += " AND question LIKE ?"
             count_parameters.append(f"%{search}%")
@@ -74,7 +102,7 @@ def toetsvragen():
             else:
                 page_numbers = [1, '...'] + list(range(page - 2, page + 3)) + ['...'] + [total_pages]
 
-        # cursor.execute("SELECT DISTINCT vak FROM questions")
+        cursor.execute(distinct_query)
         unieke_vakken = [row[0] for row in cursor.fetchall()]
 
         # Doorgeven van question_id nummer naar indexeren/wijzigen
