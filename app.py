@@ -29,19 +29,27 @@ def redacteur():
 def nieuwe_redacteur():
     return render_template('nieuwe_redacteur.html')
 
-@app.route('/taxonomie_resultaat')
+@app.route('/taxonomie_resultaat', methods=["GET","POST"])
 def vraag_taxonomie_resultaat():
+    vraag = request.form.get('vraag', 'placeholder')
+    prompt_id = request.form.get('keuze', 'bloom')
     return render_template('vraag_indexeren_resultaat.html',
                             vraag = "placeholder",
                             vak = "biologie",
                             onderwijsniveau = "niveau 2",
                             leerjaar = "leerjaar 1",
                             prompt = "bloom")
-@app.route('/indexeren')
+@app.route('/indexeren', methods=["GET",'POST'])
 def indexeren():
-    prompts= prompt_lijst()
+
+    prompts = prompt_lijst()
+    if request.method == 'POST':
+        vraag = request.form.get('vraag')
+        prompt_id = request.form.get('keuze')
+        return redirect(url_for('vraag_taxonomie_resultaat', vraag=vraag, prompt_id=prompt_id))
+
     return render_template('vraag_indexeren_naar_taxonomie.html',
-                           vraag= "placeholder",
+                           vraag="placeholder",
                            vak="biologie",
                            onderwijsniveau="niveau 2",
                            leerjaar="leerjaar 1",

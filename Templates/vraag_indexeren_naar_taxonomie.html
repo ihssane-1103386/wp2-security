@@ -39,19 +39,17 @@
         <br>
         <div>leerjaar: {{ leerjaar }}</div>
         <br>
-        <form method="get" action="{{ url_for('vraag_taxonomie_resultaat') }}">
+        <form method="POST" action="{{ url_for('indexeren') }}">
         <label for="keuze">Prompt:</label>
         <select id="keuze" name="keuze">
         {% for prompt in prompts %}
-            <option value="{{ prompt[0] }}">{{ prompt[1] }}</option>=naam-->
+            <option value="{{ prompt[0] }}">{{ prompt[1] }}</option>
         {% endfor %}
         </select>
-        <br>
-        <br>
-        <div class="button">
-            <button class="button" onclick="window.location.href='/taxonomie_resultaat';">toepassen</button>
-        </div>
+        <br><br>
+        <button type="submit" class="button">Toepassen</button>
         </form>
+
 
 </body>
 </html>
