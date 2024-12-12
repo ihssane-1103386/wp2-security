@@ -50,7 +50,8 @@ def toetsvragen():
         per_page = 10
         start = (page - 1) * per_page
 
-        query = normal_query
+        # query = normal_query
+        query = normal_query.replace("SELECT", "SELECT questions_id")
         parameters = []
 
         if search:
@@ -91,16 +92,6 @@ def toetsvragen():
         show_first = page > 1
         show_last = page < total_pages
 
-        # if total_pages <= 10:
-        #     page_numbers = list(range(1, total_pages + 1))
-        # else:
-        #     if page <= 5:
-        #         page_numbers = list(range(1, 6)) + ['...'] + [total_pages]
-        #     elif page >= total_pages - 4:
-        #         page_numbers = [1, '...'] + list(range(total_pages - 4, total_pages + 1))
-        #     else:
-        #         page_numbers = [1, '...'] + list(range(page - 2, page + 3)) + ['...'] + [total_pages]
-
         base_params = {
             "search": search,
             "vak": vak,
@@ -114,10 +105,6 @@ def toetsvragen():
 
         cursor.execute(vak_query)
         unieke_vakken = [row[0] for row in cursor.fetchall()]
-
-        # Doorgeven van question_id nummer naar indexeren/wijzigen
-        # Question_query = "SELECT question_id FROM questions"
-        # request.args.get('question_id')
 
         return (render_template
             ('toetsvragen.html', vragen=question_page, page=page, next_page=next_page, prev_page=prev_page, total_pages=total_pages, page_numbers=page_numbers, show_first=show_first, show_last=show_last, search=search, vak=vak, taxonomie=taxonomie,unieke_vakken=unieke_vakken))
@@ -142,19 +129,13 @@ def nieuwe_redacteur():
 
 @app.route('/taxonomie_resultaat')
 def vraag_taxonomie_resultaat():
-    return render_template('vraag indexeren resultaat.html')
+    question_id = request.args.get('question_id')
+    return render_template('vraag indexeren resultaat.html', question_id=question_id)
 
 @app.route("/indexeren")
 def indexeren():
-    # question_id = request.args.get('question_id')
-    #
-    # conn = sqlite3.connect('databases/database_toetsvragen.db')
-    # cursor = conn.cursor()
-    #
-    # cursor.execute("SELECT question_id, question FROM questions WHERE question_id", (question_id,))
-    # question = cursor.fetchone()
-
-    return render_template('vraag indexeren naar taxonomie.html')
+    question_id = request.args.get('question_id')
+    return render_template('vraag indexeren naar taxonomie.html', question_id=question_id)
 
 @app.route("/wijzig")
 def wijzig():
