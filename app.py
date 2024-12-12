@@ -1,4 +1,6 @@
 from flask import Flask, request, render_template, redirect, url_for
+
+from lib.gpt.bloom_taxonomy import get_bloom_category
 from model_prompts import prompts_ophalen, prompt_details_ophalen, prompt_verwijderen
 from indexeer_page_db_connection import prompt_lijst, prompt_ophalen_op_id
 import sqlite3
@@ -50,15 +52,22 @@ def indexeren():
 def vraag_taxonomie_resultaat():
     prompt_id = request.args.get('prompt_id', 'bloom')
     prompt = prompt_ophalen_op_id(prompt_id)
+    question = "wat is de hoofdstad van Indonesie?"
+    gpt_choice = "dry_run"
+    ai_response = get_bloom_category(question, prompt, gpt_choice)
     if not prompt:
         return"prompt not found"
+
+    ai_niveau = ai_response.get("niveau", "geen antwoord")
+    ai_uitleg = ai_response.get("uitleg", "geen antwoord")
     return render_template('vraag_indexeren_resultaat.html',
-                            vraag = "placeholder",
+                            vraag = question,
                             vak = "biologie",
                             onderwijsniveau = "niveau 2",
                             leerjaar = "leerjaar 1",
                             prompt = prompt[1],
-                            ai_response = "")
+                            ai_niveau = ai_niveau,
+                            ai_uitleg = ai_uitleg)
 
 @app.route("/toetsvragen")
 def toetsvragen():
