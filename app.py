@@ -4,12 +4,12 @@ from flask import render_template
 
 app = Flask(__name__)
 
+conn = sqlite3.connect('databases/database_toetsvragen.db')
+cursor = conn.cursor()
+
 @app.route("/", endpoint="toetsvragen")
 def toetsvragen():
     try:
-        conn = sqlite3.connect('databases/database_toetsvragen.db')
-        cursor = conn.cursor()
-
         # This is for searching in toetsvragen
         search = request.args.get("search", '').strip()
         vak = request.args.get("vak", '').strip()
@@ -20,7 +20,7 @@ def toetsvragen():
         per_page = 10
         start = (page - 1) * per_page
 
-        query = "SELECT question, vak, date_created, taxonomy_bloom FROM questions WHERE 1=1"
+        # query = "SELECT question, vak, date_created, taxonomy_bloom FROM questions WHERE 1=1"
         parameters = []
 
         # Iets met previous page als de website ververst bij het zoeken?
@@ -43,8 +43,8 @@ def toetsvragen():
         cursor.execute(query, parameters)
         question_page = cursor.fetchall()
 
-        count_query = "SELECT COUNT(*) FROM questions WHERE 1=1"
-        count_parameters = []  # Specifiek voor count_query
+        # count_query = "SELECT COUNT(*) FROM questions WHERE 1=1"
+        count_parameters = []
         if search:
             count_query += " AND question LIKE ?"
             count_parameters.append(f"%{search}%")
@@ -74,7 +74,7 @@ def toetsvragen():
             else:
                 page_numbers = [1, '...'] + list(range(page - 2, page + 3)) + ['...'] + [total_pages]
 
-        cursor.execute("SELECT DISTINCT vak FROM questions")
+        # cursor.execute("SELECT DISTINCT vak FROM questions")
         unieke_vakken = [row[0] for row in cursor.fetchall()]
 
         # Doorgeven van question_id nummer naar indexeren/wijzigen
