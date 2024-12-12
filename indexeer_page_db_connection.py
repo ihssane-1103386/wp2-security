@@ -24,3 +24,8 @@ def prompt_ophalen_op_id(prompt_id):
     prompt = cursor.fetchone()
     conn.close()
     return prompt
+
+def prompt_question_count_verhogen(): #nog niet helemaal in werking
+    conn = sqlite3.connect('databases/database_toetsvragen.db')
+    cursor = conn.cursor()
+    cursor.execute('''UPDATE prompts set''')

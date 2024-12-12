@@ -52,7 +52,7 @@ def indexeren():
 def vraag_taxonomie_resultaat():
     prompt_id = request.args.get('prompt_id', 'bloom')
     prompt = prompt_ophalen_op_id(prompt_id)
-    question = "wat is de hoofdstad van Indonesie?"
+    question = "placeholder?"
     gpt_choice = "dry_run"
     ai_response = get_bloom_category(question, prompt, gpt_choice)
     if not prompt:
