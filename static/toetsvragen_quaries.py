@@ -8,3 +8,12 @@ query = ("SELECT question, vak, date_created, taxonomy_bloom FROM questions WHER
 count_query = ("SELECT COUNT(*) FROM questions WHERE 1=1")
 
 cursor.execute("SELECT DISTINCT vak FROM questions")
+
+def load_queries(path):
+    queries = []
+    query_name = None
+    parameters = []
+
+    with open(path, 'r') as file:
+        for line in file:
+            line = line.strip()
