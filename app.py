@@ -35,7 +35,8 @@ def vraag_taxonomie_resultaat():
                             vraag = "placeholder",
                             vak = "biologie",
                             onderwijsniveau = "niveau 2",
-                            leerjaar = "leerjaar 1",)
+                            leerjaar = "leerjaar 1",
+                            prompt = "bloom")
 @app.route('/indexeren')
 def indexeren():
     prompts= prompt_lijst()
