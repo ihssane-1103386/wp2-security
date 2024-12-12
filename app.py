@@ -31,11 +31,11 @@ def toetsvragen():
         conn = sqlite3.connect('databases/database_toetsvragen.db')
         cursor = conn.cursor()
 
-        queries = load_queries('static/toetsvragen_sql.sql')
+        queries = load_queries('static/queries.sql')
 
         normal_query = queries['normal_query']
         count_query = queries['count_query']
-        distinct_query = queries['distinct_query']
+        vak_query = queries['distinct_query']
 
         # This is for searching in toetsvragen
         search = request.args.get("search", '').strip()
@@ -70,7 +70,6 @@ def toetsvragen():
         cursor.execute(query, parameters)
         question_page = cursor.fetchall()
 
-        count_query = count_query
         count_parameters = []
 
         if search:
@@ -102,7 +101,7 @@ def toetsvragen():
             else:
                 page_numbers = [1, '...'] + list(range(page - 2, page + 3)) + ['...'] + [total_pages]
 
-        cursor.execute(distinct_query)
+        cursor.execute(vak_query)
         unieke_vakken = [row[0] for row in cursor.fetchall()]
 
         # Doorgeven van question_id nummer naar indexeren/wijzigen
@@ -115,6 +114,8 @@ def toetsvragen():
     except Exception as e:
         print(f"Fout tijdens het verwerken van de vragen: {e}")
         return "Interne serverfout", 500
+    finally:
+        conn.close()
 
 @app.route("/inloggen")
 def inlog():
@@ -134,15 +135,15 @@ def vraag_taxonomie_resultaat():
 
 @app.route("/indexeren")
 def indexeren():
-    question_id = request.args.get('question_id')
+    # question_id = request.args.get('question_id')
+    #
+    # conn = sqlite3.connect('databases/database_toetsvragen.db')
+    # cursor = conn.cursor()
+    #
+    # cursor.execute("SELECT question_id, question FROM questions WHERE question_id", (question_id,))
+    # question = cursor.fetchone()
 
-    conn = sqlite3.connect('databases/database_toetsvragen.db')
-    cursor = conn.cursor()
-
-    cursor.execute("SELECT question_id, question FROM questions WHERE question_id", (question_id,))
-    question = cursor.fetchone()
-
-    return render_template('vraag indexeren naar taxonomie.html', question=question)
+    return render_template('vraag indexeren naar taxonomie.html')
 
 @app.route("/wijzig")
 def wijzig():
