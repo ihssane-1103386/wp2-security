@@ -1,6 +1,7 @@
 import sqlite3
 from flask import Flask, request
 from flask import render_template
+from urllib.parse import urlencode
 
 app = Flask(__name__)
 
@@ -52,9 +53,6 @@ def toetsvragen():
         query = normal_query
         parameters = []
 
-        # Iets met previous page als de website ververst bij het zoeken?
-        # De zoekresultaten gelden per 10, ik wil alle vragen en het behouden, totdat er ververst wordt?
-
         if search:
             query += " AND question LIKE ?"
             parameters.append(f"%{search}%")
@@ -93,15 +91,26 @@ def toetsvragen():
         show_first = page > 1
         show_last = page < total_pages
 
-        if total_pages <= 10:
-            page_numbers = list(range(1, total_pages + 1))
-        else:
-            if page <= 5:
-                page_numbers = list(range(1, 6)) + ['...'] + [total_pages]
-            elif page >= total_pages - 4:
-                page_numbers = [1, '...'] + list(range(total_pages - 4, total_pages + 1))
-            else:
-                page_numbers = [1, '...'] + list(range(page - 2, page + 3)) + ['...'] + [total_pages]
+        # if total_pages <= 10:
+        #     page_numbers = list(range(1, total_pages + 1))
+        # else:
+        #     if page <= 5:
+        #         page_numbers = list(range(1, 6)) + ['...'] + [total_pages]
+        #     elif page >= total_pages - 4:
+        #         page_numbers = [1, '...'] + list(range(total_pages - 4, total_pages + 1))
+        #     else:
+        #         page_numbers = [1, '...'] + list(range(page - 2, page + 3)) + ['...'] + [total_pages]
+
+        base_params = {
+            "search": search,
+            "vak": vak,
+            "taxonomie": taxonomie
+        }
+
+        page_numbers = []
+        for i in range(1, total_pages + 1):
+            base_params["page"] = i
+            page_numbers.append(f"?{urlencode(base_params)}")
 
         cursor.execute(vak_query)
         unieke_vakken = [row[0] for row in cursor.fetchall()]
