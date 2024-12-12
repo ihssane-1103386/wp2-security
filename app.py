@@ -12,16 +12,18 @@ def load_queries(path):
     with open(path, 'r') as file:
         for line in file:
             line = line.strip()
-            if line.startswith('--[') and line.endswith(']'):
+            print(f"Processing line: {line}")
+            if line.startswith('-- [') and line.endswith(']'):
                 if query_name and parameters:
-                    queries[query_name] = ' '.join(parameters)
+                    queries[query_name] = ' '.join(parameters).rstrip(';')
                 query_name = line[4:-1]
                 parameters = []
             elif query_name:
-                parameters.append(line)
+                if line:
+                    parameters.append(line)
 
         if query_name and parameters:
-            queries[query_name] = ' '.join(parameters)
+            queries[query_name] = ' '.join(parameters).rstrip(';')
 
     return queries
 
@@ -35,7 +37,7 @@ def toetsvragen():
 
         normal_query = queries['normal_query']
         count_query = queries['count_query']
-        vak_query = queries['distinct_query']
+        vak_query = queries['vak_query']
 
         # This is for searching in toetsvragen
         search = request.args.get("search", '').strip()
