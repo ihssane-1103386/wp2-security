@@ -1,5 +1,6 @@
 from flask import Flask, request, render_template, redirect, url_for
 from model_prompts import prompts_ophalen, prompt_details_ophalen, prompt_verwijderen
+from indexeer_page_db_connection import prompt_lijst
 import sqlite3
 
 app = Flask(__name__)
@@ -30,34 +31,21 @@ def nieuwe_redacteur():
 
 @app.route('/taxonomie_resultaat')
 def vraag_taxonomie_resultaat():
-    return render_template('vraag indexeren resultaat.html',
+    return render_template('vraag_indexeren_resultaat.html',
                             vraag = "placeholder",
                             vak = "biologie",
                             onderwijsniveau = "niveau 2",
-                            leerjaar = "leerjaar 1",)
-@app.route("/indexeren")
+                            leerjaar = "leerjaar 1",
+                            prompt = "bloom")
+@app.route('/indexeren')
 def indexeren():
-    vraag_id = request.args.get('vraag_id')
-    conn = sqlite3.connect('databases/database_toetsvragen.db')
-    cursor = conn.cursor()
-    cursor.execute("SELECT * FROM questions WHERE id = ?", (vraag_id,))
-    question = cursor.fetchone()
-    return render_template('vraag indexeren naar taxonomie.html',
-                           vraag= "placeholder", #julie, heb hier even iets veranderd om het te linken met de jinja code
+    prompts= prompt_lijst()
+    return render_template('vraag_indexeren_naar_taxonomie.html',
+                           vraag= "placeholder",
                            vak="biologie",
                            onderwijsniveau="niveau 2",
-                           leerjaar="leerjaar 1", )
-
-@app.route("/taxonomie_wijzigen")
-def taxonomie_wijzigen():
-    vraag_id = request.args.get('vraag_id')
-    conn = sqlite3.connect('databases/database_toetsvragen.db')
-    cursor = conn.cursor()
-    cursor.execute("SELECT * FROM questions WHERE id = ?", (vraag_id,))
-    question = cursor.fetchone()
-
-    return render_template('taxonomie_wijzigen.html', question=question)
-
+                           leerjaar="leerjaar 1",
+                           prompts=prompts)
 
 @app.route("/toetsvragen")
 def toetsvragen():
