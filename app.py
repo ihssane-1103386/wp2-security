@@ -1,6 +1,6 @@
 from flask import Flask, request, render_template, redirect, url_for
 from model_prompts import prompts_ophalen, prompt_details_ophalen, prompt_verwijderen
-from indexeer_page_db_connection import prompt_lijst
+from indexeer_page_db_connection import prompt_lijst, prompt_ophalen_op_id
 import sqlite3
 
 app = Flask(__name__)
@@ -29,16 +29,7 @@ def redacteur():
 def nieuwe_redacteur():
     return render_template('nieuwe_redacteur.html')
 
-@app.route('/taxonomie_resultaat', methods=["GET","POST"])
-def vraag_taxonomie_resultaat():
-    vraag = request.form.get('vraag', 'placeholder')
-    prompt_id = request.form.get('keuze', 'bloom')
-    return render_template('vraag_indexeren_resultaat.html',
-                            vraag = "placeholder",
-                            vak = "biologie",
-                            onderwijsniveau = "niveau 2",
-                            leerjaar = "leerjaar 1",
-                            prompt = "bloom")
+
 @app.route('/indexeren', methods=["GET",'POST'])
 def indexeren():
 
@@ -54,6 +45,19 @@ def indexeren():
                            onderwijsniveau="niveau 2",
                            leerjaar="leerjaar 1",
                            prompts=prompts)
+
+@app.route('/taxonomie_resultaat', methods=["GET","POST"])
+def vraag_taxonomie_resultaat():
+    prompt_id = request.args.get('prompt_id', 'bloom')
+    prompt = prompt_ophalen_op_id(prompt_id)
+    if not prompt:
+        return"prompt not found"
+    return render_template('vraag_indexeren_resultaat.html',
+                            vraag = "placeholder",
+                            vak = "biologie",
+                            onderwijsniveau = "niveau 2",
+                            leerjaar = "leerjaar 1",
+                            prompt = prompt[1])
 
 @app.route("/toetsvragen")
 def toetsvragen():

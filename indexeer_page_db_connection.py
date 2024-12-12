@@ -13,3 +13,14 @@ def prompt_lijst():
     conn.close()
     return prompts
 
+def prompt_ophalen_op_id(prompt_id):
+    conn = sqlite3.connect('databases/database_toetsvragen.db')
+    cursor = conn.cursor()
+    cursor.execute('''SELECT 
+                        prompts.prompts_id, 
+                        prompts.prompt_details 
+                      FROM prompts
+                      WHERE prompts.prompts_id = ?''', (prompt_id,))
+    prompt = cursor.fetchone()
+    conn.close()
+    return prompt
