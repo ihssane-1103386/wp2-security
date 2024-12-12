@@ -57,7 +57,8 @@ def vraag_taxonomie_resultaat():
                             vak = "biologie",
                             onderwijsniveau = "niveau 2",
                             leerjaar = "leerjaar 1",
-                            prompt = prompt[1])
+                            prompt = prompt[1],
+                            ai_response = "")
 
 @app.route("/toetsvragen")
 def toetsvragen():
