@@ -128,16 +128,9 @@ def nieuwe_redacteur():
 
 @app.route('/taxonomie_resultaat')
 def vraag_taxonomie_resultaat():
-    question_id = request.args.get('question_id')
-    return render_template('vraag indexeren resultaat.html', question_id=question_id)
-
-@app.route("/indexeren")
-def indexeren():
     questions_id = request.args.get('questions_id')
     if not questions_id:
         return "Geen questions_id meegegeven", 400
-    if not questions_id.isdigit():
-        return "Ongeldige questions_id meegegeven", 400
 
     try:
         conn = sqlite3.connect('databases/database_toetsvragen.db')
@@ -151,6 +144,36 @@ def indexeren():
 
         if not question:
             return "Vraag niet gevonden", 404
+
+        return render_template('vraag indexeren resultaat.html', questions_id=questions_id, question=question[0])
+
+    except Exception as e:
+            print(f"Fout tijdens ophalen van vraag: {e}")
+            return "Interne serverfout", 500
+    finally:
+            conn.close()
+
+@app.route("/indexeren")
+def indexeren():
+    questions_id = request.args.get('questions_id')
+    if not questions_id:
+        return "Geen questions_id meegegeven", 400
+
+    try:
+        conn = sqlite3.connect('databases/database_toetsvragen.db')
+        cursor = conn.cursor()
+
+        queries = load_queries('static/queries.sql')
+        get_question = queries['get_question']
+
+        print(f"Gebruikte questions_id: {questions_id}")
+        cursor.execute(get_question, (questions_id,))
+        question = cursor.fetchone()
+        print(f"Opgehaalde vraag: {question}")
+
+        if not question:
+            return "Vraag niet gevonden", 404
+        print(f"Opgehaalde vraagtekst: {question[0]}")
 
         return render_template('vraag indexeren naar taxonomie.html', questions_id=questions_id, question=question[0])
 
