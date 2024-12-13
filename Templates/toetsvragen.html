@@ -77,12 +77,12 @@
       <tr style="font-family: nunito, serif; color:#041F74; font-size: 15px; margin: 10px;">
          <td style="padding:5px">{{ vraag[1] }}</td>
          <td style="padding:5px">{{ vraag[2] }}</td>
-         <td style="padding:5px">{{ vraag[3] if vraag[2] else "N/A"}}</td>
+         <td style="padding:5px">{{ vraag[3] if vraag[3] else "N/A"}}</td>
          <td>
             {% if vraag[4] %}
-                <a href="{{ url_for('vraag_taxonomie_resultaat', question_id=vraag[0]) }}" class="button" >Wijzigen</a>
+                <a href="{{ url_for('vraag_taxonomie_resultaat', questions_id=vraag[0]) }}" class="button" >Wijzigen</a>
             {% else %}
-                <a href="{{ url_for('indexeren', question_id=vraag[0]) }}" class="button" >Indexeren</a>
+                <a href="{{ url_for('indexeren', questions_id=vraag[0]) }}" class="button" >Indexeren</a>
             {% endif %}
          </td>
       </tr>

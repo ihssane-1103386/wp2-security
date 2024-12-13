@@ -50,7 +50,6 @@ def toetsvragen():
         per_page = 10
         start = (page - 1) * per_page
 
-        # query = normal_query
         query = normal_query.replace("SELECT", "SELECT questions_id")
         parameters = []
 
@@ -134,8 +133,32 @@ def vraag_taxonomie_resultaat():
 
 @app.route("/indexeren")
 def indexeren():
-    question_id = request.args.get('question_id')
-    return render_template('vraag indexeren naar taxonomie.html', question_id=question_id)
+    questions_id = request.args.get('questions_id')
+    if not questions_id:
+        return "Geen questions_id meegegeven", 400
+    if not questions_id.isdigit():
+        return "Ongeldige questions_id meegegeven", 400
+
+    try:
+        conn = sqlite3.connect('databases/database_toetsvragen.db')
+        cursor = conn.cursor()
+
+        queries = load_queries('static/queries.sql')
+        get_question = queries['get_question']
+
+        cursor.execute(get_question, (questions_id,))
+        question = cursor.fetchone()
+
+        if not question:
+            return "Vraag niet gevonden", 404
+
+        return render_template('vraag indexeren naar taxonomie.html', questions_id=questions_id, question=question[0])
+
+    except Exception as e:
+            print(f"Fout tijdens ophalen van vraag: {e}")
+            return "Interne serverfout", 500
+    finally:
+            conn.close()
 
 @app.route("/wijzig")
 def wijzig():
