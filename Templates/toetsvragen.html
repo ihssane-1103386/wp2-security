@@ -75,16 +75,14 @@
       <tbody>
       {% for vraag in vragen %}
       <tr style="font-family: nunito, serif; color:#041F74; font-size: 15px; margin: 10px;">
-         <td style="padding:5px">{{ vraag[0] }}</td>
          <td style="padding:5px">{{ vraag[1] }}</td>
-         <td style="padding:5px">{{ vraag[2] if vraag[2] else "N/A"}}</td>
+         <td style="padding:5px">{{ vraag[2] }}</td>
+         <td style="padding:5px">{{ vraag[3] if vraag[2] else "N/A"}}</td>
          <td>
-            {% if vraag[3] %}
-<!--            <button class="button">Wijzigen</button>-->
-                <a href="{{ url_for('vraag_taxonomie_resultaat') }}" class="button" >Wijzigen</a>
+            {% if vraag[4] %}
+                <a href="{{ url_for('vraag_taxonomie_resultaat', question_id=vraag[0]) }}" class="button" >Wijzigen</a>
             {% else %}
-<!--            <button class="button">Indexeer</button>-->
-                <a href="{{ url_for('indexeren') }}" class="button" >Indexeren</a>
+                <a href="{{ url_for('indexeren', question_id=vraag[0]) }}" class="button" >Indexeren</a>
             {% endif %}
          </td>
       </tr>
@@ -99,26 +97,12 @@
 
       <div class="pagination">
         {% if show_first %}
-<!--            <a href="{{ url_for('toetsvragen', page=1) }}">Eerste pagina</a>-->
             <a href="{{ url_for('toetsvragen', page=1, search=search, vak=vak, taxonomie=taxonomie) }}">Eerste pagina</a>
         {% endif %}
 
         {% if prev_page %}
-<!--            <a href="{{ url_for('toetsvragen', page=prev_page) }}">Vorige</a>-->
                 <a href="{{ url_for('toetsvragen', page=prev_page, search=search, vak=vak, taxonomie=taxonomie) }}">Vorige</a>
         {% endif %}
-
-<!--        {% for num in page_numbers %}-->
-<!--          {% if num == '...' %}-->
-<!--             <span>...</span>-->
-
-<!--          {% else %}-->
-<!--               <a href="{{ url_for('toetsvragen', page=num) }}"-->
-<!--                  class="{% if num == page %}active{% endif %}">-->
-<!--                  {{ num }}-->
-<!--               </a>-->
-<!--          {% endif %}-->
-<!--        {% endfor %}-->
 
         {% for link in page_numbers %}
               <a href="{{ link }}" class="{% if loop.index == page %}active{% endif %}">
@@ -127,12 +111,10 @@
         {% endfor %}
 
         {% if next_page %}
-<!--            <a href="{{ url_for('toetsvragen', page=next_page) }}">Volgende</a>-->
                 <a href="{{ url_for('toetsvragen', page=next_page, search=search, vak=vak, taxonomie=taxonomie) }}">Volgende</a>
         {% endif %}
 
         {% if show_last %}
-<!--            <a href="{{ url_for('toetsvragen', page=total_pages) }}">Laatste pagina</a>-->
                 <a href="{{ url_for('toetsvragen', page=total_pages, search=search, vak=vak, taxonomie=taxonomie) }}">Laatste pagina</a>
         {% endif %}
       </div>
