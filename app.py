@@ -76,6 +76,7 @@ def indexeren():
         # get_vak = queries['get_vak']
 
         cursor.execute(get_question, (questions_id,))
+        # get_vak
         question = cursor.fetchone()
 
         if not question:
