@@ -9,7 +9,6 @@ import sqlite3
 app = Flask(__name__)
 DATABASE_FILE = "databases/database_toetsvragen.db"
 
-@app.route("/", methods=['GET', 'POST'])
 def load_queries(path):
     queries = {}
     query_name = None
@@ -40,25 +39,11 @@ def inlog():
     if request.method == 'POST':
         ingevulde_gebruikersnaam = request.form.get('username')
         ingevulde_wachtwoord = request.form.get('password')
+        return render_template('successvol_ingelogd.html',
+                               message=f"Welkom {ingevulde_gebruikersnaam}, ga snel aan de slag!",
+                               link="https://www.test-correct.nl/", ingevulde_wachtwoord=ingevulde_wachtwoord)
+    return render_template('inloggen.html')
 
-        conn = sqlite3.connect('databases/database.db')
-        conn.row_factory = sqlite3.Row
-        cursor = conn.cursor()
-        cursor.execute("SELECT password, display_name, is_admin FROM users WHERE login = ?", (ingevulde_gebruikersnaam,))
-        user = cursor.fetchone()
-        conn.close()
-
-        if user and user["password"] == ingevulde_wachtwoord:
-            if user["is_admin"]:
-                message= f"Welkom admin {user['display_name']}!"
-            else:
-                message = f"Welkom {user['display_name']}! Ga snel aan de slag!"
-            return render_template('successvol_ingelogd.html', message=message, link='/toetsvragen')
-        else:
-            return "Ongeldige gebruikersnaam of wachtwoord.", 401
-        return render_template('inloggen.html')
-        return render_template('successvol_ingelogd.html', message = f"Welkom {ingevulde_gebruikersnaam}, ga snel aan de slag!",
-                               link ='/toetsvragen', ingevulde_wachtwoord=ingevulde_wachtwoord)
 
 @app.route("/successvol_ingelogd")
 def success():
@@ -73,10 +58,12 @@ def get_redacteuren():
     conn.close()
     return redacteuren
 
+
 @app.route('/redacteur')
 def redacteur():
     redacteuren = get_redacteuren()
     return render_template('redacteur.html', redacteuren=redacteuren)
+
 
 @app.route("/nr", methods=['GET', 'POST'])
 def nieuwe_redacteur():
@@ -87,22 +74,8 @@ def nieuwe_redacteur():
         gebruikersnaam = request.form.get('username')
         email = request.form.get('email')
         wachtwoord = request.form.get('password')
-        is_admin = int(request.form.get('is_admin', 0))
-
-        conn = sqlite3.connect('databases/database.db')
-        cursor = conn.cursor()
-        try:
-            cursor.execute(
-                "INSERT INTO users (login, password, display_name, date_created, is_admin)  VALUES (?, ?, ?, datetime('now'), ?)",
-                (gebruikersnaam, wachtwoord, email, is_admin)
-            )
-            conn.commit()
-        except sqlite3.InternalError as e:
-            return f"Fout bij het toevoegen {e}", 400
-        finally:
-            conn.close()
         return render_template('successvol_ingelogd.html', message=f"{gebruikersnaam} is succesvol toegevoegd! Klik hieronder om verder te gaan!",
-                               link='/toetsvragen')
+                               link="https://www.test-correct.nl/", gebruikersnaam=gebruikersnaam, email=email, wachtwoord=wachtwoord)
     return render_template('nieuwe_redacteur.html')
 
 
