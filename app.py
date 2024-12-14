@@ -120,7 +120,7 @@ def vraag_taxonomie_resultaat():
         # get_vak = queries['get_vak']
 
         cursor.execute(get_question, (questions_id,))
-        # get vak
+        # get_vak
         question = cursor.fetchone()
 
         if not question:
@@ -144,7 +144,7 @@ def vraag_taxonomie_resultaat():
     finally:
             conn.close()
 
-@app.route("/", endpoint="toetsvragen")
+@app.route("/toetsvragen", methods=["GET","POST"])
 def toetsvragen():
     try:
         conn = sqlite3.connect('databases/database_toetsvragen.db')
