@@ -32,7 +32,7 @@ def load_queries(path):
 
     return queries
 
-@app.route("/")
+@app.route("/", methods=['GET', 'POST'])
 def inlog():
     ingevulde_gebruikersnaam = ""
     ingevulde_wachtwoord = ""
@@ -41,7 +41,7 @@ def inlog():
         ingevulde_wachtwoord = request.form.get('password')
         return render_template('successvol_ingelogd.html',
                                message=f"Welkom {ingevulde_gebruikersnaam}, ga snel aan de slag!",
-                               link="https://www.test-correct.nl/", ingevulde_wachtwoord=ingevulde_wachtwoord)
+                               link="/toetsvragen", ingevulde_wachtwoord=ingevulde_wachtwoord)
     return render_template('inloggen.html')
 
 
