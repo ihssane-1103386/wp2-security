@@ -28,74 +28,95 @@
       <li style="padding:0"><button class="button" style="font-family:Nunito extrabold,sans-serif; font-size: 17px;">Boek online demo</button>
       </li>
     </ul>
-    <button class="button" style=" text-align: right; "><a> href="{{ url_for('toetsvragen') }}"</a> Vragen </button>
-    <button class="button" style=" text-align: right; "><a> href="{{ url_for('Ai prompts') }}"</a> Ai Promts </button>
-    <button class="button" style=" text-align: right; "><a> href="{{ url_for('wijzig_redacteuren') }}"</a> Redacteuren </button>
-      <h1 style="font-family:Nunito extrabold,sans-serif; color:#041F74;"> Toetsvragen lijst </h1>
-      <p style="font-family:Zilla slab,sans-serif; color:#041F74; margin: 4px 2px;" > Toetsvragen lijst </p>
-        <button class = "button" > Ververs </button>
-          <table>
-            <thead>
-              <tr style="font-family:Nunito extrabold,sans-serif; color:#041F74; font-size: 21px;">
-                <td style="padding: 5px;" >Vraag</td>
-                <td style="padding: 5px;" >vak</td>
-                <td style="padding: 5px;" >Invoer datum</td>
-                <td style="padding: 5px;" >Taxonomie</td>
-              </tr>
-            </thead>
-            <tbody>
-              {% for vraag in vragen %}
-              <tr style="font-family: nunito, serif; color:#041F74; font-size: 15px; margin: 10px;">
-                <td style="padding:5px">{{ vraag[0] }}</td>
-                <td style="padding:5px">{{ vraag[1] }}</td>
-                <td style="padding:5px">{{ vraag[2] if vraag[2] else "N/A"}}</td>
-                <td>
-                    {% if vraag[3] %}
-                    <button class="button">Wijzigen</button>
-                    {% else %}
-                    <button class="button">Indexeer</button>
-                    {% endif %}
-                </td>
-              </tr>
-              {% else %}
-              <tr>
-                  <td colspan="4">Geen vragen beschikbaar.</td>
-              </tr>
-              {% endfor %}
-            </tbody>
-          </table>
 
-          <p></p>
+    <a href="{{ url_for('toetsvragen') }}" class="button" style="text-align: right;">Vragen</a>
+    <a href="{{ url_for('inlog') }}" class="button" style="text-align: right;">AI Prompts</a>
+    <a href="{{ url_for('inlog') }}" class="button" style="text-align: right;">Redacteuren</a>
 
-          <div class="pagination">
-            {% if show_first %}
-                <a href="{{ url_for('toetsvragen', page=1) }}">Eerste pagina</a>
+    <h2 style="font-family:Nunito extrabold,sans-serif; color:#041F74;"> Toetsvragen lijst </h2>
+
+    <form action="{{ url_for('toetsvragen') }}" methode="GET">
+        <div style="margin-bottom:10px;">
+            <label for="search">Zoekwoord:</label>
+            <input type="text" id="search" name="search" value="{{ request.args.get('search','') }}" placeholder="Zoek vraag...">
+        </div>
+
+        <div style="margin-bottom:10px">
+            <label for="vak">Filter per vak:</label>
+            <select id="vak" name="vak">
+                <option value="">Alle vakken</option>
+                {% for v in unieke_vakken %}
+                <option value="{{ v }}" {% if v == request.args.get(vak) %}selected{% endif %}>{{ v }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div style="margin-bottom: 10px;">
+            <label for="taxonomie">Toon vragen met taxonomie:</label>
+            <input type="checkbox" id="taxonomie" name="taxonomie" value="1" {% if request.args.get(taxonomie) %}checked{% endif %}>
+        </div>
+
+
+        <div>
+            <button type="submit" class="button">Zoek</button>
+            <a href="{{ url_for('toetsvragen') }}" class="button">Ververs</a>
+        </div>
+    </form>
+
+    <table>
+      <thead>
+        <tr style="font-family:Nunito extrabold,sans-serif; color:#041F74; font-size: 21px;">
+          <td style="padding: 5px;" >Vraag</td>
+          <td style="padding: 5px;" >vak</td>
+          <td style="padding: 5px;" >Invoer datum</td>
+          <td style="padding: 5px;" >Taxonomie</td>
+        </tr>
+      </thead>
+      <tbody>
+      {% for vraag in vragen %}
+      <tr style="font-family: nunito, serif; color:#041F74; font-size: 15px; margin: 10px;">
+         <td style="padding:5px">{{ vraag[1] }}</td>
+         <td style="padding:5px">{{ vraag[2] }}</td>
+         <td style="padding:5px">{{ vraag[3] if vraag[3] else "N/A"}}</td>
+         <td>
+            {% if vraag[4] %}
+                <a href="{{ url_for('vraag_taxonomie_resultaat', questions_id=vraag[0]) }}" class="button" >Wijzigen</a>
+            {% else %}
+                <a href="{{ url_for('indexeren', questions_id=vraag[0]) }}" class="button" >Indexeren</a>
             {% endif %}
-
-            {% if prev_page %}
-                <a href="{{ url_for('toetsvragen', page=prev_page) }}">Vorige</a>
-            {% endif %}
-
-            {% for num in page_numbers %}
-              {% if num == '...' %}
-                 <span>...</span>
-
-              {% else %}
-                   <a href="{{ url_for('toetsvragen', page=num) }}"
-                      class="{% if num == page %}active{% endif %}">
-                      {{ num }}
-                   </a>
-              {% endif %}
+         </td>
+      </tr>
+            {% else %}
+      <tr>
+            <td colspan="4">Geen vragen beschikbaar.</td>
+      </tr>
             {% endfor %}
+      </table>
 
+      <p></p>
 
-            {% if next_page %}
-                <a href="{{ url_for('toetsvragen', page=next_page) }}">Volgende</a>
-            {% endif %}
+      <div class="pagination">
+        {% if show_first %}
+            <a href="{{ url_for('toetsvragen', page=1, search=search, vak=vak, taxonomie=taxonomie) }}">Eerste pagina</a>
+        {% endif %}
 
-            {% if last_page %}
-                <a href="{{ url_for('toetsvragen', page=total_pages) }}">Laatste pagina</a>
-            {% endif %}
-          </div>
+        {% if prev_page %}
+                <a href="{{ url_for('toetsvragen', page=prev_page, search=search, vak=vak, taxonomie=taxonomie) }}">Vorige</a>
+        {% endif %}
+
+        {% for link in page_numbers %}
+              <a href="{{ link }}" class="{% if loop.index == page %}active{% endif %}">
+                {{ loop.index }}
+              </a>
+        {% endfor %}
+
+        {% if next_page %}
+                <a href="{{ url_for('toetsvragen', page=next_page, search=search, vak=vak, taxonomie=taxonomie) }}">Volgende</a>
+        {% endif %}
+
+        {% if show_last %}
+                <a href="{{ url_for('toetsvragen', page=total_pages, search=search, vak=vak, taxonomie=taxonomie) }}">Laatste pagina</a>
+        {% endif %}
+      </div>
 </body>
 </html>
