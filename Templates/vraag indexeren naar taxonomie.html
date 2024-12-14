@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>vraag indexeren naar taxonomie</title>
+  <link rel="stylesheet" href="../static/css/style.css">
+</head>
+<body>
+    <header class="header">
+            <a href="../index.html">
+                <img src="../static/assets/logo/testcorrect-logo.svg" alt="Test-Correct Logo" class="logo">
+            </a>
+            <nav>
+                <a href="#" class="button">Vragen</a>
+                <a href="#" class="button">AI Prompts</a>
+                <a href="#" class="button active">Redacteuren</a>
+            </nav>
+    </header>
+    <div class = "container">
+        <div>Vraag: <span id="vraag">{{ question }}</span></div>
+        <br>
+        <div>vak: biologie</div>
+        <br>
+        <div>onderwijsniveau: niveau 2</div>
+        <br>
+        <div>leerjaar: 4</div>
+        <br>
+        <form>
+        <label for="keuze">prompt:</label>
+        <select id="keuze" name="keuze">
+            <option value="prompt 1">prompt v1</option>
+        </select>
+    </form>
+        <br>
+        <div class="button">
+            <button class="button" onclick="window.location.href='/vraag_taxonomie_resultaat';">toepassen</button>
+        </div>
+    </div>
+</body>
+</html>

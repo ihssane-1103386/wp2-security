@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>vraag taxonomie resultaat</title>
+  <link rel="stylesheet" href="../static/css/style.css">
+</head>
+    <body>
+        <header class="header">
+                <a href="../index.html">
+                    <img src="../assets/logo/logo_test-correct.svg" alt="Test-Correct Logo" class="logo">
+                </a>
+                <nav>
+                    <a href="#" class="button">Vragen</a>
+                    <a href="#" class="button">AI Prompts</a>
+                    <a href="#" class="button active">Redacteuren</a>
+                </nav>
+        </header>
+        <div class = "container">
+            <div>Vraag: <span id="vraag">{{ question }}</span></div>
+            <br>
+            <div>vak: biologie</div>
+            <br>
+            <div>onderwijsniveau: niveau 2</div>
+            <br>
+            <div>leerjaar: 4</div>
+            <br>
+            <form>
+                <label for="keuze">Keuze Taxonomie:</label>
+                <select id="keuze" name="keuze">
+                    <option value="Analyseren">Analyseren</option>
+                    <option value="onderzoeken">onderzoeken</option>
+                </select>
+            </form>
+            <br>
+            <div>
+            <label for="chatgpt_antwoord">gegenereerd voorstel:</label>
+            <span id="chatgpt_antwoord"> ai response...</span>
+            </div>
+            <br>
+              <div class="button">
+                <button class="button">taxonomie opslaan</button>
+            </div>
+        </div>
+    </body>
+</html>

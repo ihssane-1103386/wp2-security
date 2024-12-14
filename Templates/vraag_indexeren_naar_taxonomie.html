@@ -31,7 +31,7 @@
         </div>
     </header>
     <div class = "container">
-        <div>vraag: <span id="vraag">{{ vraag }}</span></div>
+        <div>Vraag: <span id="vraag">{{ question }}</span></div>
         <br>
         <div>vak: {{ vak }}</div>
         <br>
@@ -39,7 +39,7 @@
         <br>
         <div>leerjaar: {{ leerjaar }}</div>
         <br>
-        <form method="POST" action="{{ url_for('indexeren') }}">
+        <form method="POST" action="{{ url_for('indexeren', questions_id=questions_id) }}">
         <label for="keuze">Prompt:</label>
         <select id="keuze" name="keuze">
         {% for prompt in prompts %}
