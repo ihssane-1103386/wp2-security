@@ -39,23 +39,25 @@
             <br>
             <div>leerjaar: {{ leerjaar }}</div>
             <br>
-            <form>
-                <label for="keuze">Keuze Taxonomie:</label>
-                <select id="keuze" name="keuze">
-                    <option value="Analyseren">Analyseren</option>
-                    <option value="onderzoeken">onderzoeken</option>
+            <form method="POST" action="{{ url_for('vraag_taxonomie_resultaat', questions_id=questions_id) }}">
+                <label for="taxonomie_bloom">Bloom Taxonomie:</label>
+                <select id="taxonomie_bloom" name="taxonomie_bloom">
+                    <option value="onthouden">onthouden</option>
+                    <option value="begrijpen">begrijpen</option>
+                    <option value="toepassen">toepassen</option>
+                    <option value="analyseren">analyseren</option>
+                    <option value="evalueren">evalueren</option>
+                    <option value="creeren">creeren</option>
                 </select>
+                <br><br>
+                <div class="button">
+                <button type="submit" class="button">taxonomie opslaan</button>
+                </div>
             </form>
-            <br>
             <div>
             <p>prompt: {{ prompt }}</p>
-            </div>
-            <br>
+            </div><br>
             <div>generated niveau: {{ ai_niveau }}</div>
             <div>uitleg: {{ ai_uitleg }}</div>
-            <br>
-              <div class="button">
-                <button class="button">taxonomie opslaan</button>
-            </div>
     </body>
 </html>

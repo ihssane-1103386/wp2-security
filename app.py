@@ -58,12 +58,14 @@ def nieuwe_redacteur():
 @app.route('/indexeren', methods=["GET",'POST'])
 def indexeren():
     prompts = prompt_lijst()
+    questions_id = request.args.get('questions_id')
+
     if request.method == 'POST':
         vraag = request.form.get('vraag')
         prompt_id = request.form.get('keuze')
-        return redirect(url_for('vraag_taxonomie_resultaat', vraag=vraag, prompt_id=prompt_id))
+        return redirect(url_for('vraag_taxonomie_resultaat', vraag=vraag, prompt_id=prompt_id, questions_id=questions_id))
 
-    questions_id = request.args.get('questions_id')
+
     if not questions_id:
         return "Geen questions_id meegegeven", 400
 

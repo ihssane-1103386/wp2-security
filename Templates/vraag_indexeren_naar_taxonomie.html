@@ -39,7 +39,7 @@
         <br>
         <div>leerjaar: {{ leerjaar }}</div>
         <br>
-        <form method="POST" action="{{ url_for('indexeren') }}">
+        <form method="POST" action="{{ url_for('indexeren', questions_id=questions_id) }}">
         <label for="keuze">Prompt:</label>
         <select id="keuze" name="keuze">
         {% for prompt in prompts %}
