@@ -147,8 +147,8 @@ def vraag_taxonomie_resultaat():
         # get_vak = queries['get_vak']
 
         cursor.execute(get_question, (questions_id,))
-        # get_vak
         question = cursor.fetchone()
+        # get_vak
 
         if not question:
             return "Vraag niet gevonden", 404
@@ -171,7 +171,7 @@ def vraag_taxonomie_resultaat():
     finally:
             conn.close()
 
-@app.route("/toetsvragen", methods=["GET","POST"])
+@app.route("/toetsvragen")
 def toetsvragen():
     try:
         conn = sqlite3.connect('databases/database_toetsvragen.db')
