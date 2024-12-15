@@ -1,5 +1,5 @@
 /*Button*/
-.button {
+.first-button {
   text-align: right;
   background-color: #3dbb56;
   border: none;
@@ -14,14 +14,14 @@
   border-radius: 10px;
 }
 
-.button:hover {
+.first-button:hover {
   background-color: #259338;
   transition-duration: 0.4s;
   color: white;
   box-shadow: 1px 1px 1px 1px rgba(85, 85, 85, 0.3);
 }
 
-.button:active {
+.first-button:active {
   background-color: #186825;
   color: white;
   transition-duration: 0.2s;
@@ -148,7 +148,7 @@ form {
     gap: 10px;
     margin-bottom: 20px;
     padding: 10px;
-    background-color: #f1f1f1;
+    background-color: #ffffff;
     border: none;
     border-radius: 5px;
 }
