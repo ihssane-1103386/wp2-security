@@ -17,3 +17,5 @@ SELECT question FROM questions WHERE questions_id = ?;
 -- [get_vak]
 SELECT vak FROM questions WHERE question_id = ?;
 
+-- [get_redacteur]
+SELECT display_name, login, is_admin FROM users;
