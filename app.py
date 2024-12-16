@@ -86,12 +86,13 @@ def indexeren():
         print(f"Opgehaalde vraagtekst: {question[0]}")
 
         return render_template('vraag_indexeren_naar_taxonomie.html',
-                           vak="biologie",
-                           onderwijsniveau="niveau 2",
-                           leerjaar="leerjaar 1",
-                           prompts=prompts,
-                           questions_id=questions_id,
-                           question=question[0])
+                            question=question[0],
+                            vak="biologie",
+                            onderwijsniveau="niveau 2",
+                            leerjaar="leerjaar 1",
+                            prompts=prompts,
+                            questions_id=questions_id,
+                            )
 
     except Exception as e:
             print(f"Fout tijdens ophalen van vraag: {e}")
@@ -141,7 +142,7 @@ def vraag_taxonomie_resultaat():
 
 
         return render_template('vraag_indexeren_resultaat.html',
-                               vraag=question,
+                               question=question,
                                vak="biologie",
                                onderwijsniveau="niveau 2",
                                leerjaar="leerjaar 1",
