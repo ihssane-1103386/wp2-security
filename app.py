@@ -86,7 +86,6 @@ def indexeren():
         print(f"Opgehaalde vraagtekst: {question[0]}")
 
         return render_template('vraag_indexeren_naar_taxonomie.html',
-                           vraag="placeholder",
                            vak="biologie",
                            onderwijsniveau="niveau 2",
                            leerjaar="leerjaar 1",
@@ -146,7 +145,7 @@ def vraag_taxonomie_resultaat():
                                vak="biologie",
                                onderwijsniveau="niveau 2",
                                leerjaar="leerjaar 1",
-                               prompt=prompt[1],
+                               prompt=prompt,
                                ai_niveau=ai_niveau,
                                ai_uitleg=ai_uitleg,
                                questions_id=questions_id)
