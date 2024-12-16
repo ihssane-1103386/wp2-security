@@ -17,13 +17,14 @@ def prompt_ophalen_op_id(prompt_id):
     conn = sqlite3.connect('databases/database_toetsvragen.db')
     cursor = conn.cursor()
     cursor.execute('''SELECT 
-                        prompts.prompts_id, 
                         prompts.prompt_details 
                       FROM prompts
                       WHERE prompts.prompts_id = ?''', (prompt_id,))
-    prompt = cursor.fetchone()
+    result = cursor.fetchone()
     conn.close()
-    return prompt
+    if result:
+        return result[0]
+    return None
 
 def prompt_question_count_verhogen(): #nog niet helemaal in werking
     conn = sqlite3.connect('databases/database_toetsvragen.db')

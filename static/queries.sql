@@ -17,3 +17,5 @@ SELECT question FROM questions WHERE questions_id = ?;
 -- [get_vak]
 SELECT vak FROM questions WHERE question_id = ?;
 
+-- [update_taxonomie]
+UPDATE questions SET taxonomie_bloom = ? WHERE questions_id = ?

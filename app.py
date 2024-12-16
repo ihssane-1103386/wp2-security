@@ -104,12 +104,10 @@ def indexeren():
 def vraag_taxonomie_resultaat():
     prompt_id = request.args.get('prompt_id', 'bloom')
     prompt = prompt_ophalen_op_id(prompt_id)
-    question = "placeholder?"
-    gpt_choice = "dry_run"
-    ai_response = get_bloom_category(question, prompt, gpt_choice)
+
     questions_id = request.args.get('questions_id')
     if not prompt:
-        return"prompt not found"
+        prompt = "Fallback Prompt"
 
     if not questions_id:
         return "Geen questions_id meegegeven", 400
@@ -120,32 +118,43 @@ def vraag_taxonomie_resultaat():
 
         queries = load_queries('static/queries.sql')
         get_question = queries['get_question']
-        # get_vak = queries['get_vak']
 
         cursor.execute(get_question, (questions_id,))
-        # get_vak
-        question = cursor.fetchone()
+        result = cursor.fetchone()
 
-        if not question:
+        if not result:
             return "Vraag niet gevonden", 404
+
+        question = result[0]
+
+        gpt_choice = "rac_test"
+        ai_response = get_bloom_category(question, prompt, gpt_choice)
+
+        if request.method == 'POST':
+            taxonomie_bloom = request.form.get('taxonomie_bloom')
+            update_taxonomie = queries['update_taxonomie']
+            cursor.execute(update_taxonomie, (taxonomie_bloom, questions_id))
+            conn.commit()
+            return redirect(url_for('toetsvragen'))
 
         ai_niveau = ai_response.get("niveau", "geen antwoord")
         ai_uitleg = ai_response.get("uitleg", "geen antwoord")
+
+
         return render_template('vraag_indexeren_resultaat.html',
-                            vraag = question,
-                            vak = "biologie",
-                            onderwijsniveau = "niveau 2",
-                            leerjaar = "leerjaar 1",
-                            prompt = prompt[1],
-                            ai_niveau = ai_niveau,
-                            ai_uitleg = ai_uitleg,
-                            questions_id=questions_id,
-                            question=question[0])
+                               vraag=question,
+                               vak="biologie",
+                               onderwijsniveau="niveau 2",
+                               leerjaar="leerjaar 1",
+                               prompt=prompt[1],
+                               ai_niveau=ai_niveau,
+                               ai_uitleg=ai_uitleg,
+                               questions_id=questions_id)
     except Exception as e:
-            print(f"Fout tijdens ophalen van vraag: {e}")
-            return "Interne serverfout", 500
+        print(f"Fout tijdens ophalen van vraag: {e}")
+        return "Interne serverfout", 500
     finally:
-            conn.close()
+        conn.close()
 
 @app.route("/toetsvragen", methods=["GET","POST"])
 def toetsvragen():
