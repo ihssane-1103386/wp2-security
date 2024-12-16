@@ -1,6 +1,6 @@
 /* Algemene instellingen */
 body {
-    font-family: 'Nunito', sans-serif; /* Stijlrichtlijnen vermelden Nunito */
+    font-family: 'Nunito', sans-serif; /* Stijlrichtlijnen Nunito */
     background-color: #F2F6FF; /* Lichtblauwe achtergrond zoals in stijlgids */
     margin: 0;
     padding: 0;
@@ -100,25 +100,60 @@ input[type="text"], select {
     font-size: 16px;
 }
 
-button {
-    font-family: 'Nunito', sans-serif;
-    font-size: 18px;
-    padding: 10px 20px;
+.button-1 {
+    text-align: right;
+    background-color: #3DBB56;
     border: none;
-    border-radius: 5px;
     color: white;
-    background-color: #3DBB56; /* Groen voor primaire actieknoppen */
+    padding: 10px 32px;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
     cursor: pointer;
+    font-family:Nunito extrabold,sans-serif;
+    transition-duration: 0.4s;
+    border-radius: 10px
 }
 
-button:hover {
-    background-color: #2A9142; /* Donkergroen bij hover */
+.button-1:hover {
+    background-color: #259338;
+    transition-duration: 0.4s;
+    color: white;
+    box-shadow: 1px 1px 1px 1px rgba(85, 85, 85, 0.3);
 }
 
-button:active {
+.button_1:active {
   background-color: #186825;
   color: white;
   transition-duration: 0.2s;
+}
+
+.button-2 {
+    text-align: right;
+    background-color: #041DF5;
+    border: none;
+    color: white;
+    padding: 10px 32px;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+    font-family:Nunito extrabold,sans-serif;
+    transition-duration: 0.4s;
+    border-radius: 10px;
+}
+
+.button-2:hover {
+    background-color: #041F74;
+    transition-duration: 0.4s;
+    color: white;
+    box-shadow: 1px 1px 1px 1px rgba(85, 85, 85, 0.3);
+}
+
+.button-2:active {
+    background-color: #041F74;
+    color: white;
+    transition-duration: 0.2s;
 }
 
 table {
