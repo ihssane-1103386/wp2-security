@@ -131,11 +131,12 @@ def vraag_taxonomie_resultaat():
         ai_response = get_bloom_category(question, prompt, gpt_choice)
 
         if request.method == 'POST':
-            taxonomie_bloom = request.form.get('taxonomie_bloom')
-            update_taxonomie = queries['update_taxonomie']
-            cursor.execute(update_taxonomie, (taxonomie_bloom, questions_id))
-            conn.commit()
-            return redirect(url_for('toetsvragen'))
+            taxonomy_bloom = request.form.get('taxonomy_bloom')
+            if taxonomy_bloom:
+                update_taxonomie = queries['update_taxonomy']
+                cursor.execute(update_taxonomie, (taxonomy_bloom, questions_id))
+                conn.commit()
+                return redirect(url_for('toetsvragen'))
 
         ai_niveau = ai_response.get("niveau", "geen antwoord")
         ai_uitleg = ai_response.get("uitleg", "geen antwoord")
