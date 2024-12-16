@@ -53,7 +53,11 @@ def success():
 def get_redacteuren():
     conn = sqlite3.connect(DATABASE_FILE)
     cursor = conn.cursor()
-    cursor.execute("SELECT display_name, login, is_admin FROM users")
+
+    queries = load_queries('static/queries.sql')
+    get_redacteur = queries['get_redacteur']
+
+    cursor.execute(get_redacteur)
     redacteuren = cursor.fetchall()
     conn.close()
     return redacteuren
