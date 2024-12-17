@@ -4,8 +4,11 @@
     <meta charset="UTF-8">
     <title> Toetsvragen lijst </title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/toetsvragen.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
+
 <body>
+  <header>
     <ul class="ul">
       <li>
           <button style= "border: none; cursor: pointer; scale:95%; background:none;">
@@ -25,15 +28,17 @@
       </li>
       <li style="padding:25px"><button class="second-button" style="font-family:Nunito extrabold,sans-serif; font-size: 17px;">Login</button>
       </li>
-      <li style="padding:0"><button class="button" style="font-family:Nunito extrabold,sans-serif; font-size: 17px;">Boek online demo</button>
+      <li style="padding:0"><button class="first-button" style="font-family:Nunito extrabold,sans-serif; font-size: 17px;">Boek online demo</button>
       </li>
     </ul>
+  </header>
 
-    <a href="{{ url_for('toetsvragen') }}" class="button" style="text-align: right;">Vragen</a>
-    <a href="{{ url_for('inlog') }}" class="button" style="text-align: right;">AI Prompts</a>
-    <a href="{{ url_for('inlog') }}" class="button" style="text-align: right;">Redacteuren</a>
+    <p></p>
+    <a class="first-button" href="{{ url_for('toetsvragen') }}" >Vragen</a>
+    <a class="first-button" href="{{ url_for('ai_prompts') }}" >AI Prompts</a>
+    <a class="first-button" href="{{ url_for('redacteur') }}" >Redacteuren</a>
 
-    <h2 style="font-family:Nunito extrabold,sans-serif; color:#041F74;"> Toetsvragen lijst </h2>
+    <h3 style="font-family:Nunito extrabold,sans-serif; color:#041F74;"> Toetsvragen lijst </h3>
 
     <form action="{{ url_for('toetsvragen') }}" methode="GET">
         <div style="margin-bottom:10px;">
@@ -58,8 +63,8 @@
 
 
         <div>
-            <button type="submit" class="button">Zoek</button>
-            <a href="{{ url_for('toetsvragen') }}" class="button">Ververs</a>
+            <button type="submit" class="first-button">Zoek</button>
+            <a href="{{ url_for('toetsvragen') }}" class="first-button">Ververs</a>
         </div>
     </form>
 
@@ -67,8 +72,8 @@
       <thead>
         <tr style="font-family:Nunito extrabold,sans-serif; color:#041F74; font-size: 21px;">
           <td style="padding: 5px;" >Vraag</td>
-          <td style="padding: 5px;" >vak</td>
-          <td style="padding: 5px;" >Invoer datum</td>
+          <td style="padding: 5px;" >Vak</td>
+          <td style="padding: 5px;" >Datum</td>
           <td style="padding: 5px;" >Taxonomie</td>
         </tr>
       </thead>
@@ -80,9 +85,9 @@
          <td style="padding:5px">{{ vraag[3] if vraag[3] else "N/A"}}</td>
          <td>
             {% if vraag[4] %}
-                <a href="{{ url_for('vraag_taxonomie_resultaat', questions_id=vraag[0]) }}" class="button" >Wijzigen</a>
+                <a href="{{ url_for('vraag_taxonomie_resultaat', questions_id=vraag[0]) }}" class="first-button" >Wijzigen</a>
             {% else %}
-                <a href="{{ url_for('indexeren', questions_id=vraag[0]) }}" class="button" >Indexeren</a>
+                <a href="{{ url_for('indexeren', questions_id=vraag[0]) }}" class="first-button" >Indexeren</a>
             {% endif %}
          </td>
       </tr>

@@ -3,10 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>inlogpagina</title>
+    <title>successvol_ingelogd</title>
     <link rel="stylesheet" href="../static/css/inloggen.css">
-    <link rel="stylesheet" href="../static/css/style.css">
-    <link rel="stylesheet" href="../static/css/ai_prompts.css">
         </head>
 <body>
 <header class="top-bar">
@@ -28,16 +26,17 @@
         </div>
 
         <div class="button-container">
-            <a href="https://www.test-correct.nl/welcome" class="button-1">Probeer nu</a>
-            <a href="https://welcome.test-correct.nl/login" class="button-2">Log in</a>
+            <a href="https://www.test-correct.nl/welcome" class="button one">Probeer nu</a>
+            <a href="https://welcome.test-correct.nl/login" class="button two">Log in</a>
         </div>
     </div>
 </header>
-
-{%  block main %}
-{% endblock %}
-
-<footer><a href="https://www.test-correct.nl/"><strong>Keer terug naar home pagina</strong></a></footer>
+<div class="login_form">
+            <div class="field">
+                <h1>{{ message }} </h1>
+                <p><a href="{{ link }}" class="newbutton">Ga verder</a></p>
+            </div>
+            </div>
 
 </body>
 </html>

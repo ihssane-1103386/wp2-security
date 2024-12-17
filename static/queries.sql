@@ -19,3 +19,6 @@ SELECT vak FROM questions WHERE question_id = ?;
 
 -- [update_taxonomy]
 UPDATE questions SET taxonomy_bloom = ? WHERE questions_id = ?;
+
+-- [get_redacteur]
+SELECT display_name, login, is_admin FROM users;
