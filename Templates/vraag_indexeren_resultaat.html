@@ -40,8 +40,8 @@
             <div>leerjaar: {{ leerjaar }}</div>
             <br>
             <form method="POST" action="{{ url_for('vraag_taxonomie_resultaat', questions_id=questions_id) }}">
-                <label for="taxonomie_bloom">Bloom Taxonomie:</label>
-                <select id="taxonomie_bloom" name="taxonomie_bloom">
+                <label for="taxonomy_bloom">Bloom Taxonomy:</label>
+                <select id="taxonomy_bloom" name="taxonomy_bloom">
                     <option value="onthouden">onthouden</option>
                     <option value="begrijpen">begrijpen</option>
                     <option value="toepassen">toepassen</option>
@@ -51,7 +51,7 @@
                 </select>
                 <br><br>
                 <div class="button">
-                <button type="submit" class="button">taxonomie opslaan</button>
+                <button type="submit" class="button">taxonomy opslaan</button>
                 </div>
             </form>
             <div>
