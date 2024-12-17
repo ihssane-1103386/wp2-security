@@ -11,12 +11,11 @@
   <header>
     <ul class="ul">
       <li>
-          <button style= "border: none; cursor: pointer; scale:100%; background:none;">
-              <img src="static/assets/logo/testcorrect-logo.svg" alt="Link to test-correct homepage" style= "border: none; cursor: pointer; scale:95%; background:none; align-items: center;"  >
-                <a href=""></a>
-          </button>
+          <a style= "border: none; cursor: pointer; scale:100%; background:none;" href="https://www.test-correct.nl/" >
+              <img src="static/assets/logo/testcorrect-logo.svg" alt="Link to test-correct homepage" style= "border: none; cursor: pointer; scale:100%; background:none; align-items: center;">
+          </a>
       </li>
-      <li><a href="??">Oplossingen</a></li>
+      <li><a href="https://www.test-correct.nl/voor-het-vo">Oplossingen</a></li>
       <li><a href="https://www.test-correct.nl/toetsplatform">Platform</a></li>
       <li><a href="https://www.test-correct.nl/pakketten">Aanbod</a></li>
       <li><a href="https://www.test-correct.nl/support">Over ons</a></li>
@@ -35,15 +34,14 @@
     </ul>
   </header>
 
-    <p></p>
-
-    <div style="margin: 10px;">
-    <a class="first-button" href="{{ url_for('toetsvragen') }}" >Vragen</a>
-    <a class="first-button" href="{{ url_for('ai_prompts') }}" >AI Prompts</a>
-    <a class="first-button" href="{{ url_for('redacteur') }}" >Redacteuren</a>
+    <div class="content-row">
+      <h2> Toetsvragen lijst </h2>
+      <div class="button-group">
+        <a class="first-button" href="{{ url_for('toetsvragen') }}" >Vragen</a>
+        <a class="first-button" href="{{ url_for('ai_prompts') }}" >AI Prompts</a>
+        <a class="first-button" href="{{ url_for('redacteur') }}" >Redacteuren</a>
+      </div>
     </div>
-
-    <h2 style="font-family:Nunito extrabold,sans-serif; color:#041F74; margin: 10px;"> Toetsvragen lijst </h2>
 
     <form action="{{ url_for('toetsvragen') }}">
         <div>
@@ -90,9 +88,9 @@
          <td style="padding:5px">{{ vraag[3] if vraag[3] else "N/A"}}</td>
          <td>
             {% if vraag[4] %}
-                <a href="{{ url_for('vraag_taxonomie_resultaat', questions_id=vraag[0]) }}" class="first-button" >Wijzigen</a>
+                <a href="{{ url_for('vraag_taxonomie_resultaat', questions_id=vraag[0]) }}" class="table-button" >Wijzigen</a>
             {% else %}
-                <a href="{{ url_for('indexeren', questions_id=vraag[0]) }}" class="first-button" >Indexeren</a>
+                <a href="{{ url_for('indexeren', questions_id=vraag[0]) }}" class="table-button" >Indexeren</a>
             {% endif %}
          </td>
       </tr>

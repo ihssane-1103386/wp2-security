@@ -64,7 +64,36 @@ body {
   transition-duration: 0.2s;
 }
 
-/*pagina*/
+/*table button*/
+.table-button {
+  text-align: center;
+  background-color: #3dbb56;
+  border: none;
+  color: white;
+  padding: 10px 25px;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 14px;
+  cursor: pointer;
+  font-family:Nunito extrabold,sans-serif;
+  transition-duration: 0.4s;
+  border-radius: 10px;
+  max-width: 70px;
+  min-width: 70px;
+}
+
+.table-button:hover {
+  background-color: #259338;
+  color: white;
+  box-shadow: 1px 1px 1px 1px rgba(85, 85, 85, 0.3);
+}
+
+.table-button:active {
+  background-color: #186825;
+  color: white;
+}
+
+/*page*/
 .pagination {
     display: flex;
     justify-content: center;
@@ -84,7 +113,7 @@ body {
 }
 
 .pagination a:hover {
-    background-color: #f0f0f0;
+    background-color: #ffffff;
 }
 
 .pagination a.active {
@@ -180,10 +209,12 @@ form select {
     font-family:Zilla slab,sans-serif; color:#041F74;
 }
 
+/*adjustments to table*/
 table {
     margin: 10px;
 }
 
+/*Row that has buttons and text*/
 .content-row {
     display: flex;
     justify-content: space-between;
