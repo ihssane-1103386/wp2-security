@@ -1,9 +1,9 @@
 body {
-    font-family: 'Nunito', sans-serif;
-    background-color: #F2F6FF;
-    margin: 0;
-    padding: 0;
-    color: #041F74;
+  font-family: 'Nunito', sans-serif;
+  background-color: #F2F6FF;
+  margin: 10px;
+  padding: 0;
+  color: #041F74;
 }
 
 /*Button 1*/
@@ -64,27 +64,6 @@ body {
   transition-duration: 0.2s;
 }
 
-/*tabel*/
-/*.table {*/
-/*  font-family: nunito-regular, serif; font-size: 15px;*/
-/*  border-collapse: collapse;*/
-/*  width: 95%;*/
-/*  margin-bottom: 20px;*/
-/*  text-align: left;*/
-/*}*/
-
-/*.td, th {*/
-/*  border: 1px solid #ffffff;*/
-/*  text-align: center;*/
-/*  padding: 8px 8px;*/
-/*  margin: 6px 6px;*/
-/*  gap:10px*/
-/*}*/
-
-/*.tr:nth-child(even) {*/
-/*  background-color: #ededed;*/
-/*}*/
-
 /*pagina*/
 .pagination {
     display: flex;
@@ -123,7 +102,7 @@ ul {
     align-items: center;
     list-style-type: none;
     margin: 0;
-    padding: 10px;
+    padding: 5px;
     gap: 15px;
     background-color: white;
     overflow: hidden;
@@ -151,14 +130,37 @@ li img {
     vertical-align: middle;
 }
 
+li:first-child {
+    margin-right: 25px;
+}
+
+li:nth-child(7) {
+    margin-left: 75px;
+}
+
+li:nth-child(8) {
+    margin-left: 25px;
+}
+
+li:nth-child(9) {
+    margin-left: 10px;
+}
+
+li:nth-child(10) {
+    margin-left: 25px;
+}
+
 /*zoeken in tabel*/
 form {
     display: flex;
+    flex-direction: row;
+    gap: 15px;
     margin-bottom: 20px;
     padding: 10px;
-    background-color: #ffffff;
+    background-color: #F2F6FF;
     border: none;
     border-radius: 5px;
+    text-align: center;
 }
 
 form label {
@@ -175,4 +177,8 @@ form select {
     border: none;
     border-radius: 5px;
     font-family:Zilla slab,sans-serif; color:#041F74;
+}
+
+table {
+    margin-inline: 20px;
 }
