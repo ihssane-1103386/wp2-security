@@ -16,19 +16,21 @@
                 <a href=""></a>
           </button>
       </li>
-      <li style="padding:10px"><a href="??">Oplossingen</a></li>
-      <li style="padding:10px"><a href="https://www.test-correct.nl/toetsplatform">Platform</a></li>
-      <li style="padding:10px"><a href="https://www.test-correct.nl/pakketten">Aanbod</a></li>
-      <li style="padding:10px"><a href="https://www.test-correct.nl/support">Over ons</a></li>
-      <li style="padding:10px"><a href="https://www.test-correct.nl/overons">Support</a></li>
+      <li><a href="??">Oplossingen</a></li>
+      <li><a href="https://www.test-correct.nl/toetsplatform">Platform</a></li>
+      <li><a href="https://www.test-correct.nl/pakketten">Aanbod</a></li>
+      <li><a href="https://www.test-correct.nl/support">Over ons</a></li>
+      <li><a href="https://www.test-correct.nl/overons">Support</a></li>
       <li
-        style="color: #041F74; font-family:nunito, regular, serif; font-size:18px;padding:50px">
-        <img src="static/assets/icons/telefoon_icoon.png" alt="Telefoonnummer" style="width:19PX; height:17px;text-align: center;">
-        010 7171 171
+        style="color: #041F74; font-family:nunito, regular, serif; font-size:18px;padding:15px; gap: 5px">
+        <img src="static/assets/icons/telefoon_icoon.png" alt="Telefoonnummer" style="width:19PX; height:19px;">
+         010 7171 171
       </li>
-      <li style="padding:25px"><button class="second-button" style="font-family:Nunito extrabold,sans-serif; font-size: 17px;">Login</button>
+      <li>
+          <a class="second-button" href="{{ url_for('inlog') }}">Login</a>
       </li>
-      <li style="padding:0"><button class="first-button" style="font-family:Nunito extrabold,sans-serif; font-size: 17px;">Boek online demo</button>
+      <li>
+          <a class="first-button" href="https://www.test-correct.nl/welcome">Boek online demo</a>
       </li>
     </ul>
   </header>
@@ -40,7 +42,7 @@
 
     <h3 style="font-family:Nunito extrabold,sans-serif; color:#041F74;"> Toetsvragen lijst </h3>
 
-    <form action="{{ url_for('toetsvragen') }}" methode="GET">
+    <form action="{{ url_for('toetsvragen') }}">
         <div style="margin-bottom:10px;">
             <label for="search">Zoekwoord:</label>
             <input type="text" id="search" name="search" value="{{ request.args.get('search','') }}" placeholder="Zoek vraag...">
