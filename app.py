@@ -169,7 +169,6 @@ def vraag_taxonomie_resultaat():
         ai_niveau = ai_response.get("niveau", "geen antwoord")
         ai_uitleg = ai_response.get("uitleg", "geen antwoord")
 
-
         return render_template('vraag_indexeren_resultaat.html',
                                question=question,
                                vak="biologie",
@@ -184,6 +183,20 @@ def vraag_taxonomie_resultaat():
         return "Interne serverfout", 500
     finally:
         conn.close()
+
+@app.route('/taxonomie_wijzigen', methods=["GET","POST"])
+def taxonomie_wijzigen():
+    # prompt_id = request.args.get('prompt_id', 'bloom')
+    # prompt = prompt_ophalen_op_id(prompt_id)
+    #
+    # questions_id = request.args.get('questions_id')
+    #
+    # conn = sqlite3.connect('databases/database_toetsvragen.db')
+    # cursor = conn.cursor()
+    #
+    # queries = load_queries('static/queries.sql')
+
+    return render_template('vraag_taxonomie_wijzigen.html')
 
 @app.route("/toetsvragen", methods=["GET","POST"])
 def toetsvragen():

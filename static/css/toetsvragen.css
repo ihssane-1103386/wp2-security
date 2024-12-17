@@ -1,4 +1,12 @@
-/*Button*/
+body {
+    font-family: 'Nunito', sans-serif;
+    background-color: #F2F6FF;
+    margin: 0;
+    padding: 0;
+    color: #041F74;
+}
+
+/*Button 1*/
 .first-button {
   text-align: right;
   background-color: #3dbb56;
@@ -27,7 +35,7 @@
   transition-duration: 0.2s;
 }
 
-/*Button*/
+/*Button 2*/
 .second-button {
   text-align: right;
   background-color: #041df5;
@@ -57,25 +65,25 @@
 }
 
 /*tabel*/
-.table {
-  font-family: nunito-regular, serif; font-size: 15px;
-  border-collapse: collapse;
-  width: 95%;
-  margin-bottom: 20px;
-  text-align: left;
-}
+/*.table {*/
+/*  font-family: nunito-regular, serif; font-size: 15px;*/
+/*  border-collapse: collapse;*/
+/*  width: 95%;*/
+/*  margin-bottom: 20px;*/
+/*  text-align: left;*/
+/*}*/
 
-.td, th {
-  border: 1px solid #ffffff;
-  text-align: center;
-  padding: 8px 8px;
-  margin: 6px 6px;
-  gap:10px
-}
+/*.td, th {*/
+/*  border: 1px solid #ffffff;*/
+/*  text-align: center;*/
+/*  padding: 8px 8px;*/
+/*  margin: 6px 6px;*/
+/*  gap:10px*/
+/*}*/
 
-.tr:nth-child(even) {
-  background-color: #ededed;
-}
+/*.tr:nth-child(even) {*/
+/*  background-color: #ededed;*/
+/*}*/
 
 /*pagina*/
 .pagination {
@@ -105,17 +113,25 @@
 }
 
 /*Menu Test-correct*/
+.header {
+    background-color: white;
+}
+
 ul {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     list-style-type: none;
     margin: 0;
-    padding: 0;
+    padding: 10px;
+    gap: 15px;
     background-color: white;
     overflow: hidden;
     text-align: center;
 }
 
 li {
-    display: inline;
+    display: inline-flex;
     text-align: center;
 }
 
@@ -128,24 +144,16 @@ li a {
 }
 
 li a:hover {
-    font-family:Nunito extrabold,sans-serif;
-    font-size: 18px;
     color: #004DF5 ;
 }
 
-li b {
-    color: #041F74;
-    text-align: center;
-    padding: 10px 25px;
-    text-decoration: none;
-    font-family:Nunito extrabold,sans-serif;
-    font-size: 18px;
+li img {
+    vertical-align: middle;
 }
 
 /*zoeken in tabel*/
 form {
     display: flex;
-    gap: 10px;
     margin-bottom: 20px;
     padding: 10px;
     background-color: #ffffff;
