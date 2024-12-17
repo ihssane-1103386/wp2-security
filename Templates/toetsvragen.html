@@ -11,7 +11,7 @@
   <header>
     <ul class="ul">
       <li>
-          <button style= "border: none; cursor: pointer; scale:95%; background:none;">
+          <button style= "border: none; cursor: pointer; scale:100%; background:none;">
               <img src="static/assets/logo/testcorrect-logo.svg" alt="Link to test-correct homepage" style= "border: none; cursor: pointer; scale:95%; background:none; align-items: center;"  >
                 <a href=""></a>
           </button>
@@ -22,7 +22,7 @@
       <li><a href="https://www.test-correct.nl/support">Over ons</a></li>
       <li><a href="https://www.test-correct.nl/overons">Support</a></li>
       <li
-        style="color: #041F74; font-family:nunito, regular, serif; font-size:18px;padding:15px; gap: 5px">
+        style="color: #041F74; font-family:nunito, regular, serif; font-size:18px; padding:15px; gap: 5px">
         <img src="static/assets/icons/telefoon_icoon.png" alt="Telefoonnummer" style="width:19PX; height:19px;">
          010 7171 171
       </li>
@@ -36,19 +36,22 @@
   </header>
 
     <p></p>
+
+    <div style="margin: 10px;">
     <a class="first-button" href="{{ url_for('toetsvragen') }}" >Vragen</a>
     <a class="first-button" href="{{ url_for('ai_prompts') }}" >AI Prompts</a>
     <a class="first-button" href="{{ url_for('redacteur') }}" >Redacteuren</a>
+    </div>
 
-    <h3 style="font-family:Nunito extrabold,sans-serif; color:#041F74;"> Toetsvragen lijst </h3>
+    <h2 style="font-family:Nunito extrabold,sans-serif; color:#041F74; margin: 10px;"> Toetsvragen lijst </h2>
 
     <form action="{{ url_for('toetsvragen') }}">
-        <div style="margin-bottom:10px;">
+        <div>
             <label for="search">Zoekwoord:</label>
             <input type="text" id="search" name="search" value="{{ request.args.get('search','') }}" placeholder="Zoek vraag...">
         </div>
 
-        <div style="margin-bottom:10px">
+        <div>
             <label for="vak">Filter per vak:</label>
             <select id="vak" name="vak">
                 <option value="">Alle vakken</option>
@@ -58,7 +61,7 @@
             </select>
         </div>
 
-        <div style="margin-bottom: 10px;">
+        <div>
             <label for="taxonomie">Toon vragen met taxonomie:</label>
             <input type="checkbox" id="taxonomie" name="taxonomie" value="1" {% if request.args.get(taxonomie) %}checked{% endif %}>
         </div>
