@@ -190,6 +190,7 @@ form {
     background-color: #F2F6FF;
     border: none;
     border-radius: 5px;
+    align-items: center;
     text-align: center;
 }
 
