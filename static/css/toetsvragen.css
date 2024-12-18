@@ -1,0 +1,236 @@
+body {
+  font-family: 'Nunito', sans-serif;
+  background-color: #F2F6FF;
+  margin: 10px;
+  padding: 0;
+  color: #041F74;
+}
+
+/*Button 1*/
+.first-button {
+  text-align: center;
+  background-color: #3dbb56;
+  border: none;
+  color: white;
+  padding: 10px 25px;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 17px;
+  cursor: pointer;
+  font-family:Nunito extrabold,sans-serif;
+  transition-duration: 0.4s;
+  border-radius: 10px;
+}
+
+.first-button:hover {
+  background-color: #259338;
+  transition-duration: 0.4s;
+  color: white;
+  box-shadow: 1px 1px 1px 1px rgba(85, 85, 85, 0.3);
+}
+
+.first-button:active {
+  background-color: #186825;
+  color: white;
+  transition-duration: 0.2s;
+}
+
+/*Button 2*/
+.second-button {
+  text-align: right;
+  background-color: #041df5;
+  border: none;
+  color: white;
+  padding: 10px 25px;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 17px;
+  cursor: pointer;
+  font-family:Nunito extrabold,sans-serif;
+  transition-duration: 0.4s;
+  border-radius: 10px;
+}
+
+.second-button:hover {
+  background-color: #041F74;
+  transition-duration: 0.4s;
+  color: white;
+  box-shadow: 1px 1px 1px 1px rgba(85, 85, 85, 0.3);
+}
+
+.second-button:active {
+  background-color: #041F74;
+  color: white;
+  transition-duration: 0.2s;
+}
+
+/*table button*/
+.table-button {
+  text-align: center;
+  background-color: #3dbb56;
+  border: none;
+  color: white;
+  padding: 10px 25px;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 14px;
+  cursor: pointer;
+  font-family:Nunito extrabold,sans-serif;
+  transition-duration: 0.4s;
+  border-radius: 10px;
+  max-width: 70px;
+  min-width: 70px;
+}
+
+.table-button:hover {
+  background-color: #259338;
+  color: white;
+  box-shadow: 1px 1px 1px 1px rgba(85, 85, 85, 0.3);
+}
+
+.table-button:active {
+  background-color: #186825;
+  color: white;
+}
+
+/*page*/
+.pagination {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    position: absolute;
+}
+
+.pagination a {
+    padding: 3px;
+    text-decoration: none;
+    color:#041F74;
+    margin: 4px;
+    border: 0 solid #ddd;
+    border-radius: 5px;
+    text-align: center;
+    font-family:Nunito, sans-serif;
+}
+
+.pagination a:hover {
+    background-color: #ffffff;
+}
+
+.pagination a.active {
+    background-color: #041F74;
+    color: white;
+}
+
+/*Menu Test-correct*/
+.header {
+    background-color: white;
+}
+
+ul {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    list-style-type: none;
+    margin: 0;
+    padding: 5px;
+    gap: 15px;
+    background-color: white;
+    overflow: hidden;
+    text-align: center;
+}
+
+li {
+    display: inline-flex;
+    text-align: center;
+}
+
+li a {
+    color: #041F74;
+    text-align: center;
+    text-decoration: none;
+    font-family:Nunito extrabold,sans-serif;
+    font-size: 18px;
+}
+
+li a:hover {
+    color: #004DF5 ;
+}
+
+li img {
+    vertical-align: middle;
+}
+
+li:first-child {
+    margin-right: 25px;
+}
+
+li:nth-child(7) {
+    margin-left: 75px;
+}
+
+li:nth-child(8) {
+    margin-left: 25px;
+}
+
+li:nth-child(9) {
+    margin-left: 10px;
+}
+
+li:nth-child(10) {
+    margin-left: 25px;
+}
+
+/*zoeken in tabel*/
+form {
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
+    margin-bottom: 20px;
+    padding: 10px;
+    background-color: #F2F6FF;
+    border: none;
+    border-radius: 5px;
+    align-items: center;
+    text-align: center;
+}
+
+form label {
+    display: inline-block;
+    margin-right: 10px;
+    font-weight: bold;
+}
+
+form input[type="text"],
+form select {
+    flex: 1;
+    padding: 8px;
+    font-size: 14px;
+    border: none;
+    border-radius: 5px;
+    font-family:Zilla slab,sans-serif; color:#041F74;
+}
+
+/*adjustments to table*/
+table {
+    margin: 10px;
+}
+
+/*Row that has buttons and text*/
+.content-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 10px;
+    padding: 0;
+}
+
+.content-title {
+    font-family: Nunito Extrabold, sans-serif;
+    color: #3dba55;
+    margin: 0;
+}
+
+.button-group {
+    display: flex;
+    gap: 10px;
+}
