@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title> Toetsvragen lijst </title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/toetsvragen.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+  <header>
+    <ul class="ul">
+      <li>
+          <a style= "border: none; cursor: pointer; scale:100%; background:none;" href="https://www.test-correct.nl/" >
+              <img src="static/assets/logo/testcorrect-logo.svg" alt="Link to test-correct homepage" style= "border: none; cursor: pointer; scale:100%; background:none; align-items: center;">
+          </a>
+      </li>
+      <li><a href="https://www.test-correct.nl/voor-het-vo">Oplossingen</a></li>
+      <li><a href="https://www.test-correct.nl/toetsplatform">Platform</a></li>
+      <li><a href="https://www.test-correct.nl/pakketten">Aanbod</a></li>
+      <li><a href="https://www.test-correct.nl/support">Over ons</a></li>
+      <li><a href="https://www.test-correct.nl/overons">Support</a></li>
+      <li
+        style="color: #041F74; font-family:nunito, regular, serif; font-size:18px; padding:15px; gap: 5px">
+        <img src="static/assets/icons/telefoon_icoon.png" alt="Telefoonnummer" style="width:19PX; height:19px;">
+         010 7171 171
+      </li>
+      <li>
+          <a class="second-button" href="{{ url_for('inlog') }}">Login</a>
+      </li>
+      <li>
+          <a class="first-button" href="https://www.test-correct.nl/welcome">Boek online demo</a>
+      </li>
+    </ul>
+  </header>
+
+    <div class="content-row">
+      <h2> Toetsvragen lijst </h2>
+      <div class="button-group">
+        <a class="first-button" href="{{ url_for('toetsvragen') }}" >Vragen</a>
+        <a class="first-button" href="{{ url_for('ai_prompts') }}" >AI Prompts</a>
+        <a class="first-button" href="{{ url_for('redacteur') }}" >Redacteuren</a>
+      </div>
+    </div>
+
+    <form action="{{ url_for('toetsvragen') }}">
+        <div>
+            <label for="search">Zoekwoord:</label>
+            <input type="text" id="search" name="search" value="{{ request.args.get('search','') }}" placeholder="Zoek vraag...">
+        </div>
+
+        <div>
+            <label for="vak">Filter per vak:</label>
+            <select id="vak" name="vak">
+                <option value="">Alle vakken</option>
+                {% for v in unieke_vakken %}
+                <option value="{{ v }}" {% if v == request.args.get(vak) %}selected{% endif %}>{{ v }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div>
+            <label for="taxonomie">Toon vragen met taxonomie:</label>
+            <input type="checkbox" id="taxonomie" name="taxonomie" value="1" {% if request.args.get(taxonomie) %}checked{% endif %}>
+        </div>
+
+
+        <div>
+            <button type="submit" class="first-button">Zoek</button>
+            <a href="{{ url_for('toetsvragen') }}" class="first-button">Ververs</a>
+        </div>
+    </form>
+
+    <table>
+      <thead>
+        <tr style="font-family:Nunito extrabold,sans-serif; color:#041F74; font-size: 21px;">
+          <td style="padding: 5px;" >Vraag</td>
+          <td style="padding: 5px;" >Vak</td>
+          <td style="padding: 5px;" >Datum</td>
+          <td style="padding: 5px;" >Taxonomie</td>
+        </tr>
+      </thead>
+      <tbody>
+      {% for vraag in vragen %}
+      <tr style="font-family: nunito, serif; color:#041F74; font-size: 15px; margin: 10px;">
+         <td style="padding:5px">{{ vraag[1] }}</td>
+         <td style="padding:5px">{{ vraag[2] }}</td>
+         <td style="padding:5px">{{ vraag[3] if vraag[3] else "N/A"}}</td>
+         <td>
+            {% if vraag[4] %}
+                <a href="{{ url_for('vraag_taxonomie_wijzigen', questions_id=vraag[0]) }}" class="table-button" >Wijzigen</a>
+            {% else %}
+                <a href="{{ url_for('indexeren', questions_id=vraag[0]) }}" class="table-button" >Indexeren</a>
+            {% endif %}
+         </td>
+      </tr>
+            {% else %}
+      <tr>
+            <td colspan="4">Geen vragen beschikbaar.</td>
+      </tr>
+            {% endfor %}
+      </table>
+
+      <p></p>
+
+      <div class="pagination">
+        {% if show_first %}
+            <a href="{{ url_for('toetsvragen', page=1, search=search, vak=vak, taxonomie=taxonomie) }}">Eerste pagina</a>
+        {% endif %}
+
+        {% if prev_page %}
+                <a href="{{ url_for('toetsvragen', page=prev_page, search=search, vak=vak, taxonomie=taxonomie) }}">Vorige</a>
+        {% endif %}
+
+        {% for link in page_numbers %}
+              <a href="{{ link }}" class="{% if loop.index == page %}active{% endif %}">
+                {{ loop.index }}
+              </a>
+        {% endfor %}
+
+        {% if next_page %}
+                <a href="{{ url_for('toetsvragen', page=next_page, search=search, vak=vak, taxonomie=taxonomie) }}">Volgende</a>
+        {% endif %}
+
+        {% if show_last %}
+                <a href="{{ url_for('toetsvragen', page=total_pages, search=search, vak=vak, taxonomie=taxonomie) }}">Laatste pagina</a>
+        {% endif %}
+      </div>
+</body>
+</html>
