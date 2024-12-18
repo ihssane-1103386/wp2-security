@@ -185,7 +185,7 @@ def vraag_taxonomie_resultaat():
         conn.close()
 
 @app.route('/taxonomie_wijzigen', methods=["GET","POST"])
-def taxonomie_wijzigen():
+def vraag_taxonomie_wijzigen():
     # prompt_id = request.args.get('prompt_id', 'bloom')
     # prompt = prompt_ophalen_op_id(prompt_id)
     #
