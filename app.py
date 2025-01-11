@@ -232,7 +232,8 @@ def toetsvragen():
             parameters.append(vak)
 
         if taxonomie:
-            query += " AND taxonomy_bloom IS NOT NULL"
+            query += " AND taxonomy_bloom IS NULL"
+            # query += " AND taxonomy_bloom IS NOT NULL"
 
         query += " LIMIT ? OFFSET ?"
         parameters.extend([per_page, start])
@@ -249,7 +250,7 @@ def toetsvragen():
             count_query += " AND vak = ?"
             count_parameters.append(vak)
         if taxonomie:
-            count_query += " AND taxonomy_bloom IS NOT NULL"
+            count_query += " AND taxonomy_bloom IS NULL"
 
         cursor.execute(count_query, count_parameters)
         total_questions = cursor.fetchone()[0]

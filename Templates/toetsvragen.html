@@ -8,6 +8,7 @@
 </head>
 
 <body>
+
   <header>
     <ul class="ul">
       <li>
@@ -60,7 +61,7 @@
         </div>
 
         <div>
-            <label for="taxonomie">Toon vragen met taxonomie:</label>
+            <label for="taxonomie">Toon vragen zonder taxonomie:</label>
             <input type="checkbox" id="taxonomie" name="taxonomie" value="1" {% if request.args.get(taxonomie) %}checked{% endif %}>
         </div>
 
