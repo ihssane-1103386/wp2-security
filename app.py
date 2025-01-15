@@ -127,24 +127,19 @@ def indexeren():
 
         queries = load_queries('static/queries.sql')
         get_question = queries['get_question']
-        get_vak = queries['get_vak']
+        # get_vak = queries['get_vak']
 
         cursor.execute(get_question, (questions_id,))
+        # get_vak
         question = cursor.fetchone()
 
         if not question:
             return "Vraag niet gevonden", 404
         print(f"Opgehaalde vraagtekst: {question[0]}")
 
-        cursor.execute(get_vak, (questions_id,))
-        vak = cursor.fetchone()
-
-        if not vak:
-            vak = "Niet bekend"
-
         return render_template('vraag_indexeren_naar_taxonomie.html',
                             question=question[0],
-                            vak=vak[0],
+                            vak="biologie",
                             onderwijsniveau="niveau 2",
                             leerjaar="leerjaar 1",
                             prompts=prompts,
@@ -175,7 +170,6 @@ def vraag_taxonomie_resultaat():
 
         queries = load_queries('static/queries.sql')
         get_question = queries['get_question']
-        get_vak = queries['get_vak']
 
         cursor.execute(get_question, (questions_id,))
         result = cursor.fetchone()
@@ -185,37 +179,23 @@ def vraag_taxonomie_resultaat():
 
         question = result[0]
 
-        cursor.execute(get_vak, (questions_id,))
-        vak = cursor.fetchone()
-
-        if not vak:
-            vak = "Niet bekend"
-
         gpt_choice = "rac_test"
         ai_response = get_bloom_category(question, prompt, gpt_choice)
-
-        ai_niveau = ai_response.get("niveau", "geen antwoord")
-        ai_uitleg = ai_response.get("uitleg", "geen antwoord")
-        bloom_answer = f"Niveau: {ai_niveau}, Uitleg: {ai_uitleg}"
 
         if request.method == 'POST':
             taxonomy_bloom = request.form.get('taxonomy_bloom')
             if taxonomy_bloom:
                 update_taxonomie = queries['update_taxonomy']
                 cursor.execute(update_taxonomie, (taxonomy_bloom, questions_id))
-
-                update_bloom_answer = queries['update_bloom_answer']
-                cursor.execute(update_bloom_answer, (bloom_answer, questions_id))
-
                 conn.commit()
                 return redirect(url_for('toetsvragen'))
 
-        # ai_niveau = ai_response.get("niveau", "geen antwoord")
-        # ai_uitleg = ai_response.get("uitleg", "geen antwoord")
+        ai_niveau = ai_response.get("niveau", "geen antwoord")
+        ai_uitleg = ai_response.get("uitleg", "geen antwoord")
 
         return render_template('vraag_indexeren_resultaat.html',
                                question=question,
-                               vak=vak[0],
+                               vak="biologie",
                                onderwijsniveau="niveau 2",
                                leerjaar="leerjaar 1",
                                prompt=prompt,
@@ -230,52 +210,17 @@ def vraag_taxonomie_resultaat():
 
 @app.route('/taxonomie_wijzigen', methods=["GET","POST"])
 def vraag_taxonomie_wijzigen():
-    questions_id = request.args.get('questions_id')
+    # prompt_id = request.args.get('prompt_id', 'bloom')
+    # prompt = prompt_ophalen_op_id(prompt_id)
+    #
+    # questions_id = request.args.get('questions_id')
+    #
+    # conn = sqlite3.connect('databases/database_toetsvragen.db')
+    # cursor = conn.cursor()
+    #
+    # queries = load_queries('static/queries.sql')
 
-    if not questions_id:
-        return "Geen questions_id meegegeven", 400
-
-    try:
-        conn = sqlite3.connect('databases/database_toetsvragen.db')
-        cursor = conn.cursor()
-
-        queries = load_queries('static/queries.sql')
-        get_question = queries['get_question']
-        get_vak = queries['get_vak']
-        get_bloom_answer = queries['get_bloom_answer']
-
-        cursor.execute(get_question, (questions_id,))
-        question = cursor.fetchone()
-
-        if not question:
-            return "Vraag niet gevonden", 404
-        print(f"Opgehaalde vraagtekst: {question[0]}")
-
-        cursor.execute(get_vak, (questions_id,))
-        vak = cursor.fetchone()
-
-        if not vak:
-            vak = "Niet bekend"
-
-        cursor.execute(get_bloom_answer, (questions_id,))
-        bloom_answer = cursor.fetchone()
-
-        if not bloom_answer:
-            bloom_answer = "Niet bekend"
-
-        return render_template('vraag_taxonomie_wijzigen.html',
-                           question=question[0],
-                           vak=vak[0],
-                           onderwijsniveau="niveau 2",
-                           leerjaar="leerjaar 1",
-                           bloom_answer=bloom_answer[0],
-                           questions_id=questions_id,)
-
-    except Exception as e:
-        print(f"Fout tijdens het verwerken van de vragen: {e}")
-        return "Interne serverfout", 500
-    finally:
-        conn.close()
+    return render_template('vraag_taxonomie_wijzigen.html')
 
 @app.route("/toetsvragen", methods=["GET","POST"])
 def toetsvragen():
