@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template, redirect, url_for
+from flask import Flask, request, render_template, redirect, url_for, session
 
 from lib.gpt.bloom_taxonomy import get_bloom_category
 from model_prompts import prompts_ophalen, prompt_details_ophalen, prompt_verwijderen, prompt_toevoegen
@@ -7,6 +7,7 @@ from urllib.parse import urlencode
 import sqlite3
 
 app = Flask(__name__)
+app.secret_key = 'wachtwoord123'
 DATABASE_FILE = "databases/database_toetsvragen.db"
 
 def load_queries(path):
@@ -34,15 +35,38 @@ def load_queries(path):
 
 @app.route("/", methods=['GET', 'POST'])
 def inlog():
-    ingevulde_gebruikersnaam = ""
-    ingevulde_wachtwoord = ""
     if request.method == 'POST':
         ingevulde_gebruikersnaam = request.form.get('username')
         ingevulde_wachtwoord = request.form.get('password')
-        return render_template('successvol_ingelogd.html',
-                               message=f"Welkom {ingevulde_gebruikersnaam}, ga snel aan de slag!",
-                               link="/toetsvragen", ingevulde_wachtwoord=ingevulde_wachtwoord)
+
+        try:
+            # Verbinding maken met de database
+            conn = sqlite3.connect(DATABASE_FILE)
+            cursor = conn.cursor()
+
+
+            query = "SELECT user_id, display_name FROM users WHERE login = ? AND password = ?"
+            cursor.execute(query, (ingevulde_gebruikersnaam, ingevulde_wachtwoord))
+
+            user = cursor.fetchone()
+
+            if user:
+
+                session['user_id'] = user[0]
+                return render_template('successvol_ingelogd.html',
+                                       message=f"Welkom {user[1]} !",
+                                       link="/toetsvragen")
+            else:
+
+                return render_template('inloggen.html', error_message="Gebruiker bestaat niet of wachtwoord is onjuist")
+        except Exception as e:
+            print(f"Fout tijdens het inloggen: {e}")
+            return "Er is een fout opgetreden", 500
+        finally:
+            conn.close()
+
     return render_template('inloggen.html')
+
 
 
 @app.route("/successvol_ingelogd")
@@ -321,13 +345,23 @@ def delete_prompt_route(prompts_id):
 
 @app.route('/prompt_toevoegen', methods=['GET', 'POST'])
 def nieuwe_prompt():
+
+    if 'user_id' not in session:
+        error_message = "Je hebt geen toegang."
+        return render_template('inloggen.html',
+                               error_message=error_message)
+
+
+    user_id = session['user_id']
+
     if request.method == 'POST':
+
         prompt = request.form.get('prompt')
         prompt_details = request.form.get('prompt_details')
 
         try:
 
-            prompt_toevoegen(prompt, prompt_details)
+            prompt_toevoegen(user_id, prompt, prompt_details)
             return redirect(url_for('ai_prompts'))
         except Exception as e:
             print(f"Fout tijdens het toevoegen van een nieuwe prompt: {e}")
