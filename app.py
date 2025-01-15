@@ -1,7 +1,7 @@
 from flask import Flask, request, render_template, redirect, url_for
 
 from lib.gpt.bloom_taxonomy import get_bloom_category
-from model_prompts import prompts_ophalen, prompt_details_ophalen, prompt_verwijderen
+from model_prompts import prompts_ophalen, prompt_details_ophalen, prompt_verwijderen, prompt_toevoegen
 from indexeer_page_db_connection import prompt_lijst, prompt_ophalen_op_id
 from urllib.parse import urlencode
 import sqlite3
@@ -318,6 +318,22 @@ def prompt_details(prompts_id):
 def delete_prompt_route(prompts_id):
     prompt_verwijderen(prompts_id)
     return redirect(url_for('ai_prompts'))
+
+@app.route('/prompt_toevoegen', methods=['GET', 'POST'])
+def nieuwe_prompt():
+    if request.method == 'POST':
+        prompt_text = request.form.get('prompt_text')
+        redacteur = request.form.get('redacteur')
+
+        try:
+            prompt_toevoegen(prompt_text, redacteur)
+            return redirect(url_for('ai_prompts'))
+        except Exception as e:
+            print(f"Fout tijdens het toevoegen van een nieuwe prompt: {e}")
+            return "Interne serverfout", 500
+
+    return render_template('prompt_toevoegen.html')
+
 
 if __name__ == '__main__':
     app.run(debug=True)
