@@ -87,16 +87,28 @@ def nieuwe_redacteur():
             try:
                 conn = sqlite3.connect('databases/database_toetsvragen.db')
                 cursor = conn.cursor()
-                cursor.execute("""
-                    INSERT INTO users (login, password, display_name, date_created, is_admin)
-                    VALUES (?, ?, ?, ?, ?)
-                """, (gebruikersnaam, wachtwoord, gebruikersnaam, date_created, is_admin))
+
+                queries = load_queries('databases/database_toetsvragen.db')
+                get_redacteur = queries['get_redacteur']
+
+                cursor.execute(get_redacteur, (gebruikersnaam, wachtwoord, gebruikersnaam, date_created, is_admin))
+                redacteuren = cursor.fetchone()
+
+                # cursor.execute("""
+                #     INSERT INTO users (login, password, display_name, date_created, is_admin)
+                #     VALUES (?, ?, ?, ?, ?)
+                # """, (gebruikersnaam, wachtwoord, gebruikersnaam, date_created, is_admin))
 
                 conn.commit()
                 conn.close()
         
                 return render_template('successvol_ingelogd.html', message=f"{gebruikersnaam} is succesvol toegevoegd! Klik hieronder om verder te gaan!",
-                               link="https://www.test-correct.nl/", gebruikersnaam=gebruikersnaam, email=email, wachtwoord=wachtwoord)
+                                       link="https://www.test-correct.nl/",
+                                       gebruikersnaam=gebruikersnaam,
+                                       email=email,
+                                       wachtwoord=wachtwoord,
+                                       redacteuren=redacteuren)
+
             except sqlite3.IntegrityError:
                 return "Fout: Deze gebruikersnaam of e-mail bestaat al!", 400
             except Exception as e:

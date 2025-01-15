@@ -29,7 +29,13 @@ UPDATE questions SET bloom_answer = ? WHERE questions_id = ?;
 -- [get_redacteur]
 SELECT display_name, login, is_admin FROM users;
 
--- fetch question, bloom_answer for wijzigen
+-- Fetch question, bloom_answer for wijzigen
 
 -- [get_bloom_answer]
 SELECT bloom_answer FROM questions WHERE questions_id = ?;
+
+-- Nieuwe_redacteuren page
+
+-- [get_redacteur]
+INSERT INTO users (login, password, display_name, date_created, is_admin)
+VALUES (?, ?, ?, ?, ?)
