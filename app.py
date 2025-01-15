@@ -322,7 +322,7 @@ def delete_prompt_route(prompts_id):
 @app.route('/prompt_toevoegen', methods=['GET', 'POST'])
 def nieuwe_prompt():
     if request.method == 'POST':
-        prompt = request.form.get('prompt_name')
+        prompt = request.form.get('prompt')
         prompt_details = request.form.get('prompt_details')
 
         try:
