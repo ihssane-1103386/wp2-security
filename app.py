@@ -103,10 +103,8 @@ def indexeren():
 
         queries = load_queries('static/queries.sql')
         get_question = queries['get_question']
-        # get_vak = queries['get_vak']
 
         cursor.execute(get_question, (questions_id,))
-        # get_vak
         question = cursor.fetchone()
 
         if not question:
@@ -158,16 +156,24 @@ def vraag_taxonomie_resultaat():
         gpt_choice = "rac_test"
         ai_response = get_bloom_category(question, prompt, gpt_choice)
 
+        ai_niveau = ai_response.get("niveau", "geen antwoord")
+        ai_uitleg = ai_response.get("uitleg", "geen antwoord")
+        bloom_answer = f"Niveau: {ai_niveau}, Uitleg: {ai_uitleg}"
+
         if request.method == 'POST':
             taxonomy_bloom = request.form.get('taxonomy_bloom')
             if taxonomy_bloom:
                 update_taxonomie = queries['update_taxonomy']
                 cursor.execute(update_taxonomie, (taxonomy_bloom, questions_id))
+
+                update_bloom_answer = queries['update_bloom_answer']
+                cursor.execute(update_bloom_answer, (bloom_answer, questions_id))
+
                 conn.commit()
                 return redirect(url_for('toetsvragen'))
 
-        ai_niveau = ai_response.get("niveau", "geen antwoord")
-        ai_uitleg = ai_response.get("uitleg", "geen antwoord")
+        # ai_niveau = ai_response.get("niveau", "geen antwoord")
+        # ai_uitleg = ai_response.get("uitleg", "geen antwoord")
 
         return render_template('vraag_indexeren_resultaat.html',
                                question=question,
