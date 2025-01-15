@@ -1,19 +1,23 @@
-{%  extends "base.html" %}
+{% extends "base.html" %}
 {% block main %}
 
 <h1>Inloggen</h1>
 <div class="login_form">
-                <form action="/" method="POST">
-            <div class="field">
-                <label for="username">Gebruikersnaam</label>
-                <input type="text" id="username" name="username" placeholder="Uw gebruikersnaam" value="{{ingevulde_gebruikersnaam|default('') }}" required="">
-            </div>
-            <div class="field">
-                <label for="password">Wachtwoord</label>
-                <input type="password" id="password" name="password" placeholder="Uw wachtwoord" value="{{inegvulde_wachtwoord|default('') }}" required="">
-            </div>
-            <button class="button" type="submit">Inloggen</button>
-        </form>
+    <form action="/" method="POST">
+        <div class="field">
+            <label for="username">Gebruikersnaam</label>
+            <input type="text" id="username" name="username" placeholder="Uw gebruikersnaam" value="{{ ingevulde_gebruikersnaam|default('') }}" required>
+        </div>
+        <div class="field">
+            <label for="password">Wachtwoord</label>
+            <input type="password" id="password" name="password" placeholder="Uw wachtwoord" value="{{ ingevulde_wachtwoord|default('') }}" required>
+        </div>
+        <button class="button" type="submit">Inloggen</button>
+    </form>
+
+    {% if error_message %}
+        <p style="color: red; margin-top: 15px;">{{ error_message }}</p>
+    {% endif %}
 </div>
 
 {% endblock %}
