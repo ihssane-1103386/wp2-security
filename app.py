@@ -103,6 +103,7 @@ def indexeren():
 
         queries = load_queries('static/queries.sql')
         get_question = queries['get_question']
+        get_vak = queries['get_vak']
 
         cursor.execute(get_question, (questions_id,))
         question = cursor.fetchone()
@@ -111,9 +112,15 @@ def indexeren():
             return "Vraag niet gevonden", 404
         print(f"Opgehaalde vraagtekst: {question[0]}")
 
+        cursor.execute(get_vak, (questions_id,))
+        vak = cursor.fetchone()
+
+        if not vak:
+            vak = "Niet bekend"
+
         return render_template('vraag_indexeren_naar_taxonomie.html',
                             question=question[0],
-                            vak="biologie",
+                            vak=vak[0],
                             onderwijsniveau="niveau 2",
                             leerjaar="leerjaar 1",
                             prompts=prompts,
@@ -144,6 +151,7 @@ def vraag_taxonomie_resultaat():
 
         queries = load_queries('static/queries.sql')
         get_question = queries['get_question']
+        get_vak = queries['get_vak']
 
         cursor.execute(get_question, (questions_id,))
         result = cursor.fetchone()
@@ -152,6 +160,12 @@ def vraag_taxonomie_resultaat():
             return "Vraag niet gevonden", 404
 
         question = result[0]
+
+        cursor.execute(get_vak, (questions_id,))
+        vak = cursor.fetchone()
+
+        if not vak:
+            vak = "Niet bekend"
 
         gpt_choice = "rac_test"
         ai_response = get_bloom_category(question, prompt, gpt_choice)
@@ -177,7 +191,7 @@ def vraag_taxonomie_resultaat():
 
         return render_template('vraag_indexeren_resultaat.html',
                                question=question,
-                               vak="biologie",
+                               vak=vak[0],
                                onderwijsniveau="niveau 2",
                                leerjaar="leerjaar 1",
                                prompt=prompt,
@@ -192,17 +206,52 @@ def vraag_taxonomie_resultaat():
 
 @app.route('/taxonomie_wijzigen', methods=["GET","POST"])
 def vraag_taxonomie_wijzigen():
-    # prompt_id = request.args.get('prompt_id', 'bloom')
-    # prompt = prompt_ophalen_op_id(prompt_id)
-    #
-    # questions_id = request.args.get('questions_id')
-    #
-    # conn = sqlite3.connect('databases/database_toetsvragen.db')
-    # cursor = conn.cursor()
-    #
-    # queries = load_queries('static/queries.sql')
+    questions_id = request.args.get('questions_id')
 
-    return render_template('vraag_taxonomie_wijzigen.html')
+    if not questions_id:
+        return "Geen questions_id meegegeven", 400
+
+    try:
+        conn = sqlite3.connect('databases/database_toetsvragen.db')
+        cursor = conn.cursor()
+
+        queries = load_queries('static/queries.sql')
+        get_question = queries['get_question']
+        get_vak = queries['get_vak']
+        get_bloom_answer = queries['get_bloom_answer']
+
+        cursor.execute(get_question, (questions_id,))
+        question = cursor.fetchone()
+
+        if not question:
+            return "Vraag niet gevonden", 404
+        print(f"Opgehaalde vraagtekst: {question[0]}")
+
+        cursor.execute(get_vak, (questions_id,))
+        vak = cursor.fetchone()
+
+        if not vak:
+            vak = "Niet bekend"
+
+        cursor.execute(get_bloom_answer, (questions_id,))
+        bloom_answer = cursor.fetchone()
+
+        if not bloom_answer:
+            bloom_answer = "Niet bekend"
+
+        return render_template('vraag_taxonomie_wijzigen.html',
+                           question=question[0],
+                           vak=vak[0],
+                           onderwijsniveau="niveau 2",
+                           leerjaar="leerjaar 1",
+                           bloom_answer=bloom_answer[0],
+                           questions_id=questions_id,)
+
+    except Exception as e:
+        print(f"Fout tijdens het verwerken van de vragen: {e}")
+        return "Interne serverfout", 500
+    finally:
+        conn.close()
 
 @app.route("/toetsvragen", methods=["GET","POST"])
 def toetsvragen():
