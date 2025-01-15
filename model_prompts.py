@@ -45,3 +45,30 @@ def prompt_verwijderen(prompts_id):
     cursor.execute('DELETE FROM prompts WHERE prompts_id = ?', (prompts_id,))
     conn.commit()
     conn.close()
+
+def prompt_toevoegen(user_id, prompt, prompt_details):
+
+    try:
+        conn = verbinding_maken_database()
+        cursor = conn.cursor()
+
+
+        query = """
+        INSERT INTO prompts (user_id, prompt, questions_count, questions_correct, prompt_details, questions_incorrect)
+        VALUES (?, ?, 0, 0, ?, 0);
+        """
+
+
+        cursor.execute(query, (user_id, prompt, prompt_details))
+        conn.commit()
+
+    except Exception as e:
+        print(f"Fout tijdens het toevoegen van een nieuwe prompt vanuit model_prompts: {e}")
+        raise e
+
+    finally:
+        conn.close()
+
+
+
+
