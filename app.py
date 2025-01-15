@@ -322,11 +322,12 @@ def delete_prompt_route(prompts_id):
 @app.route('/prompt_toevoegen', methods=['GET', 'POST'])
 def nieuwe_prompt():
     if request.method == 'POST':
-        prompt_text = request.form.get('prompt_text')
-        redacteur = request.form.get('redacteur')
+        prompt = request.form.get('prompt_name')
+        prompt_details = request.form.get('prompt_details')
 
         try:
-            prompt_toevoegen(prompt_text, redacteur)
+
+            prompt_toevoegen(prompt, prompt_details)
             return redirect(url_for('ai_prompts'))
         except Exception as e:
             print(f"Fout tijdens het toevoegen van een nieuwe prompt: {e}")
