@@ -4,8 +4,8 @@
     <h1>Nieuwe prompt toevoegen</h1>
     <form method="POST" action="/prompt_toevoegen">
         <div>
-            <label for="prompt_naam">Naam van de Prompt:</label><br>
-            <input type="text" id="prompt_naam" name="prompt_name" required>
+            <label for="prompt">Naam van de Prompt:</label><br>
+            <input type="text" id="prompt" name="prompt" required>
         </div>
         <br>
         <div>
@@ -17,5 +17,11 @@
             <button type="submit" class="button">Opslaan</button>
         </div>
     </form>
+
+    {% if error_message %}
+        <div style="color: red; margin-top: 10px;">
+            <p>{{ error_message }}</p>
+        </div>
+    {% endif %}
 </main>
 {% endblock %}
