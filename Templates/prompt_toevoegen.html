@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block main %}
+<main class="container">
+    <h1>Nieuwe Prompt Toevoegen</h1>
+    <form method="POST" action="/prompt_toevoegen">
+        <label for="prompt_text">Prompt:</label>
+        <textarea id="prompt_text" name="prompt_text" rows="4" cols="50" required></textarea>
+        <label for="redacteur">Redacteur:</label>
+        <input type="text" id="redacteur" name="redacteur" required>
+        <button type="submit" class="button">Opslaan</button>
+    </form>
+</main>
+{% endblock %}
