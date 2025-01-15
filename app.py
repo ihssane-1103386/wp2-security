@@ -1,3 +1,5 @@
+import datetime
+
 from flask import Flask, request, render_template, redirect, url_for
 
 from lib.gpt.bloom_taxonomy import get_bloom_category
@@ -78,8 +80,27 @@ def nieuwe_redacteur():
         gebruikersnaam = request.form.get('username')
         email = request.form.get('email')
         wachtwoord = request.form.get('password')
-        return render_template('successvol_ingelogd.html', message=f"{gebruikersnaam} is succesvol toegevoegd! Klik hieronder om verder te gaan!",
+        is_admin = 1 if request.form.get('is_admin') == 'on' else 0
+        date_created = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+
+        if gebruikersnaam and wachtwoord and email:
+            try:
+                conn = sqlite3.connect('databases/database_toetsvragen.db')
+                cursor = conn.cursor()
+                cursor.execute("""
+                    INSERT INTO users (login, password, display_name, date_created, is_admin)
+                    VALUES (?, ?, ?, ?, ?)
+                """, (gebruikersnaam, wachtwoord, gebruikersnaam, date_created, is_admin))
+
+                conn.commit()
+                conn.close()
+        
+                return render_template('successvol_ingelogd.html', message=f"{gebruikersnaam} is succesvol toegevoegd! Klik hieronder om verder te gaan!",
                                link="https://www.test-correct.nl/", gebruikersnaam=gebruikersnaam, email=email, wachtwoord=wachtwoord)
+            except sqlite3.IntegrityError:
+                return "Fout: Deze gebruikersnaam of e-mail bestaat al!", 400
+            except Exception as e:
+                return f"Er is een fout opgetreden: {e}"
     return render_template('nieuwe_redacteur.html')
 
 
