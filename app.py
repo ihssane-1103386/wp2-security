@@ -52,9 +52,17 @@ def inlog():
         user = cursor.fetchone()
         conn.close()
 
-        return render_template('successvol_ingelogd.html',
-                               message=f"Welkom {ingevulde_gebruikersnaam}, ga snel aan de slag!",
-                               link="/toetsvragen", ingevulde_wachtwoord=ingevulde_wachtwoord)
+        if user:
+            # Zet de gebruiker in de sessie
+            session['current_user'] = {
+                'user_id': user[0],
+                'username': user[1],
+                'display_name': user[3],
+                'is_admin': bool(user[5])
+            }
+            return render_template('successvol_ingelogd.html',
+                               message=f"Welkom {user[3]}, ga snel aan de slag!",
+                               link="/toetsvragen")
     return render_template('inloggen.html')
 
 
