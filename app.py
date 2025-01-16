@@ -38,72 +38,10 @@ def load_queries(path):
 
     return queries
 
-@app.route("/inlog", methods=['GET', 'POST'])
-def inlog():
-    ingevulde_gebruikersnaam = ""
-    ingevulde_wachtwoord = ""
-    if request.method == 'POST':
-        ingevulde_gebruikersnaam = request.form.get('username')
-        ingevulde_wachtwoord = request.form.get('password')
-
-        conn = sqlite3.connect(DATABASE_FILE)
-        cursor = conn.cursor()
-
-        queries = load_queries('static/queries.sql')
-        login_query = queries['login_query']
-
-        cursor.execute(login_query,(ingevulde_gebruikersnaam,))
-        user = cursor.fetchone()
-        conn.close()
-
-        if user:
-            hashed_wachtwoord = user[2]
-
-        if bcrypt.check_password_hash(hashed_wachtwoord, ingevulde_wachtwoord):
-
-            # Zet de gebruiker in de sessie
-            session['current_user'] = {
-                'user_id': user[0],
-                'username': user[1],
-                'display_name': user[3],
-                'is_admin': bool(user[5])
-            }
-            display_name = user[3]
-            flash(f"Welkom {user[3]}! Je bent succesvol ingelogd!", "success")
-            return redirect(url_for('toetsvragen'))
-        else:
-            flash("Onjuiste gebruikersnaam of wachtwoord. Probeer het opnieuw.", "error")
-        return render_template('inloggen.html.jinja')
-    return render_template('inloggen.html.jinja')
 
 @app.route("/successvol_ingelogd")
 def success():
     return render_template('successvol_ingelogd.html')
-
-# redacteuren uit de database halen
-def get_redacteuren():
-    conn = sqlite3.connect(DATABASE_FILE)
-    cursor = conn.cursor()
-
-    queries = load_queries('static/queries.sql')
-    get_redacteur = queries['get_redacteur']
-
-    cursor.execute(get_redacteur)
-    redacteuren = cursor.fetchall()
-    conn.close()
-
-    return redacteuren
-
-@app.route('/redacteur')
-def redacteur():
-    current_user = session.get('current_user')
-    print("Current User:", current_user)
-    if not current_user:
-        return redirect(url_for('inlog'))
-
-    redacteuren = get_redacteuren()
-    return render_template('redacteur.html.jinja', redacteuren=redacteuren, current_user=session.get('current_user'))
-
 
 @app.route("/", methods=['GET', 'POST'])
 def nieuwe_redacteur():
@@ -150,6 +88,72 @@ def nieuwe_redacteur():
             except Exception as e:
                 return f"Er is een fout opgetreden: {e}"
     return render_template('nieuwe_redacteur.html')
+
+
+
+@app.route("/inlog", methods=['GET', 'POST'])
+def inlog():
+    ingevulde_gebruikersnaam = ""
+    ingevulde_wachtwoord = ""
+    if request.method == 'POST':
+        ingevulde_gebruikersnaam = request.form.get('username')
+        ingevulde_wachtwoord = request.form.get('password')
+
+        conn = sqlite3.connect(DATABASE_FILE)
+        cursor = conn.cursor()
+
+        queries = load_queries('static/queries.sql')
+        login_query = queries['login_query']
+
+        cursor.execute(login_query,(ingevulde_gebruikersnaam,))
+        user = cursor.fetchone()
+        conn.close()
+
+        if user:
+            hashed_wachtwoord = user[2]
+
+        if user and bcrypt.check_password_hash(user[2], ingevulde_wachtwoord):
+
+            # Zet de gebruiker in de sessie
+            session['current_user'] = {
+                'user_id': user[0],
+                'username': user[1],
+                'display_name': user[3],
+                'is_admin': bool(user[5])
+            }
+            flash(f"Welkom {user[3]}! Je bent succesvol ingelogd!", "success")
+            return redirect(url_for('success'))
+        else:
+            flash("Onjuiste gebruikersnaam of wachtwoord. Probeer het opnieuw.", "error")
+        except Exception as e:
+        flash(f"Er is een fout opgetreden: {e}", "error")
+
+    return render_template('inloggen.html.jinja')
+
+
+# redacteuren uit de database halen
+def get_redacteuren():
+    conn = sqlite3.connect(DATABASE_FILE)
+    cursor = conn.cursor()
+
+    queries = load_queries('static/queries.sql')
+    get_redacteur = queries['get_redacteur']
+
+    cursor.execute(get_redacteur)
+    redacteuren = cursor.fetchall()
+    conn.close()
+
+    return redacteuren
+
+@app.route('/redacteur')
+def redacteur():
+    current_user = session.get('current_user')
+    print("Current User:", current_user)
+    if not current_user:
+        return redirect(url_for('inlog'))
+
+    redacteuren = get_redacteuren()
+    return render_template('redacteur.html.jinja', redacteuren=redacteuren, current_user=session.get('current_user'))
 
 
 @app.route('/indexeren', methods=["GET",'POST'])
