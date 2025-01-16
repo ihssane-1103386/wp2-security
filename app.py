@@ -66,8 +66,8 @@ def inlog():
             return redirect(url_for('toetsvragen'))
         else:
             flash("Onjuiste gebruikersnaam of wachtwoord. Probeer het opnieuw.", "error")
-        return render_template('inloggen.html')
-    return render_template('inloggen.html')
+        return render_template('inloggen.html.jinja')
+    return render_template('inloggen.html.jinja')
 @app.route("/successvol_ingelogd")
 def success():
     return render_template('successvol_ingelogd.html')
@@ -180,14 +180,14 @@ def indexeren():
         if not vak:
             vak = "Niet bekend"
 
-        return render_template('vraag_indexeren_naar_taxonomie.html',
-                            question=question[0],
-                            vak=vak[0],
-                            onderwijsniveau="niveau 2",
-                            leerjaar="leerjaar 1",
-                            prompts=prompts,
-                            questions_id=questions_id,
-                            )
+        return render_template('vraag_indexeren_naar_taxonomie.html.jinja',
+                               question=question[0],
+                               vak=vak[0],
+                               onderwijsniveau="niveau 2",
+                               leerjaar="leerjaar 1",
+                               prompts=prompts,
+                               questions_id=questions_id,
+                               )
 
     except Exception as e:
             print(f"Fout tijdens ophalen van vraag: {e}")
@@ -251,7 +251,7 @@ def vraag_taxonomie_resultaat():
                 conn.commit()
                 return redirect(url_for('toetsvragen'))
 
-        return render_template('vraag_indexeren_resultaat.html',
+        return render_template('vraag_indexeren_resultaat.html.jinja',
                                question=question,
                                vak=vak[0],
                                onderwijsniveau="niveau 2",
@@ -302,13 +302,13 @@ def vraag_taxonomie_wijzigen():
         if not bloom_answer:
             bloom_answer = "Niet bekend"
 
-        return render_template('vraag_taxonomie_wijzigen.html',
-                           question=question[0],
-                           vak=vak[0],
-                           onderwijsniveau="niveau 2",
-                           leerjaar="leerjaar 1",
-                           bloom_answer=bloom_answer[0],
-                           questions_id=questions_id,)
+        return render_template('vraag_taxonomie_wijzigen.html.jinja',
+                               question=question[0],
+                               vak=vak[0],
+                               onderwijsniveau="niveau 2",
+                               leerjaar="leerjaar 1",
+                               bloom_answer=bloom_answer[0],
+                               questions_id=questions_id, )
 
     except Exception as e:
         print(f"Fout tijdens het verwerken van de vragen: {e}")
@@ -395,19 +395,19 @@ def toetsvragen():
         unieke_vakken = [row[0] for row in cursor.fetchall()]
 
         return (render_template
-            ('toetsvragen.html',
-                               vragen=question_page,
-                               page=page,
-                               next_page=next_page,
-                               prev_page=prev_page,
-                               total_pages=total_pages,
-                               page_numbers=page_numbers,
-                               show_first=show_first,
-                               show_last=show_last,
-                               search=search,
-                               vak=vak,
-                               taxonomie=taxonomie,
-                               unieke_vakken=unieke_vakken))
+            ('toetsvragen.html.jinja',
+             vragen=question_page,
+             page=page,
+             next_page=next_page,
+             prev_page=prev_page,
+             total_pages=total_pages,
+             page_numbers=page_numbers,
+             show_first=show_first,
+             show_last=show_last,
+             search=search,
+             vak=vak,
+             taxonomie=taxonomie,
+             unieke_vakken=unieke_vakken))
 
     except Exception as e:
         print(f"Fout tijdens het verwerken van de vragen: {e}")
