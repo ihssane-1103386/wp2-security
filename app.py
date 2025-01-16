@@ -37,7 +37,7 @@ def load_queries(path):
 
     return queries
 
-@app.route("/", methods=['GET', 'POST'])
+@app.route("/inlog", methods=['GET', 'POST'])
 def inlog():
     ingevulde_gebruikersnaam = ""
     ingevulde_wachtwoord = ""
@@ -99,7 +99,7 @@ def redacteur():
     return render_template('redacteur.html.jinja', redacteuren=redacteuren, current_user=session.get('current_user'))
 
 
-@app.route("/nr", methods=['GET', 'POST'])
+@app.route("/", methods=['GET', 'POST'])
 def nieuwe_redacteur():
     gebruikersnaam = ""
     email = ""
