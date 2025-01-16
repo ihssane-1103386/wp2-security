@@ -20,13 +20,17 @@
                     <td>
                         <input type="checkbox" {% if redacteur[2] %}checked{% endif %} disabled>
                     </td>
+
                     <td>
                     {% if current_user and (current_user.is_admin or current_user.username == redacteur[1]) %}
                     <button
-                            onclick="window.location.href='{{ url_for('wijzig', username=redacteur[1]) }}';" class="button">Wijzig
+                            onclick="window.location.href='{{ url_for('wijzig', username=redacteur[1]) }}';"
+                            class="admin-only-button"
+                            aria-label="Wijzig gegevens van {{ redacteur[0] }}">
+                            Wijzig
                     </button>
                     {% endif %}
-                </td>
+                    </td>
                 </tr>
                 {% endfor %}
             </tbody>
