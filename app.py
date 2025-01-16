@@ -1,6 +1,6 @@
 import datetime
 
-from flask import Flask, request, render_template, redirect, url_for
+from flask import Flask, request, render_template, redirect, url_for, session, flash
 
 from lib.gpt.bloom_taxonomy import get_bloom_category
 from model_prompts import prompts_ophalen, prompt_details_ophalen, prompt_verwijderen
@@ -9,6 +9,8 @@ from urllib.parse import urlencode
 import sqlite3
 
 app = Flask(__name__)
+app.secret_key = 'error-not-found'
+
 DATABASE_FILE = "databases/database_toetsvragen.db"
 
 def load_queries(path):
@@ -41,12 +43,31 @@ def inlog():
     if request.method == 'POST':
         ingevulde_gebruikersnaam = request.form.get('username')
         ingevulde_wachtwoord = request.form.get('password')
-        return render_template('successvol_ingelogd.html',
-                               message=f"Welkom {ingevulde_gebruikersnaam}, ga snel aan de slag!",
-                               link="/toetsvragen", ingevulde_wachtwoord=ingevulde_wachtwoord)
-    return render_template('inloggen.html')
 
+        conn = sqlite3.connect(DATABASE_FILE)
+        cursor = conn.cursor()
 
+        queries = load_queries('static/queries.sql')
+        login_query = queries['login_query']
+
+        cursor.execute(login_query,(ingevulde_gebruikersnaam, ingevulde_wachtwoord))
+        user = cursor.fetchone()
+        conn.close()
+
+        if user:
+            # Zet de gebruiker in de sessie
+            session['current_user'] = {
+                'user_id': user[0],
+                'username': user[1],
+                'display_name': user[3],
+                'is_admin': bool(user[5])
+            }
+            flash(f"Welkom {user[3]}! Je bent succesvol ingelogd!", "success")
+            return redirect(url_for('toetsvragen'))
+        else:
+            flash("Onjuiste gebruikersnaam of wachtwoord. Probeer het opnieuw.", "error")
+        return render_template('inloggen.html.jinja')
+    return render_template('inloggen.html.jinja')
 @app.route("/successvol_ingelogd")
 def success():
     return render_template('successvol_ingelogd.html')
@@ -67,8 +88,13 @@ def get_redacteuren():
 
 @app.route('/redacteur')
 def redacteur():
+    current_user = session.get('current_user')
+    print("Current User:", current_user)
+    if not current_user:
+        return redirect(url_for('inlog'))
+
     redacteuren = get_redacteuren()
-    return render_template('redacteur.html', redacteuren=redacteuren)
+    return render_template('redacteur.html.jinja', redacteuren=redacteuren, current_user=session.get('current_user'))
 
 
 @app.route("/nr", methods=['GET', 'POST'])
@@ -149,14 +175,14 @@ def indexeren():
         if not vak:
             vak = "Niet bekend"
 
-        return render_template('vraag_indexeren_naar_taxonomie.html',
-                            question=question[0],
-                            vak=vak[0],
-                            onderwijsniveau="niveau 2",
-                            leerjaar="leerjaar 1",
-                            prompts=prompts,
-                            questions_id=questions_id,
-                            )
+        return render_template('vraag_indexeren_naar_taxonomie.html.jinja',
+                               question=question[0],
+                               vak=vak[0],
+                               onderwijsniveau="niveau 2",
+                               leerjaar="leerjaar 1",
+                               prompts=prompts,
+                               questions_id=questions_id,
+                               )
 
     except Exception as e:
             print(f"Fout tijdens ophalen van vraag: {e}")
@@ -220,7 +246,7 @@ def vraag_taxonomie_resultaat():
                 conn.commit()
                 return redirect(url_for('toetsvragen'))
 
-        return render_template('vraag_indexeren_resultaat.html',
+        return render_template('vraag_indexeren_resultaat.html.jinja',
                                question=question,
                                vak=vak[0],
                                onderwijsniveau="niveau 2",
@@ -271,13 +297,13 @@ def vraag_taxonomie_wijzigen():
         if not bloom_answer:
             bloom_answer = "Niet bekend"
 
-        return render_template('vraag_taxonomie_wijzigen.html',
-                           question=question[0],
-                           vak=vak[0],
-                           onderwijsniveau="niveau 2",
-                           leerjaar="leerjaar 1",
-                           bloom_answer=bloom_answer[0],
-                           questions_id=questions_id,)
+        return render_template('vraag_taxonomie_wijzigen.html.jinja',
+                               question=question[0],
+                               vak=vak[0],
+                               onderwijsniveau="niveau 2",
+                               leerjaar="leerjaar 1",
+                               bloom_answer=bloom_answer[0],
+                               questions_id=questions_id, )
 
     except Exception as e:
         print(f"Fout tijdens het verwerken van de vragen: {e}")
@@ -364,19 +390,19 @@ def toetsvragen():
         unieke_vakken = [row[0] for row in cursor.fetchall()]
 
         return (render_template
-            ('toetsvragen.html',
-                               vragen=question_page,
-                               page=page,
-                               next_page=next_page,
-                               prev_page=prev_page,
-                               total_pages=total_pages,
-                               page_numbers=page_numbers,
-                               show_first=show_first,
-                               show_last=show_last,
-                               search=search,
-                               vak=vak,
-                               taxonomie=taxonomie,
-                               unieke_vakken=unieke_vakken))
+            ('toetsvragen.html.jinja',
+             vragen=question_page,
+             page=page,
+             next_page=next_page,
+             prev_page=prev_page,
+             total_pages=total_pages,
+             page_numbers=page_numbers,
+             show_first=show_first,
+             show_last=show_last,
+             search=search,
+             vak=vak,
+             taxonomie=taxonomie,
+             unieke_vakken=unieke_vakken))
 
     except Exception as e:
         print(f"Fout tijdens het verwerken van de vragen: {e}")
@@ -384,9 +410,91 @@ def toetsvragen():
     finally:
         conn.close()
 
-@app.route("/wijzig")
-def wijzig():
-    return render_template('wijzig_redacteuren.html')
+@app.route('/wijzig/<username>', methods=['GET', 'POST'])
+def wijzig(username):
+    current_user = session.get('current_user')
+    if not current_user or (not current_user['is_admin'] and current_user['username'] != username):
+        return "Toegang geweigerd", 403
+
+    conn = sqlite3.connect(DATABASE_FILE)
+    cursor = conn.cursor()
+
+    queries = load_queries('static/queries.sql')
+    redacteur_query = queries['redacteur_query']
+    cursor.execute(redacteur_query, (username,))
+    redacteur = cursor.fetchone()
+
+    if not redacteur:
+        conn.close()
+        return "Redacteur niet gevonden", 404
+
+    print("DEBUG: Redacteur:", redacteur)
+
+    if request.method == 'POST':
+        nieuwe_naam = request.form.get('display_name')
+        wachtwoord = request.form.get('password')
+
+
+        queries = load_queries('static/queries.sql')
+        wijzig_redacteur_query = queries['wijzig_redacteur_query']
+
+        cursor.execute(wijzig_redacteur_query,(nieuwe_naam, wachtwoord, username))
+        conn.commit()
+        conn.close()
+
+        return redirect(url_for('redacteur'))
+
+    conn.close()
+
+    return render_template('wijzig_redacteuren.html.jinja', redacteur=redacteur)
+
+@app.route('/update_redacteur/<int:user_id>', methods=['POST'])
+def update_redacteur(user_id):
+    nieuwe_naam = request.form.get('name')
+    nieuwe_email = request.form.get('email')
+    nieuw_wachtwoord = request.form.get('password')
+    is_admin = 1 if request.form.get('is_admin') else 0
+
+    conn = sqlite3.connect(DATABASE_FILE)
+    cursor = conn.cursor()
+
+    queries = load_queries('static/queries.sql')
+    wijzig_redacteur_query = queries['wijzig_redacteur_query']
+
+    cursor.execute(wijzig_redacteur_query, (nieuwe_naam, nieuw_wachtwoord, nieuwe_email, is_admin, user_id))
+    conn.commit()
+    conn.close()
+
+    flash(f"Redacteur met ID {user_id} is bijgewerkt!", "success")
+
+    return redirect(url_for('redacteur'))
+
+
+@app.route('/delete_redacteur/<int:user_id>', methods=['POST'])
+def delete_redacteur(user_id):
+    conn = sqlite3.connect(DATABASE_FILE)
+    cursor = conn.cursor()
+
+    queries = load_queries('static/queries.sql')
+    delete_redacteur_query = queries['delete_redacteur_query']
+
+    if not delete_redacteur_query:
+        flash("De verwijder-query kon niet worden gevonden!", "error")
+        return redirect(url_for('redacteur'))
+
+    try:
+        cursor.execute(delete_redacteur_query, (user_id,))
+        conn.commit()
+        flash(f"Redacteur met ID {user_id} is succesvol verwijderd!", "success")
+    except sqlite3.OperationalError as e:
+        flash(f"Er is een fout opgetreden: {e}", "error")
+    finally:
+        conn.close()
+
+    return redirect(url_for('redacteur'))
+
+
+
 
 @app.route("/ai_prompts")
 def ai_prompts():
