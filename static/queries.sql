@@ -32,6 +32,9 @@ UPDATE questions SET bloom_answer = ? WHERE questions_id = ?;
 -- [get_redacteur]
 SELECT display_name, login, is_admin FROM users;
 
+-- [redacteur_query]
+SELECT user_id, login, display_name, is_admin FROM users WHERE login = ?;
+
 -- [wijzig_redacteur_query]
 UPDATE users SET display_name = ?, password = ? WHERE login = ?
 
