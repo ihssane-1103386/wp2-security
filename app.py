@@ -94,10 +94,9 @@ def redacteur():
     print("Current User:", current_user)
     if not current_user:
         return redirect(url_for('inlog'))
-    print("Huidige gebruiker:", session.get('current_user'))
 
     redacteuren = get_redacteuren()
-    return render_template('redacteur.html', redacteuren=redacteuren)
+    return render_template('redacteur.html.jinja', redacteuren=redacteuren, current_user=session.get('current_user'))
 
 
 @app.route("/nr", methods=['GET', 'POST'])
