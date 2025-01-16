@@ -122,13 +122,11 @@ def inlog():
                 'is_admin': bool(user[5])
             }
             flash(f"Welkom {user[3]}! Je bent succesvol ingelogd!", "success")
-            return redirect(url_for('success'))
+            return redirect(url_for('toetsvragen'))
         else:
             flash("Onjuiste gebruikersnaam of wachtwoord. Probeer het opnieuw.", "error")
-        except Exception as e:
-        flash(f"Er is een fout opgetreden: {e}", "error")
-
-    return render_template('inloggen.html.jinja')
+        return render_template('inloggen.html.jinja')
+        return render_template('inloggen.html.jinja')
 
 
 # redacteuren uit de database halen
