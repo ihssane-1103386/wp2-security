@@ -1,39 +1,39 @@
 {%  extends "base.html" %}
 {% block main %}
 
-   <main class="container">
-       <h1>wijzig redacteuren</h1>
-        <table class="redacteuren">
-            <form>
-                <div id="box1">
-                    <div>
-                        <lable for="uname">naam: </lable>
-                        <input type="" placeholder= {{ naam }} required>
-                    </div>
-                    <br>
-                    <div>
-                        <lable for="uname">Email/Login: </lable>
-                        <input type="" placeholder="email@login" required>
-                    </div>
-                    <br>
-                    <div>
-                        <lable for="uname">wachtwoord: </lable>
-                        <input type="" placeholder="wachtwoord" required>
-                    </div>
-                    <br>
-                    <div>
-                        <lable for="usename">is admin? </lable>
-                        <input type="checkbox" disabled>
-                    </div>
-                </div>
-            </form>
-        </table>
-        <div class="button">
-                    <button class="button">Opslaan</button>
-        </div>
+    <main class="container">
+        <h1>Wijzig Redacteur</h1>
+        <form class="redacteuren" method="post" action="{{ url_for('update_redacteur', user_id=redacteur[0]) }}">
+            <table>
+                <tbody>
+                    <tr>
+                        <td><label for="name">Naam:</label></td>
+                        <td><input type="text" id="name" name="name" value="{{ redacteur[1] }}" required></td>
+                    </tr>
+                    <tr>
+                        <td><label for="email">Email/Login:</label></td>
+                        <td><input type="email" id="email" name="email" value="{{ redacteur[2] }}" required></td>
+                    </tr>
+                    <tr>
+                        <td><label for="password">Wachtwoord:</label></td>
+                        <td><input type="password" id="password" name="password" placeholder="Vul nieuw wachtwoord in" required></td>
+                    </tr>
+                    <tr>
+                        <td><label for="is_admin">Is Admin?</label></td>
+                        <td><input type="checkbox" id="is_admin" name="is_admin" {% if redacteur[3] %}checked{% endif %}></td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="button">
+                <button type="submit" class="button">Opslaan</button>
+            </div>
+        </form>
         <br>
         <div class="button">
-                    <button class="button">Verwijder</button>
+            <form method="post" action="{{ url_for('delete_redacteur', user_id=redacteur[0]) }}">
+                <button type="submit" class="button" onclick="return confirm('Weet je zeker dat je deze redacteur wilt verwijderen?');">Verwijder</button>
+            </form>
         </div>
-   </main>
+    </main>
+
 {% endblock %}
