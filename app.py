@@ -346,7 +346,6 @@ def toetsvragen():
 
         if taxonomie:
             query += " AND taxonomy_bloom IS NULL"
-            # query += " AND taxonomy_bloom IS NOT NULL"
 
         query += " LIMIT ? OFFSET ?"
         parameters.extend([per_page, start])
@@ -492,8 +491,6 @@ def delete_redacteur(user_id):
         conn.close()
 
     return redirect(url_for('redacteur'))
-
-
 
 
 @app.route("/ai_prompts")
