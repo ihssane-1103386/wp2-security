@@ -83,12 +83,17 @@ def nieuwe_redacteur():
         is_admin = 1 if request.form.get('is_admin') == 'on' else 0
         date_created = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
 
+        print(f"Gebruikersnaam: {gebruikersnaam}")
+        print(f"Email: {email}")
+        print(f"Wachtwoord: {wachtwoord}")
+        print(f"Is Admin: {is_admin}")
+
         if gebruikersnaam and wachtwoord and email:
             try:
                 conn = sqlite3.connect('databases/database_toetsvragen.db')
                 cursor = conn.cursor()
 
-                queries = load_queries('databases/database_toetsvragen.db')
+                queries = load_queries('static/queries.sql')
                 insert_redacteur = queries['insert_redacteur']
 
                 cursor.execute(insert_redacteur, (gebruikersnaam, wachtwoord, gebruikersnaam, date_created, is_admin))
