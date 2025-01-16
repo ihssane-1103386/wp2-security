@@ -69,8 +69,8 @@ def inlog():
                 'is_admin': bool(user[5])
             }
             display_name = user[3]
-            flash(f"Welkom {display_name}! Je bent succesvol ingelogd!", "success")
-            return render_template('toetsvragen.html.jinja')
+            flash(f"Welkom {user[3]}! Je bent succesvol ingelogd!", "success")
+            return redirect(url_for('toetsvragen'))
         else:
             flash("Onjuiste gebruikersnaam of wachtwoord. Probeer het opnieuw.", "error")
         return render_template('inloggen.html.jinja')
