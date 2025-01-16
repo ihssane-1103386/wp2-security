@@ -105,15 +105,11 @@ def inlog():
         queries = load_queries('static/queries.sql')
         login_query = queries['login_query']
 
-        cursor.execute(login_query,(ingevulde_gebruikersnaam,))
+        cursor.execute(login_query,(ingevulde_gebruikersnaam, ingevulde_wachtwoord))
         user = cursor.fetchone()
         conn.close()
 
         if user:
-            hashed_wachtwoord = user[2]
-
-        if user and bcrypt.check_password_hash(user[2], ingevulde_wachtwoord):
-
             # Zet de gebruiker in de sessie
             session['current_user'] = {
                 'user_id': user[0],
@@ -121,11 +117,13 @@ def inlog():
                 'display_name': user[3],
                 'is_admin': bool(user[5])
             }
-            flash(f"Welkom {user[3]}! Je bent succesvol ingelogd!", "success")
+            display_name = user[3]
+            flash(f"Welkom {display_name}! Je bent succesvol ingelogd!", "success")
             return redirect(url_for('toetsvragen'))
         else:
             flash("Onjuiste gebruikersnaam of wachtwoord. Probeer het opnieuw.", "error")
-        return redirect(url_for('inlog'))
+        return render_template('inloggen.html.jinja')
+    return render_template('inloggen.html.jinja')
 
 
 # redacteuren uit de database halen
