@@ -91,6 +91,7 @@ def get_redacteuren():
 @app.route('/redacteur')
 def redacteur():
     current_user = session.get('current_user')
+    print("Current User:", current_user)
     if not current_user:
         return redirect(url_for('inlog'))
     print("Huidige gebruiker:", session.get('current_user'))
