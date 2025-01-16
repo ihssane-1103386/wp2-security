@@ -112,12 +112,13 @@ def nieuwe_redacteur():
         is_admin = 1 if request.form.get('is_admin') == 'on' else 0
         date_created = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
 
-        print(f"Gebruikersnaam: {gebruikersnaam}")
-        print(f"Email: {email}")
-        print(f"Wachtwoord (gehasht): {wachtwoord}")
-        print(f"Is Admin: {is_admin}")
 
         hashed_wachtwoord = bcrypt.generate_password_hash(wachtwoord).decode("utf-8")
+
+        print(f"Gebruikersnaam: {gebruikersnaam}")
+        print(f"Email: {email}")
+        print(f"Wachtwoord (gehasht): {hashed_wachtwoord}")
+        print(f"Is Admin: {is_admin}")
 
         if gebruikersnaam and hashed_wachtwoord and email:
             try:
