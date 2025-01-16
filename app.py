@@ -59,6 +59,7 @@ def inlog():
         if user:
             hashed_wachtwoord = user[2]
             if bcrypt.check_password_hash(hashed_wachtwoord, ingevulde_wachtwoord):
+
             # Zet de gebruiker in de sessie
             session['current_user'] = {
                 'user_id': user[0],
