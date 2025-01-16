@@ -62,8 +62,8 @@ def get_redacteuren():
     cursor.execute(get_redacteur)
     redacteuren = cursor.fetchall()
     conn.close()
-    return redacteuren
 
+    return redacteuren
 
 @app.route('/redacteur')
 def redacteur():
@@ -89,10 +89,12 @@ def nieuwe_redacteur():
                 cursor = conn.cursor()
 
                 queries = load_queries('databases/database_toetsvragen.db')
-                get_redacteur = queries['get_redacteur']
+                insert_redacteur = queries['insert_redacteur']
 
-                cursor.execute(get_redacteur, (gebruikersnaam, wachtwoord, gebruikersnaam, date_created, is_admin))
-                redacteuren = cursor.fetchone()
+                cursor.execute(insert_redacteur, (gebruikersnaam, wachtwoord, gebruikersnaam, date_created, is_admin))
+
+                print(
+                    f"Gebruikersnaam: {gebruikersnaam}, E-mail: {email}, Wachtwoord: {wachtwoord}, Is Admin: {is_admin}, Datum: {date_created}")
 
                 # cursor.execute("""
                 #     INSERT INTO users (login, password, display_name, date_created, is_admin)
@@ -103,11 +105,7 @@ def nieuwe_redacteur():
                 conn.close()
         
                 return render_template('successvol_ingelogd.html', message=f"{gebruikersnaam} is succesvol toegevoegd! Klik hieronder om verder te gaan!",
-                                       link="https://www.test-correct.nl/",
-                                       gebruikersnaam=gebruikersnaam,
-                                       email=email,
-                                       wachtwoord=wachtwoord,
-                                       redacteuren=redacteuren)
+                                       link="https://www.test-correct.nl/")
 
             except sqlite3.IntegrityError:
                 return "Fout: Deze gebruikersnaam of e-mail bestaat al!", 400
@@ -216,11 +214,11 @@ def vraag_taxonomie_resultaat():
                 update_bloom_answer = queries['update_bloom_answer']
                 cursor.execute(update_bloom_answer, (bloom_answer, questions_id))
 
+                print(f"taxonomy_bloom: {taxonomy_bloom}")
+                print(f"bloom_answer: {bloom_answer}")
+
                 conn.commit()
                 return redirect(url_for('toetsvragen'))
-
-        # ai_niveau = ai_response.get("niveau", "geen antwoord")
-        # ai_uitleg = ai_response.get("uitleg", "geen antwoord")
 
         return render_template('vraag_indexeren_resultaat.html',
                                question=question,
@@ -231,6 +229,7 @@ def vraag_taxonomie_resultaat():
                                ai_niveau=ai_niveau,
                                ai_uitleg=ai_uitleg,
                                questions_id=questions_id)
+
     except Exception as e:
         print(f"Fout tijdens ophalen van vraag: {e}")
         return "Interne serverfout", 500

@@ -36,6 +36,6 @@ SELECT bloom_answer FROM questions WHERE questions_id = ?;
 
 -- Nieuwe_redacteuren page
 
--- [get_redacteur]
+-- [insert_redacteur]
 INSERT INTO users (login, password, display_name, date_created, is_admin)
-VALUES (?, ?, ?, ?, ?)
+VALUES (?, ?, ?, ?, ?);
