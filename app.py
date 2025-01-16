@@ -9,6 +9,8 @@ from urllib.parse import urlencode
 import sqlite3
 
 app = Flask(__name__)
+app.secret_key = 'error-not-found'
+
 DATABASE_FILE = "databases/database_toetsvragen.db"
 
 def load_queries(path):
@@ -63,7 +65,9 @@ def inlog():
             return render_template('successvol_ingelogd.html',
                                message=f"Welkom {user[3]}, ga snel aan de slag!",
                                link="/toetsvragen")
-    return render_template('inloggen.html')
+    else:
+        return render_template('inloggen.html')
+    return "Onjuiste gebruikersnaam of wachtwoord", 401
 
 
 @app.route("/successvol_ingelogd")
