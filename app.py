@@ -127,7 +127,7 @@ def nieuwe_redacteur():
                 queries = load_queries('static/queries.sql')
                 insert_redacteur = queries['insert_redacteur']
 
-                cursor.execute(insert_redacteur, (gebruikersnaam, hashed_wachtwoord, gebruikersnaam, date_created, is_admin))
+                cursor.execute(insert_redacteur, (gebruikersnaam, wachtwoord, gebruikersnaam, date_created, is_admin))
 
                 print(
                     f"Gebruikersnaam: {gebruikersnaam}, E-mail: {email}, Wachtwoord: {hashed_wachtwoord}, Is Admin: {is_admin}, Datum: {date_created}")
