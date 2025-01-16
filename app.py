@@ -1,6 +1,6 @@
 import datetime
 
-from flask import Flask, request, render_template, redirect, url_for
+from flask import Flask, request, render_template, redirect, url_for, session
 
 from lib.gpt.bloom_taxonomy import get_bloom_category
 from model_prompts import prompts_ophalen, prompt_details_ophalen, prompt_verwijderen
@@ -41,6 +41,17 @@ def inlog():
     if request.method == 'POST':
         ingevulde_gebruikersnaam = request.form.get('username')
         ingevulde_wachtwoord = request.form.get('password')
+
+        conn = sqlite3.connect(DATABASE_FILE)
+        cursor = conn.cursor()
+
+        queries = load_queries('static/queries.sql')
+        login_query = queries['login_query']
+
+        cursor.execute(login_query,(ingevulde_gebruikersnaam, ingevulde_wachtwoord))
+        user = cursor.fetchone()
+        conn.close()
+
         return render_template('successvol_ingelogd.html',
                                message=f"Welkom {ingevulde_gebruikersnaam}, ga snel aan de slag!",
                                link="/toetsvragen", ingevulde_wachtwoord=ingevulde_wachtwoord)
