@@ -179,12 +179,45 @@ table tr:nth-child(even) {
 }
 
 /* Admin-only knoppen */
-.admin-only button {
+.admin-only-button {
+    text-align: right;
     background-color: #FF7972; /* Rood voor kritieke acties */
+    border: none;
+    color: white;
+    padding: 10px 32px;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+    font-family:Nunito extrabold,sans-serif;
+    transition-duration: 0.4s;
+    border-radius: 10px;
 }
 
-.admin-only button:hover {
+.admin-only-button:hover {
     background-color: #CC5A5A; /* Donkerrood hover */
+    transition-duration: 0.4s;
+    color: white;
+    box-shadow: 1px 1px 1px 1px rgba(85, 85, 85, 0.3);
+}
+
+.alert {
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+}
+
+.alert-success {
+    color: #3c763d;
+    background-color: #dff0d8;
+    border-color: #d6e9c6;
+}
+
+.alert-danger {
+    color: #a94442;
+    background-color: #f2dede;
+    border-color: #ebccd1;
 }
 
 /* Responsieve aanpassingen */

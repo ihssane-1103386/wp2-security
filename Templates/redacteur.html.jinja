@@ -1,0 +1,55 @@
+{%  extends "base.html.jinja" %}
+{% block main %}
+
+    <main class="container">
+        <h1>Redacteuren</h1>
+     {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+            <div class="flash-messages">
+                {% for category, message in messages %}
+                <div class="alert alert-{{ category }}">
+                    {{ message }}
+                </div>
+                {% endfor %}
+            </div>
+            {% endif %}
+        {% endwith %}
+        <table class="redacteuren">
+            <thead>
+                <tr>
+                    <th>Redacteur</th>
+                    <th>Loginnaam</th>
+                    <th>Admin</th>
+                    <th class="admin-only">Acties</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for redacteur in redacteuren %}
+                <tr>
+                    <td>{{ redacteur[0] }}</td>
+                    <td>{{ redacteur[1] }}</td>
+                    <td>
+                        <input type="checkbox" {% if redacteur[2] %}checked{% endif %} disabled>
+                    </td>
+
+                    <td>
+                    {% if current_user and (current_user.is_admin or current_user.username == redacteur[1]) %}
+                    <button
+                            onclick="window.location.href='{{ url_for('wijzig', username=redacteur[1]) }}';"
+                            class="admin-only-button"
+                            aria-label="Wijzig gegevens van {{ redacteur[0] }}">
+                            Wijzig
+                    </button>
+                    {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <div class="button">
+            <button
+                    onclick="window.location.href='{{ url_for('nieuwe_redacteur') }}';" class="button">Nieuwe redacteur
+            </button>
+        </div>
+    </main>
+{% endblock %}
