@@ -36,7 +36,12 @@ SELECT display_name, login, is_admin FROM users;
 SELECT user_id, login, display_name, is_admin FROM users WHERE login = ?;
 
 -- [wijzig_redacteur_query]
-UPDATE users SET display_name = ?, password = ? WHERE login = ?
+UPDATE users
+SET display_name = ?, password = ?, login = ?, is_admin = ?
+WHERE user_id = ?;
+
+-- [delete_redacteur_query]
+DELETE FROM users WHERE user_id =
 
 -- Fetch question, bloom_answer for wijzigen
 
