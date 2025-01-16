@@ -519,16 +519,17 @@ def delete_prompt_route(prompts_id):
     prompt_verwijderen(prompts_id)
     return redirect(url_for('ai_prompts'))
 
+
 @app.route('/prompt_toevoegen', methods=['GET', 'POST'])
 def nieuwe_prompt():
 
-    if 'user_id' not in session:
-        error_message = "Je hebt geen toegang."
-        return render_template('inloggen.html',
-                               error_message=error_message)
+    current_user = session.get('current_user')
+    if not current_user:
+        flash("Je moet ingelogd zijn om een nieuwe prompt toe te voegen.", "error")
+        return redirect(url_for('inlog'))
 
 
-    user_id = session['user_id']
+    user_id = current_user.get('user_id')
 
     if request.method == 'POST':
 
@@ -540,7 +541,8 @@ def nieuwe_prompt():
             prompt_toevoegen(user_id, prompt, prompt_details)
             return redirect(url_for('ai_prompts'))
         except Exception as e:
-            print(f"Fout tijdens het toevoegen van een nieuwe prompt: {e}")
+            logging.error(f"Fout tijdens het toevoegen van een nieuwe prompt: {e}")
+            flash("Er is een fout opgetreden bij het toevoegen van de prompt.", "error")
             return "Interne serverfout", 500
 
     return render_template('prompt_toevoegen.html')
