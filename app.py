@@ -423,6 +423,20 @@ def wijzig(username):
     if not current_user or (not current_user['is_admin'] and current_user['username'] != username):
         return "Toegang geweigerd", 403
 
+    conn = sqlite3.connect(DATABASE_FILE)
+    cursor = conn.cursor()
+
+    queries = load_queries('static/queries.sql')
+    redacteur_query = queries['redacteur_query']
+    cursor.execute(redacteur_query, (username,))
+    redacteur = cursor.fetchone()
+
+    if not redacteur:
+        conn.close()
+        return "Redacteur niet gevonden", 404
+
+    print("DEBUG: Redacteur:", redacteur)
+
     if request.method == 'POST':
         nieuwe_naam = request.form.get('display_name')
         wachtwoord = request.form.get('password')
@@ -436,9 +450,49 @@ def wijzig(username):
         cursor.execute(wijzig_redacteur_query,(nieuwe_naam, wachtwoord, username))
         conn.commit()
         conn.close()
+
         return redirect(url_for('redacteur'))
 
-    return render_template('wijzig_redacteuren.html', username=username)
+    conn.close()
+
+    return render_template('wijzig_redacteuren.html.jinja', redacteur=redacteur)
+
+@app.route('/update_redacteur/<int:user_id>', methods=['POST'])
+def update_redacteur(user_id):
+    nieuwe_naam = request.form.get('name')
+    nieuwe_email = request.form.get('email')
+    nieuw_wachtwoord = request.form.get('password')
+    is_admin = 1 if request.form.get('is_admin') else 0
+
+    conn = sqlite3.connect(DATABASE_FILE)
+    cursor = conn.cursor()
+
+    queries = load_queries('static/queries.sql')
+    wijzig_redacteur_query = queries['wijzig_redacteur_query']
+
+    cursor.execute(wijzig_redacteur_query, (nieuwe_naam, nieuw_wachtwoord, nieuwe_email, is_admin, user_id))
+    conn.commit()
+    conn.close()
+
+    flash(f"Redacteur met ID {user_id} is bijgewerkt!", "success")
+
+    return redirect(url_for('redacteur'))
+
+
+@app.route('/delete_redacteur/<int:user_id>', methods=['POST'])
+def delete_redacteur(user_id):
+    conn = sqlite3.connect(DATABASE_FILE)
+    cursor = conn.cursor()
+
+    queries = load_queries('static/queries.sql')
+    delete_redacteur_query = queries['delete_redacteur_query']
+
+    cursor.execute(delete_redacteur_query, (user_id,))
+    conn.commit()
+    conn.close()
+
+    return redirect(url_for('redacteur'))
+
 
 @app.route("/ai_prompts")
 def ai_prompts():
