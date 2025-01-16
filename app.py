@@ -1,4 +1,5 @@
 import datetime
+import logging
 
 from flask import Flask, request, render_template, redirect, url_for, session, flash
 
@@ -218,7 +219,6 @@ def vraag_taxonomie_resultaat():
             return "Vraag niet gevonden", 404
 
         question = result[0]
-
         cursor.execute(get_vak, (questions_id,))
         vak = cursor.fetchone()
 
@@ -228,8 +228,14 @@ def vraag_taxonomie_resultaat():
         gpt_choice = "rac_test"
         ai_response = get_bloom_category(question, prompt, gpt_choice)
 
-        ai_niveau = ai_response.get("categorie", "geen antwoord")
-        ai_uitleg = ai_response.get("uitleg", "geen antwoord")
+        if not ai_response:
+            logging.error("geen valide AI-respons ontvangen")
+            ai_niveau = "geen antwoord"
+            ai_uitleg = "geen antwoord"
+        else:
+            ai_niveau = ai_response.get("categorie", "geen antwoord")
+            ai_uitleg = ai_response.get("uitleg", "geen antwoord")
+
         bloom_answer = f"Niveau: {ai_niveau}, Uitleg: {ai_uitleg}"
 
         if request.method == 'POST':
@@ -241,8 +247,8 @@ def vraag_taxonomie_resultaat():
                 update_bloom_answer = queries['update_bloom_answer']
                 cursor.execute(update_bloom_answer, (bloom_answer, questions_id))
 
-                print(f"taxonomy_bloom: {taxonomy_bloom}")
-                print(f"bloom_answer: {bloom_answer}")
+                logging.debug(f"taxonomy_bloom: {taxonomy_bloom}")
+                logging.debug(f"bloom_answer: {bloom_answer}")
 
                 conn.commit()
                 return redirect(url_for('toetsvragen'))
@@ -258,7 +264,7 @@ def vraag_taxonomie_resultaat():
                                questions_id=questions_id)
 
     except Exception as e:
-        print(f"Fout tijdens ophalen van vraag: {e}")
+        logging.error(f"Fout tijdens ophalen van vraag: {e}")
         return "Interne serverfout", 500
     finally:
         conn.close()
