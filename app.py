@@ -119,7 +119,7 @@ def nieuwe_redacteur():
 
         hashed_wachtwoord = bcrypt.generate_password_hash(wachtwoord).decode("utf-8")
 
-        if gebruikersnaam and wachtwoord and email:
+        if gebruikersnaam and hashed_wachtwoord and email:
             try:
                 conn = sqlite3.connect('databases/database_toetsvragen.db')
                 cursor = conn.cursor()
