@@ -1,5 +1,8 @@
 -- Toetsvragen queries
 
+-- [login_query]
+SELECT * FROM users WHERE login = ? AND password = ?,(ingevulde_gebruikersnaam, ingevulde_wachtwoord)
+
 -- [normal_query]
 SELECT questions_id, question, vak, date_created, taxonomy_bloom FROM questions WHERE 1=1;
 
