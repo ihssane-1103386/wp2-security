@@ -125,8 +125,7 @@ def inlog():
             return redirect(url_for('toetsvragen'))
         else:
             flash("Onjuiste gebruikersnaam of wachtwoord. Probeer het opnieuw.", "error")
-        return render_template('inloggen.html.jinja')
-        return render_template('inloggen.html.jinja')
+        return redirect(url_for('inlog'))
 
 
 # redacteuren uit de database halen
