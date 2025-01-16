@@ -90,6 +90,10 @@ def get_redacteuren():
 
 @app.route('/redacteur')
 def redacteur():
+    current_user = session.get('current_user')
+    if not current_user:
+        return redirect(url_for('inlog'))
+
     redacteuren = get_redacteuren()
     return render_template('redacteur.html', redacteuren=redacteuren)
 
