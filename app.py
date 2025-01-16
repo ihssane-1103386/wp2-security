@@ -62,14 +62,12 @@ def inlog():
                 'display_name': user[3],
                 'is_admin': bool(user[5])
             }
-            return render_template('successvol_ingelogd.html',
-                               message=f"Welkom {user[3]}, ga snel aan de slag!",
-                               link="/toetsvragen")
-    else:
+            flash(f"Welkom {user[3]}! Je bent succesvol ingelogd!", "success")
+            return redirect(url_for('toetsvragen'))
+        else:
+            flash("Onjuiste gebruikersnaam of wachtwoord. Probeer het opnieuw.", "error")
         return render_template('inloggen.html')
-    return "Onjuiste gebruikersnaam of wachtwoord", 401
-
-
+    return render_template('inloggen.html')
 @app.route("/successvol_ingelogd")
 def success():
     return render_template('successvol_ingelogd.html')
@@ -485,11 +483,22 @@ def delete_redacteur(user_id):
     queries = load_queries('static/queries.sql')
     delete_redacteur_query = queries['delete_redacteur_query']
 
-    cursor.execute(delete_redacteur_query, (user_id,))
-    conn.commit()
-    conn.close()
+    if not delete_redacteur_query:
+        flash("De verwijder-query kon niet worden gevonden!", "error")
+        return redirect(url_for('redacteur'))
+
+    try:
+        cursor.execute(delete_redacteur_query, (user_id,))
+        conn.commit()
+        flash(f"Redacteur met ID {user_id} is succesvol verwijderd!", "success")
+    except sqlite3.OperationalError as e:
+        flash(f"Er is een fout opgetreden: {e}", "error")
+    finally:
+        conn.close()
 
     return redirect(url_for('redacteur'))
+
+
 
 
 @app.route("/ai_prompts")
