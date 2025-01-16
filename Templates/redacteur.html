@@ -20,13 +20,21 @@
                     <td>
                         <input type="checkbox" {% if redacteur[2] %}checked{% endif %} disabled>
                     </td>
-                    <td class="admin-only"><button onclick="window.location.href='{{ url_for('wijzig') }}';" class="button">Wijzig</button></td>
+                    <td>
+                    {% if current_user and (current_user.is_admin or current_user.username == redacteur[1]) %}
+                    <button
+                            onclick="window.location.href='{{ url_for('wijzig', username=redacteur[1]) }}';" class="button">Wijzig
+                    </button>
+                    {% endif %}
+                </td>
                 </tr>
                 {% endfor %}
             </tbody>
         </table>
         <div class="button">
-            <a href="{{ url_for('nieuwe_redacteur') }}" class="button">Nieuwe redacteur</a>
+            <button
+                    onclick="window.location.href='{{ url_for('nieuwe_redacteur') }}';" class="button">Nieuwe redacteur
+            </button>
         </div>
     </main>
 {% endblock %}
