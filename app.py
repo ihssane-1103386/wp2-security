@@ -93,6 +93,7 @@ def redacteur():
     current_user = session.get('current_user')
     if not current_user:
         return redirect(url_for('inlog'))
+    print("Huidige gebruiker:", session.get('current_user'))
 
     redacteuren = get_redacteuren()
     return render_template('redacteur.html', redacteuren=redacteuren)
@@ -416,9 +417,12 @@ def toetsvragen():
     finally:
         conn.close()
 
-@app.route("/wijzig")
-def wijzig():
-    return render_template('wijzig_redacteuren.html')
+@app.route('/wijzig/<username>', methods=['GET', 'POST'])
+def wijzig(username):
+    current_user = session.get('current_user')
+    if not current_user or (not current_user['is_admin'] and current_user['username'] != username):
+        return "Toegang geweigerd", 403
+
 
 @app.route("/ai_prompts")
 def ai_prompts():
