@@ -37,7 +37,7 @@ def load_queries(path):
 
     return queries
 
-@app.route("/inlog", methods=['GET', 'POST'])
+@app.route("/", methods=['GET', 'POST'])
 def inlog():
     ingevulde_gebruikersnaam = ""
     ingevulde_wachtwoord = ""
@@ -99,7 +99,7 @@ def redacteur():
     return render_template('redacteur.html.jinja', redacteuren=redacteuren, current_user=session.get('current_user'))
 
 
-@app.route("/", methods=['GET', 'POST'])
+@app.route("/nieuwe_redacteur", methods=['GET', 'POST'])
 def nieuwe_redacteur():
     gebruikersnaam = ""
     email = ""
@@ -225,21 +225,16 @@ def vraag_taxonomie_resultaat():
         if not vak:
             vak = "Niet bekend"
 
-        gpt_choice = "rac_test"
-        ai_response = get_bloom_category(question, prompt, gpt_choice)
-
-        if not ai_response:
-            logging.error("geen valide AI-respons ontvangen")
-            ai_niveau = "geen antwoord"
-            ai_uitleg = "geen antwoord"
-        else:
-            ai_niveau = ai_response.get("categorie", "geen antwoord")
-            ai_uitleg = ai_response.get("uitleg", "geen antwoord")
-
-        bloom_answer = f"Niveau: {ai_niveau}, Uitleg: {ai_uitleg}"
-
         if request.method == 'POST':
             taxonomy_bloom = request.form.get('taxonomy_bloom')
+            ai_response = session.get('ai_response')
+            if ai_response:
+                ai_niveau = ai_response.get("categorie", "geen antwoord")
+                ai_uitleg = ai_response.get("uitleg", "geen antwoord")
+                bloom_answer = f"Niveau: {ai_niveau}, Uitleg: {ai_uitleg}"
+            else:
+                bloom_answer = "Niveau: geen antwoord, Uitleg: geen antwoord"
+
             if taxonomy_bloom:
                 update_taxonomie = queries['update_taxonomy']
                 cursor.execute(update_taxonomie, (taxonomy_bloom, questions_id))
@@ -247,11 +242,27 @@ def vraag_taxonomie_resultaat():
                 update_bloom_answer = queries['update_bloom_answer']
                 cursor.execute(update_bloom_answer, (bloom_answer, questions_id))
 
+                print(f'{bloom_answer} opgeslagen?')
+
                 logging.debug(f"taxonomy_bloom: {taxonomy_bloom}")
                 logging.debug(f"bloom_answer: {bloom_answer}")
 
                 conn.commit()
                 return redirect(url_for('toetsvragen'))
+
+        gpt_choice = "rac_test"
+        ai_response = get_bloom_category(question, prompt, gpt_choice)
+        session['ai_response'] = ai_response  # Sla AI-respons op in session
+
+        if ai_response:
+            ai_niveau = ai_response.get("categorie", "Geen antwoord")
+            ai_uitleg = ai_response.get("uitleg", "Geen antwoord")
+        else:
+            ai_niveau = "geen antwoord"
+            ai_uitleg = "geen antwoord"
+
+        bloom_answer = f"Niveau: {ai_niveau}, Uitleg: {ai_uitleg}"
+        print(bloom_answer)
 
         return render_template('vraag_indexeren_resultaat.html.jinja',
                                question=question,
