@@ -228,7 +228,7 @@ def vraag_taxonomie_resultaat():
         gpt_choice = "rac_test"
         ai_response = get_bloom_category(question, prompt, gpt_choice)
 
-        ai_niveau = ai_response.get("niveau", "geen antwoord")
+        ai_niveau = ai_response.get("categorie", "geen antwoord")
         ai_uitleg = ai_response.get("uitleg", "geen antwoord")
         bloom_answer = f"Niveau: {ai_niveau}, Uitleg: {ai_uitleg}"
 
