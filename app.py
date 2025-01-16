@@ -423,6 +423,22 @@ def wijzig(username):
     if not current_user or (not current_user['is_admin'] and current_user['username'] != username):
         return "Toegang geweigerd", 403
 
+    if request.method == 'POST':
+        nieuwe_naam = request.form.get('display_name')
+        wachtwoord = request.form.get('password')
+
+        conn = sqlite3.connect(DATABASE_FILE)
+        cursor = conn.cursor()
+
+        queries = load_queries('static/queries.sql')
+        wijzig_redacteur_query = queries['wijzig_redacteur_query']
+
+        cursor.execute(wijzig_redacteur_query,(nieuwe_naam, wachtwoord, username))
+        conn.commit()
+        conn.close()
+        return redirect(url_for('redacteur'))
+
+    return render_template('wijzig_redacteuren.html', username=username)
 
 @app.route("/ai_prompts")
 def ai_prompts():
