@@ -466,6 +466,7 @@ def update_redacteur(user_id):
     conn.commit()
     conn.close()
 
+
     flash(f"Redacteur met ID {user_id} is bijgewerkt!", "success")
 
     return redirect(url_for('redacteur'))
