@@ -101,11 +101,6 @@ def nieuwe_redacteur():
                 print(
                     f"Gebruikersnaam: {gebruikersnaam}, E-mail: {email}, Wachtwoord: {wachtwoord}, Is Admin: {is_admin}, Datum: {date_created}")
 
-                # cursor.execute("""
-                #     INSERT INTO users (login, password, display_name, date_created, is_admin)
-                #     VALUES (?, ?, ?, ?, ?)
-                # """, (gebruikersnaam, wachtwoord, gebruikersnaam, date_created, is_admin))
-
                 conn.commit()
                 conn.close()
         
