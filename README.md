@@ -1,3 +1,106 @@
+> # Werkplaats 2: Test Correct
+
+---
+
+## Team: 
+Error not found (1E3)
+* Anmol Haribhajan (1096493)
+* Ihssane El Bahraoui (1103386)
+* Jordi Vrolijk (1111805)
+* Julie Blokland (1010439)
+* Yoshua Volkerts (1045100)
+* Askari Sardar (1112079)
+
+### Installation:
+
+---
+
+### Guide:
+[Guide](markDown_files/guide.md)
+
+---
+
+### Clone the repository to your local machine:
+git clone https://github.com/Rac-Software-Development/wp2-2024-mvc-1e3-error-not-found
+
+---
+
+### Website features:
+* Inlog scherm
+* Welkom scherm
+* Toetsvragen
+* Redacteuren (admin only)
+* Redacteur toevoegen (admin only)
+* Redacteur wijzigen/verwijderen (admin only)
+* Ai prompts (admin only)
+* AI details (admin only)
+* AI verwijderen (admin only)
+* Nieuwe prompt toevoegen (admin only)
+* Indexeren van taxonomie
+* Resultaat van taxonomie (meerdere taxonomie opties)
+* Wijzigen van taxonomie
+
+---
+
+### Credits: 
+* Programming: Team: error not found
+* Anmol Haribhajan, Ihssane El Bahraoui, Jordi Vrolijk, Julie Blokland, Yoshua Volkerts
+* Hogeschool Rotterdam: leraren, lessen, powerpoints, tutorials & opdrachten
+
+---
+
+### Sources & references:
+[Bronnenlijst & verwijzingen](markDown_files/bronnenlijst.md)
+
+---
+
+### Screenshots
+
+---
+
+### Venv file
+
+---
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 # WP2 Starter 
 
 Dit is de starter repository voor WP2 2024. Deze bevat: 
