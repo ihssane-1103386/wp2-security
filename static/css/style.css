@@ -201,6 +201,25 @@ table tr:nth-child(even) {
     box-shadow: 1px 1px 1px 1px rgba(85, 85, 85, 0.3);
 }
 
+.alert {
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+}
+
+.alert-success {
+    color: #3c763d;
+    background-color: #dff0d8;
+    border-color: #d6e9c6;
+}
+
+.alert-danger {
+    color: #a94442;
+    background-color: #f2dede;
+    border-color: #ebccd1;
+}
+
 /* Responsieve aanpassingen */
 @media (max-width: 768px) {
     .header {
