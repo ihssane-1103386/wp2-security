@@ -1,6 +1,6 @@
 import datetime
 
-from flask import Flask, request, render_template, redirect, url_for, session
+from flask import Flask, request, render_template, redirect, url_for, session, flash
 
 from lib.gpt.bloom_taxonomy import get_bloom_category
 from model_prompts import prompts_ophalen, prompt_details_ophalen, prompt_verwijderen
@@ -441,8 +441,6 @@ def wijzig(username):
         nieuwe_naam = request.form.get('display_name')
         wachtwoord = request.form.get('password')
 
-        conn = sqlite3.connect(DATABASE_FILE)
-        cursor = conn.cursor()
 
         queries = load_queries('static/queries.sql')
         wijzig_redacteur_query = queries['wijzig_redacteur_query']
