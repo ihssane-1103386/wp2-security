@@ -62,7 +62,8 @@ def inlog():
                 'display_name': user[3],
                 'is_admin': bool(user[5])
             }
-            flash(f"Welkom {user[3]}! Je bent succesvol ingelogd!", "success")
+            display_name = user[3]
+            flash(f"Welkom {display_name}! Je bent succesvol ingelogd!", "success")
             return redirect(url_for('toetsvragen'))
         else:
             flash("Onjuiste gebruikersnaam of wachtwoord. Probeer het opnieuw.", "error")
@@ -463,6 +464,7 @@ def update_redacteur(user_id):
     cursor.execute(wijzig_redacteur_query, (nieuwe_naam, nieuw_wachtwoord, nieuwe_email, is_admin, user_id))
     conn.commit()
     conn.close()
+
 
     flash(f"Redacteur met ID {user_id} is bijgewerkt!", "success")
 
