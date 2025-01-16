@@ -71,6 +71,7 @@ def inlog():
             flash("Onjuiste gebruikersnaam of wachtwoord. Probeer het opnieuw.", "error")
         return render_template('inloggen.html.jinja')
     return render_template('inloggen.html.jinja')
+
 @app.route("/successvol_ingelogd")
 def success():
     return render_template('successvol_ingelogd.html')
@@ -136,7 +137,7 @@ def nieuwe_redacteur():
                 conn.commit()
                 conn.close()
 
-                return render_template('successvol_ingelogd.html', message=f"{gebruikersnaam} is succesvol toegevoegd! Klik hieronder om verder te gaan!",
+                return render_template('successvol_ingelogd', message=f"{gebruikersnaam} is succesvol toegevoegd! Klik hieronder om verder te gaan!",
                                        link="http://127.0.0.1:5000/toetsvragen")
 
             except sqlite3.IntegrityError:
