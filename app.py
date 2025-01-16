@@ -137,7 +137,7 @@ def nieuwe_redacteur():
                 conn.commit()
                 conn.close()
 
-                return render_template('success', message=f"{gebruikersnaam} is succesvol toegevoegd! Klik hieronder om verder te gaan!",
+                return render_template('successvol_ingelogd.html', message=f"{gebruikersnaam} is succesvol toegevoegd! Klik hieronder om verder te gaan!",
                                        link="http://127.0.0.1:5000/toetsvragen")
 
             except sqlite3.IntegrityError:
