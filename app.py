@@ -52,11 +52,13 @@ def inlog():
         queries = load_queries('static/queries.sql')
         login_query = queries['login_query']
 
-        cursor.execute(login_query,(ingevulde_gebruikersnaam, ingevulde_wachtwoord))
+        cursor.execute(login_query,(ingevulde_gebruikersnaam,))
         user = cursor.fetchone()
         conn.close()
 
         if user:
+            hashed_wachtwoord = user[2]
+            if bcrypt.check_password_hash(hashed_wachtwoord, ingevulde_wachtwoord):
             # Zet de gebruiker in de sessie
             session['current_user'] = {
                 'user_id': user[0],
