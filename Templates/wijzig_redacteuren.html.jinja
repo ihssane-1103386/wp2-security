@@ -1,24 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>wijzig redacteuren</title>
-    <link rel="stylesheet" href="../static/css/style.css">
-</head>
-<body>
-   <header class="header">
-        <a href="../index.html">
-            <img src="../static/assets/logo/testcorrect-logo.svg" alt="Test-Correct Logo" class="logo">
-        </a>
-        <nav>
-            <a href="#" class="button">Vragen</a>
-            <a href="#" class="button">AI Prompts</a>
-            <a href="#" class="button active">Redacteuren</a>
-        </nav>
-    </header>
+{%  extends "base.html" %}
+{% block main %}
+
    <main class="container">
        <h1>wijzig redacteuren</h1>
-        <table>
+        <table class="redacteuren">
             <form>
                 <div id="box1">
                     <div>
@@ -51,5 +36,4 @@
                     <button class="button">Verwijder</button>
         </div>
    </main>
-</body>
-</html>
+{% endblock %}
