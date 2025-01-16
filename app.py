@@ -133,7 +133,7 @@ def nieuwe_redacteur():
                 conn.close()
 
                 return render_template('successvol_ingelogd.html', message=f"{gebruikersnaam} is succesvol toegevoegd! Klik hieronder om verder te gaan!",
-                                       link="https://www.test-correct.nl/")
+                                       link="http://127.0.0.1:5000/toetsvragen")
 
             except sqlite3.IntegrityError:
                 return "Fout: Deze gebruikersnaam of e-mail bestaat al!", 400
