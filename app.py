@@ -2,7 +2,7 @@ import datetime
 import logging
 
 from flask import Flask, request, render_template, redirect, url_for, session, flash
-
+from flask_bcrypt import Bcrypt
 from lib.gpt.bloom_taxonomy import get_bloom_category
 from model_prompts import prompts_ophalen, prompt_details_ophalen, prompt_verwijderen, prompt_toevoegen
 from indexeer_page_db_connection import prompt_lijst, prompt_ophalen_op_id
@@ -11,6 +11,7 @@ import sqlite3
 
 app = Flask(__name__)
 app.secret_key = 'error-not-found'
+bcrypt = Bcrypt(app)
 
 DATABASE_FILE = "databases/database_toetsvragen.db"
 
@@ -116,6 +117,8 @@ def nieuwe_redacteur():
         print(f"Wachtwoord: {wachtwoord}")
         print(f"Is Admin: {is_admin}")
 
+        hashed_wachtwoord = bcrypt.generate_password_hash(wachtwoord).decode("utf-8")
+
         if gebruikersnaam and wachtwoord and email:
             try:
                 conn = sqlite3.connect('databases/database_toetsvragen.db')
@@ -124,10 +127,10 @@ def nieuwe_redacteur():
                 queries = load_queries('static/queries.sql')
                 insert_redacteur = queries['insert_redacteur']
 
-                cursor.execute(insert_redacteur, (gebruikersnaam, wachtwoord, gebruikersnaam, date_created, is_admin))
+                cursor.execute(insert_redacteur, (gebruikersnaam, hashed_wachtwoord, gebruikersnaam, date_created, is_admin))
 
                 print(
-                    f"Gebruikersnaam: {gebruikersnaam}, E-mail: {email}, Wachtwoord: {wachtwoord}, Is Admin: {is_admin}, Datum: {date_created}")
+                    f"Gebruikersnaam: {gebruikersnaam}, E-mail: {email}, Wachtwoord: {hashed_wachtwoord}, Is Admin: {is_admin}, Datum: {date_created}")
 
                 conn.commit()
                 conn.close()
