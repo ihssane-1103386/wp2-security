@@ -41,7 +41,7 @@ SET display_name = ?, password = ?, login = ?, is_admin = ?
 WHERE user_id = ?;
 
 -- [delete_redacteur_query]
-DELETE FROM users WHERE user_id =
+DELETE FROM users WHERE user_id = ?;
 
 -- Fetch question, bloom_answer for wijzigen
 
