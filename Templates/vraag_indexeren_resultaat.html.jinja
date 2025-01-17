@@ -4,33 +4,31 @@
   <meta charset="UTF-8">
   <title>vraag taxonomie resultaat</title>
   <link rel="stylesheet" href="../static/css/style.css">
+  <link rel="stylesheet" href="../static/css/ai_prompts.css">
 </head>
-    <body>
-    <header class="top-bar">
-        <div class="container-main">
-            <div class="left-side">
-                <a href="https://www.test-correct.nl/" class="site-logo">
-                    <img src="../static/assets/logo/testcorrect-logo.svg" alt="Logo">
-                </a>
-            </div>
 
-            <div class="menu-container">
-                <ul class="main-navigation">
-                    <li><a href="#">Oplossingen</a></li>
-                    <li><a href="https://www.test-correct.nl/toetsplatform">Toetsplatform</a></li>
-                    <li><a href="https://www.test-correct.nl/pakketten">Aanbod</a></li>
-                    <li><a href="https://www.test-correct.nl/support">Support</a></li>
-                    <li><a href="https://www.test-correct.nl/overons">Over</a></li>
-                </ul>
-            </div>
-
-            <div class="button-container">
-                <a href="https://www.test-correct.nl/welcome" class="button one">Probeer nu</a>
-                <a href="https://welcome.test-correct.nl/login" class="button two">Log in</a>
-            </div>
+<body>
+<header class="top-bar" style="background-color: #f8f9fa; padding: 15px 0; border-bottom: 2px solid white; margin-bottom: 15px;">
+    <div style="max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between;">
+        <div class="left-side" style="display: flex; align-items: center;">
+            <a href="https://www.test-correct.nl/" class="site-logo" style="text-decoration: none;">
+                <img src="../static/assets/logo/testcorrect-logo.svg" alt="Logo" style="height: 50px;">
+            </a>
         </div>
-    </header>
-        <div class = "container">
+        <div class="button-container">
+            <a href="http://127.0.0.1:5000/nieuwe_redacteur" class="button">redacteur toevoegen</a>
+            <a href="http://127.0.0.1:5000/redacteur" class="button">redacteuren</a>
+            <a href="http://127.0.0.1:5000/toetsvragen" class="button">toetsvragen</a>
+            <a href="http://127.0.0.1:5000/ai_prompts" class="button">ai-prompts</a>
+        </div>
+    </div>
+</header>
+
+    <div class="content-row" style="margin-left:49px">
+      <h2> Taxonomie resultaat </h2>
+    </div>
+
+        <div class = "container" style="text-align: left; margin:10px;">
             <div>Vraag: <span id="vraag">{{ question }}</span></div>
             <br>
             <div>vak: {{ vak }}</div>
@@ -51,7 +49,7 @@
                 </select>
                 <br><br>
                 <div class="button">
-                <button type="submit" class="button">taxonomy opslaan</button>
+                <button type="submit" class="button-1" style="margin-top:8px;">taxonomy opslaan</button>
                 </div>
             </form>
             <div>
@@ -59,5 +57,12 @@
             </div><br>
             <div>generated niveau: {{ ai_niveau }}</div>
             <div>uitleg: {{ ai_uitleg }}</div>
-    </body>
+        </div>
+
+{%  block main %}
+{% endblock %}
+
+<footer style="text-align: center;"><a href="{{ url_for('toetsvragen') }}"><strong>Keer terug naar home pagina</strong></a></footer>
+
+</body>
 </html>
