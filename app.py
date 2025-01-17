@@ -38,12 +38,51 @@ def load_queries(path):
 
     return queries
 
+@app.route("/")
+def home_redirect():
+    return redirect(url_for('inlog'))
+
+@app.route("/inlog", methods=['GET', 'POST'])
+def inlog():
+    ingevulde_gebruikersnaam = ""
+    ingevulde_wachtwoord = ""
+    if request.method == 'POST':
+        ingevulde_gebruikersnaam = request.form.get('username')
+        ingevulde_wachtwoord = request.form.get('password')
+
+        conn = sqlite3.connect(DATABASE_FILE)
+        cursor = conn.cursor()
+
+        queries = load_queries('static/queries.sql')
+        login_query = queries['login_query']
+
+        cursor.execute(login_query,(ingevulde_gebruikersnaam, ))
+        user = cursor.fetchone()
+        conn.close()
+
+        if user and bcrypt.check_password_hash(user[2], ingevulde_wachtwoord):
+            # Zet de gebruiker in de sessie
+            session['current_user'] = {
+                'user_id': user[0],
+                'username': user[1],
+                'display_name': user[3],
+                'is_admin': bool(user[5]),
+                'password': user[2]
+            }
+            display_name = user[3]
+            flash(f"Welkom {user[3]}! Je bent succesvol ingelogd!", "success")
+            return redirect(url_for('toetsvragen'))
+        else:
+            flash("Onjuiste gebruikersnaam of wachtwoord. Probeer het opnieuw.", "error")
+        return render_template('inloggen.html.jinja')
+    return render_template('inloggen.html.jinja', ingevulde_gebruikersnaam = ingevulde_gebruikersnaam)
+
 
 @app.route("/successvol_ingelogd")
 def success():
     return render_template('successvol_ingelogd.html')
 
-@app.route("/", methods=['GET', 'POST'])
+@app.route("/nieuwe_redacteur", methods=['GET', 'POST'])
 def nieuwe_redacteur():
     gebruikersnaam = ""
     email = ""
@@ -88,44 +127,6 @@ def nieuwe_redacteur():
             except Exception as e:
                 return f"Er is een fout opgetreden: {e}"
     return render_template('nieuwe_redacteur.html')
-
-
-
-@app.route("/inlog", methods=['GET', 'POST'])
-def inlog():
-    ingevulde_gebruikersnaam = ""
-    ingevulde_wachtwoord = ""
-    if request.method == 'POST':
-        ingevulde_gebruikersnaam = request.form.get('username')
-        ingevulde_wachtwoord = request.form.get('password')
-
-        conn = sqlite3.connect(DATABASE_FILE)
-        cursor = conn.cursor()
-
-        queries = load_queries('static/queries.sql')
-        login_query = queries['login_query']
-
-        cursor.execute(login_query,(ingevulde_gebruikersnaam, ))
-        user = cursor.fetchone()
-        conn.close()
-
-        if user and bcrypt.check_password_hash(user[2], ingevulde_wachtwoord):
-            # Zet de gebruiker in de sessie
-            session['current_user'] = {
-                'user_id': user[0],
-                'username': user[1],
-                'display_name': user[3],
-                'is_admin': bool(user[5]),
-                'password': user[2]
-            }
-            display_name = user[3]
-            flash(f"Welkom {user[3]}! Je bent succesvol ingelogd!", "success")
-            return redirect(url_for('toetsvragen'))
-        else:
-            flash("Onjuiste gebruikersnaam of wachtwoord. Probeer het opnieuw.", "error")
-        return render_template('inloggen.html.jinja')
-    return render_template('inloggen.html.jinja', ingevulde_gebruikersnaam = ingevulde_gebruikersnaam)
-
 
 # redacteuren uit de database halen
 def get_redacteuren():
@@ -262,7 +263,7 @@ def vraag_taxonomie_resultaat():
 
         gpt_choice = "rac_test"
         ai_response = get_bloom_category(question, prompt, gpt_choice)
-        session['ai_response'] = ai_response  # Sla AI-respons op in session
+        session['ai_response'] = ai_response
 
         if ai_response:
             ai_niveau = ai_response.get("categorie", "Geen antwoord")

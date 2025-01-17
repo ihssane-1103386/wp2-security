@@ -4,7 +4,7 @@
 
 #### Inlog scherm
 
-Vul hier de inlognaam in + het wachtwoord
+Vul hier de inlognaam in + het wachtwoord:
 
 Kies uit 1 van de onderstaande om de website te testen, tip: gebruik een admin. 
 * Admin user: naam = , wachtwoord = geheim
