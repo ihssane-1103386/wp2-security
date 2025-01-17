@@ -11,7 +11,7 @@ Error not found (1E3)
 * Yoshua Volkerts (1045100)
 * Askari Sardar (1112079)
 
-### Installation:
+### Installation & venv files:
 
 ---
 
@@ -45,7 +45,7 @@ git clone https://github.com/Rac-Software-Development/wp2-2024-mvc-1e3-error-not
 ### Credits: 
 * Programming: Team: error not found
 * Anmol Haribhajan, Ihssane El Bahraoui, Jordi Vrolijk, Julie Blokland, Yoshua Volkerts
-* Hogeschool Rotterdam: leraren, lessen, powerpoints, tutorials & opdrachten
+* Hogeschool Rotterdam: leraren, lessen, powerpoints, workshops & opdrachten
 
 ---
 
