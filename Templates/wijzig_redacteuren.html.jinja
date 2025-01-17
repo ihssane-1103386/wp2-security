@@ -22,7 +22,12 @@
                     </tr>
                     <tr>
                         <td><label for="is_admin">Is Admin?</label></td>
-                        <td><input type="checkbox" id="is_admin" name="is_admin" {% if redacteur[3] %}checked{% endif %}></td>
+                        <td><input
+            type="checkbox"
+            id="is_admin"
+            name="is_admin"
+            {% if redacteur[3] %}checked{% endif %}
+            {% if not current_user.is_admin %}disabled{% endif %}></td>
                     </tr>
                 </tbody>
             </table>
