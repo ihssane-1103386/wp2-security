@@ -105,7 +105,7 @@ def inlog():
         queries = load_queries('static/queries.sql')
         login_query = queries['login_query']
 
-        cursor.execute(login_query,(ingevulde_gebruikersnaam,))
+        cursor.execute(login_query,(ingevulde_gebruikersnaam, ))
         user = cursor.fetchone()
         conn.close()
 
@@ -115,7 +115,8 @@ def inlog():
                 'user_id': user[0],
                 'username': user[1],
                 'display_name': user[3],
-                'is_admin': bool(user[5])
+                'is_admin': bool(user[5]),
+                'password': user[2]
             }
             display_name = user[3]
             flash(f"Welkom {user[3]}! Je bent succesvol ingelogd!", "success")
