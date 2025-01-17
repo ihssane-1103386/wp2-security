@@ -53,7 +53,9 @@ body {
             font-family: 'Nunito', sans-serif;
         }
 
-        .button-container a {
+        .button-container {
+            display: flex;
+            gap: 50px;
             margin-left: 15px;
             color: white;
             background-color: #3dbb56;
@@ -62,11 +64,19 @@ body {
             border-radius: 5px;
         }
 
-       .button-container .button.two {
-            background-color: #004df5;
+       .button-container .button one {
+            background-color: #3dbb56;
         }
 
-        .button-container .button.one {
+       .button-container .button two {
+            background-color: #3dbb56;
+        }
+
+       .button-container .button three {
+            background-color: #3dbb56;
+        }
+
+       .button-container .button four {
             background-color: #3dbb56;
         }
 
