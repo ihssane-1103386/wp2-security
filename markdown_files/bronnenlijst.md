@@ -101,6 +101,18 @@ youtube. https://youtu.be/6M3LzGmIAso?si=wZ-BtLpaYiEI9HE5
 *w3Schools.com.* (z.d.-e). W3Schools.
 https://www.w3schools.com/sql/
 
+*Workshop HTML* (6-11-2024). RAC.
+werkplaats 2 
+
+*Workshop Flask* (20-11-2024). RAC.
+werkplaats 2 
+
+*Workshop Jinja* (27-11-2024). RAC.
+werkplaats 2 
+
+* Flask, Jinja and SQL tutorial* (-). RAC.
+Louella's Blog https://lovelacecoding.hashnode.dev/build-a-to-do-list-app-using-python-flask-jinja2-and-sql
+
 
 
 
