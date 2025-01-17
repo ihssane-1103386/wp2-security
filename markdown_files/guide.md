@@ -4,7 +4,7 @@
 
 #### Download de pakketten en open de venv file
 
-Stap 1: Download the pakketten en open de venv files in de README.md  
+Stap 1: Download de pakketten en open de venv files in de README.md  
 Stap 2: Run de FLASK (applicatie-wp2), rechts bovenin uitvouwen en dan de play knop indrukken  
 Stap 3: Open de server bij Run of klik hier: http://127.0.0.1:5000  
 Stap 4: Volgt hieronder  
@@ -23,6 +23,7 @@ Kies uit 1 van de onderstaande om de website te testen, tip: gebruik een admin.
 * Admin user: naam = julie , wachtwoord = 22222
 * Admin user: naam = Jordi , wachtwoord = 12345
 * Admin user: naam = Joshua , wachtwoord = 12345
+* Non-Admin user: naam = test , wachtwoord = 123
 
 * Later bij nieuwe redacteur scherm, kun je zien hoe je een nieuwe redacteur aanmaakt
 
@@ -161,6 +162,7 @@ Klik om door te gaan op de knop.
 
 * Let op! Verwijder geen bestaande redacteuren! Deze zitten in de guide en anders kom je er niet meer in!
 * Wijzig hier de redacteur met nieuwe informatie of bekijk de informatie
+* Admin users kunnen gegevens van hunzelf en anderen wijzigen, Non-Admin users kunnen alleen hun eigen gegeven wijzigen
 * Ga terug naar de redacteuren scherm
 
   

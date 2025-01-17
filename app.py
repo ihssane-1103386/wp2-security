@@ -15,6 +15,10 @@ bcrypt = Bcrypt(app)
 
 DATABASE_FILE = "databases/database_toetsvragen.db"
 
+@app.context_processor
+def inject_current_user():
+    return {'current_user': session.get('current_user')}
+
 def load_queries(path):
     queries = {}
     query_name = None
@@ -305,6 +309,7 @@ def vraag_taxonomie_wijzigen():
         queries = load_queries('static/queries.sql')
         get_question = queries['get_question']
         get_vak = queries['get_vak']
+        get_taxonomy = queries['get_taxonomy']
         get_bloom_answer = queries['get_bloom_answer']
 
         cursor.execute(get_question, (questions_id,))
@@ -320,6 +325,12 @@ def vraag_taxonomie_wijzigen():
         if not vak:
             vak = "Niet bekend"
 
+        cursor.execute(get_taxonomy, (questions_id,))
+        bloom = cursor.fetchone()
+
+        if not bloom:
+            bloom = "Niet bekend"
+
         cursor.execute(get_bloom_answer, (questions_id,))
         bloom_answer = cursor.fetchone()
 
@@ -331,8 +342,9 @@ def vraag_taxonomie_wijzigen():
                                vak=vak[0],
                                onderwijsniveau="niveau 2",
                                leerjaar="leerjaar 1",
+                               bloom=bloom[0],
                                bloom_answer=bloom_answer[0],
-                               questions_id=questions_id, )
+                               questions_id=questions_id,)
 
     except Exception as e:
         print(f"Fout tijdens het verwerken van de vragen: {e}")
@@ -462,7 +474,6 @@ def wijzig(username):
         nieuwe_naam = request.form.get('display_name')
         wachtwoord = request.form.get('password')
 
-
         queries = load_queries('static/queries.sql')
         wijzig_redacteur_query = queries['wijzig_redacteur_query']
 
@@ -478,10 +489,31 @@ def wijzig(username):
 
 @app.route('/update_redacteur/<int:user_id>', methods=['POST'])
 def update_redacteur(user_id):
+    current_user = session.get('current_user')
+
+    if not current_user:
+        return "Niet ingelogd", 403
+
+    if not current_user['is_admin']:
+        conn = sqlite3.connect(DATABASE_FILE)
+        cursor = conn.cursor()
+        queries = load_queries('static/queries.sql')
+        user_query = queries['get_user_by_id']
+        cursor.execute(user_query, (user_id,))
+        target_user = cursor.fetchone()
+        conn.close()
+
+        if not target_user or target_user[1] != current_user['username']:
+            return "Toegang geweigerd", 403
+
     nieuwe_naam = request.form.get('name')
     nieuwe_email = request.form.get('email')
     nieuw_wachtwoord = request.form.get('password')
-    is_admin = 1 if request.form.get('is_admin') else 0
+
+    if current_user['is_admin']:
+        is_admin = 1 if request.form.get('is_admin') else 0
+    else:
+        is_admin = None
 
     conn = sqlite3.connect(DATABASE_FILE)
     cursor = conn.cursor()
@@ -489,15 +521,18 @@ def update_redacteur(user_id):
     queries = load_queries('static/queries.sql')
     wijzig_redacteur_query = queries['wijzig_redacteur_query']
 
-    cursor.execute(wijzig_redacteur_query, (nieuwe_naam, nieuw_wachtwoord, nieuwe_email, is_admin, user_id))
+    if is_admin is not None:
+        cursor.execute(wijzig_redacteur_query, (nieuwe_naam, nieuw_wachtwoord, nieuwe_email, is_admin, user_id))
+    else:
+        wijzig_redacteur_query = queries['wijzig_redacteur_without_admin']
+        cursor.execute(wijzig_redacteur_query, (nieuwe_naam, nieuw_wachtwoord, nieuwe_email, user_id))
+
     conn.commit()
     conn.close()
-
 
     flash(f"Redacteur met ID {user_id} is bijgewerkt!", "success")
 
     return redirect(url_for('redacteur'))
-
 
 @app.route('/delete_redacteur/<int:user_id>', methods=['POST'])
 def delete_redacteur(user_id):

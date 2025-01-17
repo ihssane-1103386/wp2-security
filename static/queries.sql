@@ -23,6 +23,9 @@ SELECT question, bloom_answer FROM questions WHERE questions_id = ?;
 -- [get_vak]
 SELECT vak FROM questions WHERE questions_id = ?;
 
+-- [get_taxonomy]
+SELECT taxonomy_bloom FROM questions WHERE questions_id = ?;
+
 -- [update_taxonomy]
 UPDATE questions SET taxonomy_bloom = ? WHERE questions_id = ?;
 
@@ -39,6 +42,9 @@ SELECT user_id, login, display_name, is_admin FROM users WHERE login = ?;
 UPDATE users
 SET display_name = ?, password = ?, login = ?, is_admin = ?
 WHERE user_id = ?;
+
+-- [wijzig_redacteur_without_admin]
+UPDATE users SET display_name = ?, password = ?, email = ? WHERE id = ?;
 
 -- [delete_redacteur_query]
 DELETE FROM users WHERE user_id = ?;

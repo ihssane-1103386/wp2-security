@@ -89,6 +89,8 @@ https://www.w3schools.com/sql/default.asp
 *W3Schools.com.* (z.d.-f). W3Schools.  
 https://www.w3schools.com/python/default.asp
 
+
+
 *Codehal* (2023, 18 juni) Login Form in HTML & CSS.
 youtube. https://youtu.be/hlwlM4a5rxg?si=V0V0U5Wz01na4JXJ
 
@@ -118,3 +120,25 @@ Louella's Blog https://lovelacecoding.hashnode.dev/build-a-to-do-list-app-using-
 
 
 ---
+
+Bro Code. (2023, 21 september). Learn HTML buttons in 5 minutes! 🔘 [Video]. 
+YouTube. https://www.youtube.com/watch?v=tDqTXipQmBU 
+
+Codemy.com. (2021, 22 januari). How to use Python on a web page with Jinja2 - Flask Fridays #2 [Video]. 
+YouTube. https://www.youtube.com/watch?v=4yaG-jFfePc 
+
+Creating Web Applications with Flask | PyCharm. (z.d.). PyCharm Help. 
+https://www.jetbrains.com/help/pycharm/creating-web-application-with-flask.html#database 
+
+Creemers, L. (2023, 31 december). Build a To-Do List App Using Python Flask, Jinja2, and SQL. Lou’s Blog Exploring Tech. 
+https://lovelacecoding.hashnode.dev/build-a-to-do-list-app-using-python-flask-jinja2-and-sql
+
+Hashing Passwords in Python with BCrypt. (z.d.). https://www.tutorialspoint.com/hashing-passwords-in-python-with-bcrypt 
+
+Julian Nash. (2019, 6 maart). Hashing passwords with Python and Bcrypt [Video]. YouTube. https://www.youtube.com/watch?v=hNa05wr0DSA 
+
+Real Python. (2023, 29 juni). Introduction to Jinja Templating [Video]. YouTube. https://www.youtube.com/watch?v=OraYXEr0Irg
+
+W3Schools.com. (z.d.-a). https://www.w3schools.com/howto/howto_css_login_form.asp 
+W3Schools.com. (z.d.-b). https://www.w3schools.com/howto/howto_css_signup_form.asp 
+W3Schools.com. (z.d.-c). https://www.w3schools.com/howto/howto_css_style_header.asp
