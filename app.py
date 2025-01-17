@@ -309,6 +309,7 @@ def vraag_taxonomie_wijzigen():
         queries = load_queries('static/queries.sql')
         get_question = queries['get_question']
         get_vak = queries['get_vak']
+        get_taxonomy = queries['get_taxonomy']
         get_bloom_answer = queries['get_bloom_answer']
 
         cursor.execute(get_question, (questions_id,))
@@ -324,6 +325,12 @@ def vraag_taxonomie_wijzigen():
         if not vak:
             vak = "Niet bekend"
 
+        cursor.execute(get_taxonomy, (questions_id,))
+        bloom = cursor.fetchone()
+
+        if not bloom:
+            bloom = "Niet bekend"
+
         cursor.execute(get_bloom_answer, (questions_id,))
         bloom_answer = cursor.fetchone()
 
@@ -335,8 +342,9 @@ def vraag_taxonomie_wijzigen():
                                vak=vak[0],
                                onderwijsniveau="niveau 2",
                                leerjaar="leerjaar 1",
+                               bloom=bloom[0],
                                bloom_answer=bloom_answer[0],
-                               questions_id=questions_id, )
+                               questions_id=questions_id,)
 
     except Exception as e:
         print(f"Fout tijdens het verwerken van de vragen: {e}")

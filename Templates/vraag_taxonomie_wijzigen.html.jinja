@@ -6,46 +6,30 @@
     <title>Taxonomie wijzigen</title>
     <link rel="stylesheet" href="../static/css/style.css">
     <link rel="stylesheet" href="../static/css/ai_prompts.css">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/toetsvragen.css') }}">
 </head>
 
 <body>
-<header>
-    <ul class="ul">
-      <li>
-          <a style= "border: none; cursor: pointer; scale:100%; background:none;" href="https://www.test-correct.nl/" >
-              <img src="static/assets/logo/testcorrect-logo.svg" alt="Link to test-correct homepage" style= "border: none; cursor: pointer; scale:100%; background:none; align-items: center;">
-          </a>
-      </li>
-      <li><a href="https://www.test-correct.nl/voor-het-vo">Oplossingen</a></li>
-      <li><a href="https://www.test-correct.nl/toetsplatform">Platform</a></li>
-      <li><a href="https://www.test-correct.nl/pakketten">Aanbod</a></li>
-      <li><a href="https://www.test-correct.nl/support">Over ons</a></li>
-      <li><a href="https://www.test-correct.nl/overons">Support</a></li>
-      <li
-        style="color: #041F74; font-family:nunito, regular, serif; font-size:18px; padding:15px; gap: 5px">
-        <img src="static/assets/icons/telefoon_icoon.png" alt="Telefoonnummer" style="width:19PX; height:19px;">
-         010 7171 171
-      </li>
-      <li>
-          <a class="second-button" href="{{ url_for('inlog') }}">Login</a>
-      </li>
-      <li>
-          <a class="first-button" href="https://www.test-correct.nl/welcome">Boek online demo</a>
-      </li>
-    </ul>
-  </header>
+<header class="top-bar" style="background-color: #f8f9fa; padding: 15px 0; border-bottom: 2px solid white; margin-bottom: 15px;">
+    <div style="max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between;">
+        <div class="left-side" style="display: flex; align-items: center;">
+            <a href="https://www.test-correct.nl/" class="site-logo" style="text-decoration: none;">
+                <img src="../static/assets/logo/testcorrect-logo.svg" alt="Logo" style="height: 50px;">
+            </a>
+        </div>
+        <div class="button-container">
+            <a href="http://127.0.0.1:5000/nieuwe_redacteur" class="button">redacteur toevoegen</a>
+            <a href="http://127.0.0.1:5000/redacteur" class="button">redacteuren</a>
+            <a href="http://127.0.0.1:5000/toetsvragen" class="button">toetsvragen</a>
+            <a href="http://127.0.0.1:5000/ai_prompts" class="button">ai-prompts</a>
+        </div>
+    </div>
+</header>
 
-    <div class="content-row">
-      <h2> Taxonomie wijzigen </h2>
-      <div class="button-group">
-        <a class="first-button" href="{{ url_for('toetsvragen') }}" >Vragen</a>
-        <a class="first-button" href="{{ url_for('ai_prompts') }}" >AI Prompts</a>
-        <a class="first-button" href="{{ url_for('redacteur') }}" >Redacteuren</a>
-      </div>
+    <div class="content-row" style="margin-left:49px">
+      <h2> Toetsvragen lijst </h2>
     </div>
 
-<div class = "container">
+<div class = "container" style="text-align: left; margin:10px;">
         <div>Vraag: <span id="vraag">{{ question }}</span></div>
         <br>
         <div>vak: {{ vak }}</div>
@@ -54,10 +38,12 @@
         <br>
         <div>leerjaar: {{ leerjaar }}</div>
         <br>
+        <div>Bloom Taxonomie: {{ bloom }}</div>
+        <br>
         <div>Bloom antwoord: {{ bloom_answer }}</div>
         <form method="GET" action="{{ url_for('indexeren') }}">
         <input type="hidden" name="questions_id" value="{{ questions_id }}">
-        <button type="submit" class="first-button">Wijzigen</button>
+        <button type="submit" class="button-1" style="margin-top:20px;">Wijzigen</button>
         </form>
         </div>
 
