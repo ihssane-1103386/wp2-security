@@ -21,7 +21,6 @@ Kies uit 1 van de onderstaande om de website te testen, tip: gebruik een admin.
 * Admin user: naam = test , wachtwoord = 12345
 * Admin user: naam = julie , wachtwoord = 22222
 * Admin user: naam = ihssane , wachtwoord = redacteuren
-* user: naam = user , wachtwoord = login
 
 * Later bij nieuwe redacteur scherm, kun je zien hoe je een nieuwe redacteur aanmaakt
 

@@ -91,4 +91,5 @@ youtube. https://youtu.be/6M3LzGmIAso?si=wZ-BtLpaYiEI9HE5
 
 *w3Schools.com.* (z.d.-e). W3Schools.
 https://www.w3schools.com/sql/
+
 ---
