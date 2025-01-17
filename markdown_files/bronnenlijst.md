@@ -41,6 +41,12 @@ https://www.devoriales.com/post/323/how-to-implement-pagination-in-your-flask-ap
 Michal Kovacik. (2023, 13 april). *Display Json data in HTML page with Python and Flask* [Video].  
 YouTube. https://www.youtube.com/watch?v=JZTXc9RRXfw
 
+Netizzan. (2023, 28 oktober). Flask MVC Project (Todo App) | Flask MVC Tutorial | Flask MVC Architecture
+YouTube. https://www.youtube.com/watch?v=7KOBXGCzwmI
+
+Nishant, V. (2020, 28 september). Flask CRUD Application - Create, Retrieve, Update, and Delete - AskPython.
+https://www.askpython.com/python-modules/flask/flask-crud-application?utm_source=chatgpt.com
+
 *OpenAi.* (2024). *ChatGPT* (versie 4o mini, versie 4o) [Generatieve AI].  
 https://chatgpt.com/
 
@@ -61,6 +67,9 @@ YouTube. https://www.youtube.com/watch?v=HwXN4fiCxno
 
 *Tutorial — Flask Documentation (3.1.x).* (z.d.).  
 https://flask.palletsprojects.com/en/stable/tutorial/
+
+Vishal. (2021, maart 9). Python SQLite tutorial using sqlite3. 
+https://pynative.com/python-sqlite/
 
 *W3Schools.com.* (z.d.-a). W3Schools.   
 https://www.w3schools.com/
@@ -93,5 +102,21 @@ youtube. https://youtu.be/6M3LzGmIAso?si=wZ-BtLpaYiEI9HE5
 
 *w3Schools.com.* (z.d.-e). W3Schools.
 https://www.w3schools.com/sql/
+
+*Workshop HTML* (6-11-2024). RAC.
+werkplaats 2 
+
+*Workshop Flask* (20-11-2024). RAC.
+werkplaats 2 
+
+*Workshop Jinja* (27-11-2024). RAC.
+werkplaats 2 
+
+* Flask, Jinja and SQL tutorial* (-). RAC.
+Louella's Blog https://lovelacecoding.hashnode.dev/build-a-to-do-list-app-using-python-flask-jinja2-and-sql
+
+
+
+
 
 ---

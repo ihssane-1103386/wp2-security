@@ -40,6 +40,9 @@ UPDATE users
 SET display_name = ?, password = ?, login = ?, is_admin = ?
 WHERE user_id = ?;
 
+-- [wijzig_redacteur_without_admin]
+UPDATE users SET display_name = ?, password = ?, email = ? WHERE id = ?;
+
 -- [delete_redacteur_query]
 DELETE FROM users WHERE user_id = ?;
 
