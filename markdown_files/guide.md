@@ -18,11 +18,10 @@ Bij problemen van het openen kun je altijd http://127.0.0.1:5000 + /(naam van de
 Vul hier de inlognaam in + het wachtwoord:
 
 Kies uit 1 van de onderstaande om de website te testen, tip: gebruik een admin. 
-* Admin user: naam = krugw@hr.nl , wachtwoord = geheim
-* Admin user: naam = test1 , wachtwoord = ww1
-* Admin user: naam = julie , wachtwoord = test
-* User: naam = , wachtwoord = geheimer  
-
+* Admin user: naam = test , wachtwoord = 12345
+* Admin user: naam = julie , wachtwoord = 22222
+* Admin user: naam = ihssane , wachtwoord = redacteuren
+* user: naam = user , wachtwoord = login
 
 * Later bij nieuwe redacteur scherm, kun je zien hoe je een nieuwe redacteur aanmaakt
 
