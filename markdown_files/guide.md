@@ -63,7 +63,7 @@ Klik om door te gaan op de knop.
 
 ![wijzigen](../markdown_files/afbeeldingen/wijzig.png)
 
-* AI prompts (admin only) > Naar AI prompts scherm
+* AI prompts > Naar AI prompts scherm
 
 ![AI prompts](../markdown_files/afbeeldingen/ai_knop.png)
 
