@@ -80,6 +80,8 @@ https://www.w3schools.com/sql/default.asp
 *W3Schools.com.* (z.d.-f). W3Schools.  
 https://www.w3schools.com/python/default.asp
 
+
+
 *Codehal* (2023, 18 juni) Login Form in HTML & CSS.
 youtube. https://youtu.be/hlwlM4a5rxg?si=V0V0U5Wz01na4JXJ
 
