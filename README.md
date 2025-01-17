@@ -19,8 +19,8 @@ Error not found (1E3)
 * Installeer de pakketten in de requirements.txt file via bash command: pip install -r requirements.txt
 * Creëer een nieuwe Run/Debug Configuration  
 
-* Het is niet gelukt om via Git de virtual environment mee te geven
-* Git laat deze niet uploaden en de bestanden blijven oranje
+* Op één of andere manier kan ik de virtual environment meegeven, maar dit zijn 1500+ bestanden
+* Emiel zei dat de virtual environment via de .bat file in Lib>Scripts kunt installeren
 
 #### Installeren via Bash:
 
