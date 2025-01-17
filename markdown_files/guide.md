@@ -4,7 +4,7 @@
 
 #### Download de pakketten en open de venv file
 
-Stap 1: Download de pakketten en open de venv files in de README.md  
+Stap 1: Download de pakketten en open de venv files in de README.md > source /path/to/venv/Scripts/activate (gooi dit in de bash) 
 Stap 2: Run de FLASK (applicatie-wp2), rechts bovenin uitvouwen en dan de play knop indrukken  
 Stap 3: Open de server bij Run of klik hier: http://127.0.0.1:5000  
 Stap 4: Volgt hieronder  
