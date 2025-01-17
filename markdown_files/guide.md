@@ -21,9 +21,10 @@ Kies uit 1 van de onderstaande om de website te testen, tip: gebruik een admin.
 * Admin user: naam = krugw@hr.nl , wachtwoord = geheim
 * Admin user: naam = test1 , wachtwoord = ww1
 * Admin user: naam = julie , wachtwoord = test
-* User: naam = , wachtwoord = geheimer
+* User: naam = , wachtwoord = geheimer  
 
-* Later bij 
+
+* Later bij nieuwe redacteur scherm, kun je zien hoe je een nieuwe redacteur aanmaakt
 
 ![Inlog](../markdown_files/afbeeldingen/inlog.png)
 
@@ -111,6 +112,7 @@ Klik om door te gaan op de knop.
 * Hier zie je een overzicht van de prompts, ingedeelde toetsvragen en correcte antwoorden
 * Klik op details van taxonomie van bloom > Naar taxonomie details scherm
 
+  
 * De knoppen vragen en redacteuren brengen je naar andere schermen
 
 ![AI prompts](../markdown_files/afbeeldingen/ai_prompts.png)
@@ -122,6 +124,7 @@ Klik om door te gaan op de knop.
 * Hier kun je informatie zien over de prompt en door wie die ingedeeld is
 * Ga nu terug naar overzicht en klik niet op verwijderen
 
+  
 * Nu kun je doorgaan naar een nieuwe prompt toevoegen
 * De knoppen vragen en redacteuren brengen je naar andere schermen
 
@@ -134,6 +137,7 @@ Klik om door te gaan op de knop.
 * Voeg hier je nieuwe prompt toe
 * Klik op opslaan en jouw prompt staat erbij
 
+  
 * De knoppen vragen en redacteuren brengen je naar andere schermen
 
 ![Nieuwe prompt](../markdown_files/afbeeldingen/??.png)
@@ -146,6 +150,7 @@ Klik om door te gaan op de knop.
 * Klik op redacteur details > Naar redacteur details scherm
 * Klik op nieuwe redacteur > Naar nieuwe redacteur scherm
 
+  
 * De knoppen AI prompts en redacteuren brengen je naar andere schermen
 
 ![Redacteuren](../markdown_files/afbeeldingen/??.png)
@@ -158,6 +163,7 @@ Klik om door te gaan op de knop.
 * Wijzig hier de redacteur met nieuwe informatie of bekijk de informatie
 * Ga terug naar de redacteuren scherm
 
+  
 * De knoppen vragen en redacteuren brengen je naar andere schermen
 
 ![Redacteuren details](../markdown_files/afbeeldingen/??.png)
