@@ -22,6 +22,48 @@ Error not found (1E3)
 * Op één of andere manier kan ik de virtual environment meegeven, maar dit zijn 1500+ bestanden
 * Emiel zei dat de virtual environment via de .bat file in Lib>Scripts kunt installeren
 
+#### venv file koppelen:
+Ik heb geen idee of dit moest, en of de venv file erin moest. Ik heb ze met geluk en veel uitproberen erin gekregen.
+
+* Open de Bash terminal
+* Als je ls intypt, kun je alle mappen vinden
+
+      ls 
+
+* Om de virtual environment toe te voegen met change directory
+
+      cd venv
+
+* Ga naar Scripts om de venv file toe te voegen
+
+      cd Scripts
+
+* Nu ga je de venv file activeren
+
+      activate.ps1
+
+* Op windows pc's kun je een foutmelding krijgen, dit los je op door te lezen
+* Er staat ".\activate.ps1", door een beveiligingsmelding
+* typ nu .\activate.ps1
+    
+      .\activate.ps1
+
+* Nu zie je als het goed is dit staan (wel van je eigen computer):
+
+      (venv) PS D:\..\Applicatie project\venv\Scripts>  
+
+* Als je de virtual environment wilt deactiveren
+
+      deactivate
+
+* Om al je packages te zien met (venv) active, typ je:
+
+      pip list
+
+* Als dit niet werkt moet je helaas een nieuwe virtual environment aanmaken
+
+---
+
 #### Installeren via Bash:
 
 ---
