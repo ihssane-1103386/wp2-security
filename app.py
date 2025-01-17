@@ -82,7 +82,7 @@ def inlog():
 def success():
     return render_template('successvol_ingelogd.html')
 
-@app.route("/nieuwe_redacteur", methods=['GET', 'POST'])
+@app.route("/", methods=['GET', 'POST'])
 def nieuwe_redacteur():
     gebruikersnaam = ""
     email = ""
