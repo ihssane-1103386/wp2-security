@@ -109,21 +109,68 @@ Klik om door te gaan op de knop.
 
 * LET OP! Verwijder geen prompt die er al was, alleen je eigen prompts mogen verwijderd worden! 
 * Hier zie je een overzicht van de prompts, ingedeelde toetsvragen en correcte antwoorden
-* Klik op details van taxonomie van bloom
+* Klik op details van taxonomie van bloom > Naar taxonomie details scherm
+
+* De knoppen vragen en redacteuren brengen je naar andere schermen
+
+![AI prompts](../markdown_files/afbeeldingen/ai_prompts.png)
+
+---
+
+#### Ai details scherm
+
 * Hier kun je informatie zien over de prompt en door wie die ingedeeld is
 * Ga nu terug naar overzicht en klik niet op verwijderen
 
 * Nu kun je doorgaan naar een nieuwe prompt toevoegen
 * De knoppen vragen en redacteuren brengen je naar andere schermen
 
----
-
-#### Ai details scherm
+![Prompt details](../markdown_files/afbeeldingen/prompt_details.png)
 
 ---
 
 #### Nieuwe prompt scherm
 
+* Voeg hier je nieuwe prompt toe
+* Klik op opslaan en jouw prompt staat erbij
+
+* De knoppen vragen en redacteuren brengen je naar andere schermen
+
+![Nieuwe prompt](../markdown_files/afbeeldingen/??.png)
+
 ---
 
 #### Redacteuren scherm
+
+* Hier zie je de lijst met redacteuren
+* Klik op redacteur details > Naar redacteur details scherm
+* Klik op nieuwe redacteur > Naar nieuwe redacteur scherm
+
+* De knoppen AI prompts en redacteuren brengen je naar andere schermen
+
+![Redacteuren](../markdown_files/afbeeldingen/??.png)
+
+---
+
+#### Redacteur details scherm
+
+* Let op! Verwijder geen bestaande redacteuren! Deze zitten in de guide en anders kom je er niet in!
+* Wijzig hier de redacteur met nieuwe informatie of bekijk de informatie
+* Ga terug naar de redacteuren scherm
+
+* De knoppen vragen en redacteuren brengen je naar andere schermen
+
+![Redacteuren details](../markdown_files/afbeeldingen/??.png)
+
+---
+
+#### Nieuwe redacteur scherm
+
+* Maak hier een nieuwe redacteur aan
+* Vul alles in
+* Als je op opslaan klikt, kun je bij het opnieuw inloggen deze inlog gegevens gebruiken
+* Je keert nu terug naar de inlog scherm?
+
+![Nieuwe redacteur](../markdown_files/afbeeldingen/??.png)
+
+---
