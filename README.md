@@ -13,12 +13,52 @@ Error not found (1E3)
 
 ### Installation & venv files:
 
+#### Benodigdheden:
 * Python/Pycharm versie 2024.3.3.1
+* Installeer een nieuwe venv stappen doornemen
 * Installeer de pakketten in de requirements.txt file via bash command: pip install -r requirements.txt
-* 
+* Creëer een nieuwe Run/Debug Configuration
 
+* Het is niet gelukt om via Git de virtual environment mee te geven
+* Git laat deze niet uploaden en de bestanden blijven oranje
+
+#### Installeren via Bash:
+
+Venv file
+
+
+Run/Debug Configuration
+
+
+#### Handmatig:
+
+Venv file
+* rechts onderin zie je de current virtual environment file
+* klik op: Add new interpreter (add local interpreter)
+* Pak de eerste: Virtualenv Environment
+* Klik op new, meeste staat al klaar, mocht je het in een andere map willen plaatsen 'bladeren'
+* Klik dan op ok
+
+Run/Debug Configuration
+* Voordat je een Run/Debug aanmaakt, zorg dat je een virtual environment file hebt
+* Rechts bovenin zie je Current file staan of 3 puntjes en edit
+* Klap deze open en klik op edit configurations
+* Klik op + en voeg een Flask server toe
+* Zet deze op je aangemaakte virtual environment
+* Mocht je nog een working directory willen toevoegen, kies dan de huidige project
+* Klik dan op ok
+* Met deze Flask configuratie kun je App.py starten (eerst de packages installeren op je venv)
 
 pip install -r requirements.txt
+
+Klik op onderstaande command en plak het in je terminal:
+
+    [![Install Requirements](https://img.shields.io/badge/Install%20Requirements-%F0%9F%96%A5%20Click%20to%20copy-blue)](#requirements-command)
+
+    **Command:**
+    ```bash
+    pip install -r requirements.txt
+    ```
 
 ---
 
@@ -66,9 +106,6 @@ git clone https://github.com/Rac-Software-Development/wp2-2024-mvc-1e3-error-not
 
 ---
 
-### Venv file
-
----
 
 
 
