@@ -526,7 +526,6 @@ def update_redacteur(user_id):
 
     return redirect(url_for('redacteur'))
 
-
 @app.route('/delete_redacteur/<int:user_id>', methods=['POST'])
 def delete_redacteur(user_id):
     conn = sqlite3.connect(DATABASE_FILE)
