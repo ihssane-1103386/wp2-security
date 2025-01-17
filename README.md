@@ -37,7 +37,7 @@ git clone https://github.com/Rac-Software-Development/wp2-2024-mvc-1e3-error-not
 * Redacteur wijzigen/verwijderen (admin only)
 * Ai prompts
 * AI details 
-* AI verwijderen (admin only)
+* Prompt verwijderen (admin only)
 * Nieuwe prompt toevoegen (admin only)
 * Indexeren van taxonomie
 * Resultaat van taxonomie (meerdere taxonomie opties)
