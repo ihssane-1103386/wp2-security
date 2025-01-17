@@ -1,4 +1,4 @@
-> # Werkplaats 2: Test Correct
+> # Werkplaats 2: Test Correct applicatie project
 
 ---
 
