@@ -158,7 +158,7 @@ Klik om door te gaan op de knop.
 
 #### Redacteur details scherm
 
-* Let op! Verwijder geen bestaande redacteuren! Deze zitten in de guide en anders kom je er niet in!
+* Let op! Verwijder geen bestaande redacteuren! Deze zitten in de guide en anders kom je er niet meer in!
 * Wijzig hier de redacteur met nieuwe informatie of bekijk de informatie
 * Ga terug naar de redacteuren scherm
 
