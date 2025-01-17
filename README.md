@@ -14,7 +14,11 @@ Error not found (1E3)
 ### Installation & venv files:
 
 * Python/Pycharm versie 2024.3.3.1
+* Installeer de pakketten in de requirements.txt file via bash command: pip install -r requirements.txt
+* 
 
+
+pip install -r requirements.txt
 
 ---
 
