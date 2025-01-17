@@ -32,29 +32,37 @@ Klik om door te gaan op de knop.
 
 * Hier krijg je de welkom bericht met je inlog naam.
 
+![succesvol ingelogd](../markdown_files/afbeeldingen/??.png)
+
 ---
 
 #### Toetsvragen scherm
 
 Filteren & zoeken
 
-Filter hier de vragen.
+Filter hier de vragen, druk dan op zoeken en ververs als je alles weer wilt zien.
 
 ![Filteren](../markdown_files/afbeeldingen/toetsvragen_zoeken.png)
 
 paginering
 
-zoek uit de pagina nummers, dit kan ook wanneer er gefilterd is.
+Zoek uit de pagina nummers, dit kan ook wanneer het gefilterd is.
+
+![paginering](../markdown_files/afbeeldingen/paginering.png)
 
 Knoppen:
 
-Indexeren > Indexeren scherm
+Indexeren > Naar indexeren scherm
 
-Wijzigen > Taxonomie wijzigen scherm
+![indexeren](../markdown_files/afbeeldingen/indexeren.png)
 
-AI prompts (admin only) > AI prompts scherm
+Wijzigen > Naar taxonomie wijzigen scherm
 
-redacteuren (admin only) > Redacteuren scherm
+![wijzigen](../markdown_files/afbeeldingen/wijzig.png)
+
+AI prompts (admin only) > Naar AI prompts scherm
+
+redacteuren (admin only) > Naar redacteuren scherm
 
 ---
 
