@@ -466,7 +466,6 @@ def wijzig(username):
         nieuwe_naam = request.form.get('display_name')
         wachtwoord = request.form.get('password')
 
-
         queries = load_queries('static/queries.sql')
         wijzig_redacteur_query = queries['wijzig_redacteur_query']
 
