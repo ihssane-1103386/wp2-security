@@ -53,7 +53,7 @@ git clone https://github.com/Rac-Software-Development/wp2-2024-mvc-1e3-error-not
 ---
 
 ### Sources & references:
-[Bronnenlijst & verwijzingen](markDown_files/bronnenlijst.md)
+[Bronnenlijst & verwijzingen](markdown_files/bronnenlijst.md)
 
 ---
 
