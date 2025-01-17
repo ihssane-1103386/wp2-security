@@ -14,26 +14,17 @@
                 <img src="../static/assets/logo/testcorrect-logo.svg" alt="Logo">
             </a>
         </div>
-
-        <div class="menu-container">
-            <ul class="main-navigation">
-                <li><a href="#">Oplossingen</a></li>
-                <li><a href="https://www.test-correct.nl/toetsplatform">Toetsplatform</a></li>
-                <li><a href="https://www.test-correct.nl/pakketten">Aanbod</a></li>
-                <li><a href="https://www.test-correct.nl/support">Support</a></li>
-                <li><a href="https://www.test-correct.nl/overons">Over</a></li>
-            </ul>
-        </div>
-
         <div class="button-container">
-            <a href="https://www.test-correct.nl/welcome" class="button one">Probeer nu</a>
-            <a href="https://welcome.test-correct.nl/login" class="button two">Log in</a>
+            <a href="http://127.0.0.1:5000/inlog" class="button">inloggen</a>
+            <a href="http://127.0.0.1:5000/redacteur" class="button">redacteuren</a>
+            <a href="http://127.0.0.1:5000/toetsvragen" class="button">toetsvragen</a>
+            <a href="http://127.0.0.1:5000/ai_prompts" class="button">ai-prompts</a>
         </div>
     </div>
 </header>
 <h1>Nieuwe redacteur</h1>
 <div class="login_form">
-                <form action="/nr" method="POST">
+                <form action="/" method="POST">
             <div class="field">
                 <label for="username">Gebruikersnaam</label>
                 <input type="text" id="username" name="username" placeholder="Uw gebruikersnaam" value="{{gebruikersnaam|default('')}}" required="">

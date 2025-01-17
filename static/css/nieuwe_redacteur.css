@@ -53,25 +53,24 @@ body {
             font-family: 'Nunito', sans-serif;
         }
 
-        .button-container a {
-            margin-left: 15px;
+        .button-container a{
             color: white;
-            background-color: #3dbb56;
+            background-color: #3DBB56;
             padding: 10px 20px;
             text-decoration: none;
             border-radius: 5px;
+            font-size: 16px;
+            text-align: center;
+            transition: background-color 0.3s ease;
         }
 
-       .button-container .button.two {
-            background-color: #004df5;
-        }
-
-        .button-container .button.one {
-            background-color: #3dbb56;
-        }
 
         .button-container a:hover {
             background-color: #2e9e47;
+        }
+
+       .button-container .button {
+            background-color: #3dbb56;
         }
 
         .toggle-switch {

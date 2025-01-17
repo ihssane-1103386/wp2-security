@@ -2,7 +2,7 @@ import datetime
 import logging
 
 from flask import Flask, request, render_template, redirect, url_for, session, flash
-
+from flask_bcrypt import Bcrypt
 from lib.gpt.bloom_taxonomy import get_bloom_category
 from model_prompts import prompts_ophalen, prompt_details_ophalen, prompt_verwijderen, prompt_toevoegen
 from indexeer_page_db_connection import prompt_lijst, prompt_ophalen_op_id
@@ -11,6 +11,7 @@ import sqlite3
 
 app = Flask(__name__)
 app.secret_key = 'error-not-found'
+bcrypt = Bcrypt(app)
 
 DATABASE_FILE = "databases/database_toetsvragen.db"
 
@@ -37,7 +38,60 @@ def load_queries(path):
 
     return queries
 
+
+@app.route("/successvol_ingelogd")
+def success():
+    return render_template('successvol_ingelogd.html')
+
 @app.route("/", methods=['GET', 'POST'])
+def nieuwe_redacteur():
+    gebruikersnaam = ""
+    email = ""
+    wachtwoord = ""
+    if request.method == 'POST':
+        gebruikersnaam = request.form.get('username')
+        email = request.form.get('email')
+        wachtwoord = request.form.get('password')
+        is_admin = 1 if request.form.get('is_admin') == 'on' else 0
+        date_created = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+
+
+        hashed_wachtwoord = bcrypt.generate_password_hash(wachtwoord).decode("utf-8")
+
+        print(f"Gebruikersnaam: {gebruikersnaam}")
+        print(f"Email: {email}")
+        print(f"Wachtwoord (gehasht): {hashed_wachtwoord}")
+        print(f"Is Admin: {is_admin}")
+
+        if gebruikersnaam and hashed_wachtwoord and email:
+            try:
+                conn = sqlite3.connect('databases/database_toetsvragen.db')
+                cursor = conn.cursor()
+
+                queries = load_queries('static/queries.sql')
+                insert_redacteur = queries['insert_redacteur']
+
+                cursor.execute(insert_redacteur, (gebruikersnaam, hashed_wachtwoord, gebruikersnaam, date_created, is_admin))
+
+                print(
+                    f"Gebruikersnaam: {gebruikersnaam}, E-mail: {email}, Wachtwoord: {hashed_wachtwoord}, Is Admin: {is_admin}, Datum: {date_created}")
+
+                conn.commit()
+                conn.close()
+
+                return render_template('successvol_ingelogd.html', message=f"{gebruikersnaam} is succesvol toegevoegd! Klik hieronder om verder te gaan!",
+                                       link="http://127.0.0.1:5000/toetsvragen")
+
+            except sqlite3.IntegrityError:
+                flash("Fout: Deze gebruikersnaam of e-mail bestaat al!")
+                return "Fout: Deze gebruikersnaam of e-mail bestaat al!", 400
+            except Exception as e:
+                return f"Er is een fout opgetreden: {e}"
+    return render_template('nieuwe_redacteur.html')
+
+
+
+@app.route("/inlog", methods=['GET', 'POST'])
 def inlog():
     ingevulde_gebruikersnaam = ""
     ingevulde_wachtwoord = ""
@@ -51,28 +105,27 @@ def inlog():
         queries = load_queries('static/queries.sql')
         login_query = queries['login_query']
 
-        cursor.execute(login_query,(ingevulde_gebruikersnaam, ingevulde_wachtwoord))
+        cursor.execute(login_query,(ingevulde_gebruikersnaam, ))
         user = cursor.fetchone()
         conn.close()
 
-        if user:
+        if user and bcrypt.check_password_hash(user[2], ingevulde_wachtwoord):
             # Zet de gebruiker in de sessie
             session['current_user'] = {
                 'user_id': user[0],
                 'username': user[1],
                 'display_name': user[3],
-                'is_admin': bool(user[5])
+                'is_admin': bool(user[5]),
+                'password': user[2]
             }
             display_name = user[3]
-            flash(f"Welkom {display_name}! Je bent succesvol ingelogd!", "success")
+            flash(f"Welkom {user[3]}! Je bent succesvol ingelogd!", "success")
             return redirect(url_for('toetsvragen'))
         else:
             flash("Onjuiste gebruikersnaam of wachtwoord. Probeer het opnieuw.", "error")
         return render_template('inloggen.html.jinja')
-    return render_template('inloggen.html.jinja')
-@app.route("/successvol_ingelogd")
-def success():
-    return render_template('successvol_ingelogd.html')
+    return render_template('inloggen.html.jinja', ingevulde_gebruikersnaam = ingevulde_gebruikersnaam)
+
 
 # redacteuren uit de database halen
 def get_redacteuren():
@@ -97,49 +150,6 @@ def redacteur():
 
     redacteuren = get_redacteuren()
     return render_template('redacteur.html.jinja', redacteuren=redacteuren, current_user=session.get('current_user'))
-
-
-@app.route("/nieuwe_redacteur", methods=['GET', 'POST'])
-def nieuwe_redacteur():
-    gebruikersnaam = ""
-    email = ""
-    wachtwoord = ""
-    if request.method == 'POST':
-        gebruikersnaam = request.form.get('username')
-        email = request.form.get('email')
-        wachtwoord = request.form.get('password')
-        is_admin = 1 if request.form.get('is_admin') == 'on' else 0
-        date_created = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-
-        print(f"Gebruikersnaam: {gebruikersnaam}")
-        print(f"Email: {email}")
-        print(f"Wachtwoord: {wachtwoord}")
-        print(f"Is Admin: {is_admin}")
-
-        if gebruikersnaam and wachtwoord and email:
-            try:
-                conn = sqlite3.connect('databases/database_toetsvragen.db')
-                cursor = conn.cursor()
-
-                queries = load_queries('static/queries.sql')
-                insert_redacteur = queries['insert_redacteur']
-
-                cursor.execute(insert_redacteur, (gebruikersnaam, wachtwoord, gebruikersnaam, date_created, is_admin))
-
-                print(
-                    f"Gebruikersnaam: {gebruikersnaam}, E-mail: {email}, Wachtwoord: {wachtwoord}, Is Admin: {is_admin}, Datum: {date_created}")
-
-                conn.commit()
-                conn.close()
-
-                return render_template('successvol_ingelogd.html', message=f"{gebruikersnaam} is succesvol toegevoegd! Klik hieronder om verder te gaan!",
-                                       link="http://127.0.0.1:5000/toetsvragen")
-
-            except sqlite3.IntegrityError:
-                return "Fout: Deze gebruikersnaam of e-mail bestaat al!", 400
-            except Exception as e:
-                return f"Er is een fout opgetreden: {e}"
-    return render_template('nieuwe_redacteur.html')
 
 
 @app.route('/indexeren', methods=["GET",'POST'])
