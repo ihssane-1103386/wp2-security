@@ -162,6 +162,7 @@ Klik om door te gaan op de knop.
 
 * Let op! Verwijder geen bestaande redacteuren! Deze zitten in de guide en anders kom je er niet meer in!
 * Wijzig hier de redacteur met nieuwe informatie of bekijk de informatie
+* Admin users kunnen gegevens van hunzelf en anderen wijzigen, Non-Admin users kunnen alleen hun eigen gegeven wijzigen
 * Ga terug naar de redacteuren scherm
 
   
