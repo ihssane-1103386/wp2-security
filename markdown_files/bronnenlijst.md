@@ -20,8 +20,13 @@ YouTube. https://www.youtube.com/watch?v=4yaG-jFfePc
 *Constructing URL: proper query parameter encoding.* (2024, 21 december).  
 W3resource. https://www.w3resource.com/python-exercises/urllib3/python-urllib3-exercise-11.php
 
+*Creating Web Applications with Flask | PyCharm.* (z.d.). PyCharm Help.  
+https://www.jetbrains.com/help/pycharm/creating-web-application-with-flask.html#database 
+
 Creemers, L. (2023, 31 december). Build a To-Do List App Using Python Flask, Jinja2, and SQL.  
 *Lou’s Blog Exploring Tech.* https://lovelacecoding.hashnode.dev/build-a-to-do-list-app-using-python-flask-jinja2-and-sql
+
+Emiel 't lam. (2025, 17 januari). *Persoonlijke communicatie.*
 
 *Flask SQLite database - Python Tutorial.* (z.d.).  
 https://pythonbasics.org/flask-sqlite/
@@ -37,6 +42,12 @@ GeeksforGeeks. https://www.geeksforgeeks.org/get-the-value-of-a-checkbox-in-flas
 
 GeeksforGeeks. (2024c, augustus 30). *How to Create a Checkbox in HTML?*   
 GeeksforGeeks. https://www.geeksforgeeks.org/how-to-create-a-checkbox-in-html/?ref=ml_lbp
+
+Hashing Passwords in Python with BCrypt. (z.d.).  
+https://www.tutorialspoint.com/hashing-passwords-in-python-with-bcrypt 
+
+Julian Nash. (2019, 6 maart). *Hashing passwords with Python and Bcrypt* [Video].  
+YouTube. https://www.youtube.com/watch?v=hNa05wr0DSA
 
 Kennedy, P. (2023, 4 juni). *Sessions in flask.* TestDriven.io.    
 https://testdriven.io/blog/flask-sessions/
@@ -70,6 +81,12 @@ https://dev.to/emilossola/a-step-by-step-guide-for-pagination-in-python-1464
 
 Programming with Mosh. (2019, 20 maart). *SQL Course for Beginners [Full Course]* [Video].  
 YouTube. https://www.youtube.com/watch?v=7S_tz1z_5bA
+
+Python ML Daily. (2024, 24 januari). *Python requirements.txt: Generate with PyCharm* [Video].  
+YouTube. https://www.youtube.com/watch?v=rxKB3Bbn48I
+
+Real Python. (2023, 29 juni). *Introduction to Jinja Templating* [Video].  
+YouTube. https://www.youtube.com/watch?v=OraYXEr0Irg
 
 S3CloudHub (2022, 18 augustus) *how to create a simple flask app in just 5 min.*  
 youtube. https://youtu.be/6M3LzGmIAso?si=wZ-BtLpaYiEI9HE5
@@ -129,13 +146,3 @@ werkplaats 2
 werkplaats 2 
 
 ---
-
-
-Creating Web Applications with Flask | PyCharm. (z.d.). PyCharm Help. 
-https://www.jetbrains.com/help/pycharm/creating-web-application-with-flask.html#database 
-
-Hashing Passwords in Python with BCrypt. (z.d.). https://www.tutorialspoint.com/hashing-passwords-in-python-with-bcrypt 
-
-Julian Nash. (2019, 6 maart). Hashing passwords with Python and Bcrypt [Video]. YouTube. https://www.youtube.com/watch?v=hNa05wr0DSA 
-
-Real Python. (2023, 29 juni). Introduction to Jinja Templating [Video]. YouTube. https://www.youtube.com/watch?v=OraYXEr0Irg

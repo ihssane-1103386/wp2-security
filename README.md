@@ -13,24 +13,104 @@ Error not found (1E3)
 
 ### Installation & venv files:
 
-#### Benodigdheden:
+#### Benodigdheden (zie installeren):
 * Python/Pycharm versie 2024.3.3.1
 * Installeer een nieuwe venv stappen doornemen
 * Installeer de pakketten in de requirements.txt file via bash command: pip install -r requirements.txt
-* Creëer een nieuwe Run/Debug Configuration
+* Creëer een nieuwe Run/Debug Configuration  
 
 * Het is niet gelukt om via Git de virtual environment mee te geven
 * Git laat deze niet uploaden en de bestanden blijven oranje
 
 #### Installeren via Bash:
 
-Venv file
+---
 
+Venv file
+Stap 1: Navigeer naar de gewenste map
+Gebruik cd om naar de map te gaan waar je de virtuele omgeving wilt maken:
+
+       cd /pad/naar/jouw/project
+
+---
+
+Stap 2: Creëer de virtuele omgeving
+Gebruik het python of python3 commando om de virtuele omgeving te maken:
+
+       python3 -m venv naam_van_venv
+
+Vervang naam_van_venv met de gewenste naam voor je virtuele omgeving, bijvoorbeeld venv.
+
+---
+
+Stap 3: Activeer de virtuele omgeving
+Afhankelijk van je shell (bijv. bash), gebruik je het volgende commando om de virtuele omgeving te activeren:
+
+       source naam_van_venv/bin/activate
+
+Je zult zien dat de prompt verandert en de naam van je virtuele omgeving toont, zoals:
+
+       (venv) user@computer:~/project$
+
+---
+
+Stap 4: Deactiveer de virtuele omgeving
+Als je klaar bent, kun je de virtuele omgeving deactiveren met:
+
+       deactivate
+
+---
+
+Stap 5: Controleer of het werkt
+Controleer of je in de virtuele omgeving zit door het volgende commando uit te voeren:
+
+       which python
+
+Dit zou naar het python-bestand in de venv-map moeten verwijzen, bijvoorbeeld:
+
+       /pad/naar/project/venv/bin/python
+
+---
 
 Run/Debug Configuration
+Stap 1: Maak een .idea map aan
+PyCharm slaat configuraties op in een .idea map. Zorg dat deze aanwezig is:
 
+     mkdir -p .idea/runConfigurations
 
-#### Handmatig:
+---
+
+Stap 2: Maak een XML-bestand voor de configuratie
+Creëer een bestand zoals MyScript.xml:
+
+     touch .idea/runConfigurations/MyScript.xml
+
+---
+
+Stap 3: Vul het bestand met een configuratie
+Gebruik de volgende Bash-opdracht:
+
+        cat <<EOL > .idea/runConfigurations/MyScript.xml
+        <component name="ProjectRunConfigurationManager">
+          <configuration default="false" name="MyScript" type="PythonConfigurationType" factoryName="Python">
+            <module name="MyProject" />
+            <option name="SCRIPT_NAME" value="\$PROJECT_DIR$/main.py" />
+            <option name="WORKING_DIRECTORY" value="\$PROJECT_DIR$" />
+            <option name="INTERPRETER_OPTIONS" value="" />
+            <option name="PARENT_ENVS" value="true" />
+            <envs />
+            <option name="SDK_HOME" value="\$PROJECT_DIR$/venv/bin/python" />
+            <option name="PARAMETERS" value="" />
+            <method v="2" />
+          </configuration>
+        </component>
+        EOL
+
+Hiermee stel je een Run-configuratie in voor een script genaamd main.py.
+
+---
+
+#### Handmatig installeren:
 
 Venv file
 * rechts onderin zie je de current virtual environment file
@@ -49,21 +129,26 @@ Run/Debug Configuration
 * Klik dan op ok
 * Met deze Flask configuratie kun je App.py starten (eerst de packages installeren op je venv)
 
-pip install -r requirements.txt
+#### Packages installeren:
 
-Klik op onderstaande command en plak het in je terminal:
+      pip install -r requirements.txt
+
+* Klik op onderstaande command en plak het in je terminal:
 
     [![Install Requirements](https://img.shields.io/badge/Install%20Requirements-%F0%9F%96%A5%20Click%20to%20copy-blue)](#requirements-command)
 
     **Command:**
     ```bash
+  
     pip install -r requirements.txt
     ```
+
+* Dit installeert alle benodigde packages
 
 ---
 
 ### Guide:
-[Guide](markdown_files/guide.md)
+[Guide, stapsgewijs uitgelegd](markdown_files/guide.md)
 
 ---
 

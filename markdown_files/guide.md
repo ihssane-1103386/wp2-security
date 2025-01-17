@@ -2,9 +2,9 @@
 
 ---
 
-#### Download de pakketten en open de venv file
+#### Download de pakketten en open een venv file
 
-Stap 1: Download de pakketten en open de venv files in de README.md > source /path/to/venv/Scripts/activate (gooi dit in de bash) 
+Stap 1: Download de pakketten en open de venv file staan in de README.md
 Stap 2: Run de FLASK (applicatie-wp2), rechts bovenin uitvouwen en dan de play knop indrukken  
 Stap 3: Open de server bij Run of klik hier: http://127.0.0.1:5000  
 Stap 4: Volgt hieronder  
@@ -33,11 +33,11 @@ Kies uit 1 van de onderstaande om de website te testen, tip: gebruik een admin.
 
 #### Welkom scherm
 
-Klik om door te gaan op de knop.
+Deze krijg je automatisch bij redacteuren, als je ingelogd bent
 
-* Hier krijg je de welkom bericht met je inlog naam.
+* Welkom bericht met je inlog naam.
 
-![succesvol ingelogd](../markdown_files/afbeeldingen/??.png)
+![succesvol ingelogd](../markdown_files/afbeeldingen/welkom.png)
 
 ---
 
@@ -141,7 +141,7 @@ Klik om door te gaan op de knop.
   
 * De knoppen vragen en redacteuren brengen je naar andere schermen
 
-![Nieuwe prompt](../markdown_files/afbeeldingen/??.png)
+![Nieuwe prompt](../markdown_files/afbeeldingen/nieuwe_prompt.png)
 
 ---
 
@@ -154,11 +154,11 @@ Klik om door te gaan op de knop.
   
 * De knoppen AI prompts en redacteuren brengen je naar andere schermen
 
-![Redacteuren](../markdown_files/afbeeldingen/??.png)
+![Redacteuren](../markdown_files/afbeeldingen/redacteur.png)
 
 ---
 
-#### Redacteur details scherm
+#### Redacteur wijzigen scherm
 
 * Let op! Verwijder geen bestaande redacteuren! Deze zitten in de guide en anders kom je er niet meer in!
 * Wijzig hier de redacteur met nieuwe informatie of bekijk de informatie
@@ -168,7 +168,7 @@ Klik om door te gaan op de knop.
   
 * De knoppen vragen en redacteuren brengen je naar andere schermen
 
-![Redacteuren details](../markdown_files/afbeeldingen/??.png)
+![Redacteuren details](../markdown_files/afbeeldingen/wijzigen.png)
 
 ---
 
@@ -177,8 +177,8 @@ Klik om door te gaan op de knop.
 * Maak hier een nieuwe redacteur aan
 * Vul alles in
 * Als je op opslaan klikt, kun je bij het opnieuw inloggen deze inlog gegevens gebruiken
-* Je keert nu terug naar de inlog scherm?
+* Je keert nu terug naar de redacteuren pagina
 
-![Nieuwe redacteur](../markdown_files/afbeeldingen/??.png)
+![Nieuwe redacteur](../markdown_files/afbeeldingen/nieuwe_redacteur.png)
 
 ---
