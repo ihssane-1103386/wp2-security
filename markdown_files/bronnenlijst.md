@@ -77,8 +77,18 @@ https://www.w3schools.com/howto/default.asp
 *W3Schools.com.* (z.d.-e). W3Schools.   
 https://www.w3schools.com/sql/default.asp
 
-W3Schools.com. (z.d.-f). W3Schools.  
+*W3Schools.com.* (z.d.-f). W3Schools.  
 https://www.w3schools.com/python/default.asp
 
+*Codehal* (2023, 18 juni) Login Form in HTML & CSS.
+youtube. https://youtu.be/hlwlM4a5rxg?si=V0V0U5Wz01na4JXJ
 
+*Bro code* (2021 september 1) Learn HTML forms.
+youtube. https://youtu.be/2O8pkybH6po?si=2ez4xmN5oiunpRvq
+
+*S3CloudHub* (2022, 18 augustus) how to create a simple flask app in just 5 min.
+youtube. https://youtu.be/6M3LzGmIAso?si=wZ-BtLpaYiEI9HE5
+
+*w3Schools.com.* (z.d.-e). W3Schools.
+https://www.w3schools.com/sql/
 ---
