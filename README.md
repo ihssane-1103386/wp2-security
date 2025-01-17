@@ -19,7 +19,7 @@ Error not found (1E3)
 ---
 
 ### Guide:
-[Guide](markDown_files/guide.md)
+[Guide](markdown_files/guide.md)
 
 ---
 
