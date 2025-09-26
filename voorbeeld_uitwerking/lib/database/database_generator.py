@@ -66,8 +66,7 @@ class WP2DatabaseGenerator:
         self.__execute_transaction_statement(create_statement)
         print("✅ Questions table created")
 
-
-
+# OWASP top 10: A02:2021: Cryptographic Failures
     def insert_admin_user(self):
         users = [
             ( "krugw@hr.nl", "geheim", "Gerard van Kruining", 1),
