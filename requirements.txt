@@ -1,7 +1,6 @@
 openai~=1.59.7
 ollama~=0.4.6
 h11~=0.14.0
-pip~=24.3.1
 distro~=1.9.0
 colorama~=0.4.6
 typing_extensions~=4.12.2
