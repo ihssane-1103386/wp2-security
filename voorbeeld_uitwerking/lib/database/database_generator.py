@@ -67,7 +67,7 @@ class WP2DatabaseGenerator:
         print("✅ Questions table created")
 
 
-
+#A07:2021 – Identification and Authentication Failures
     def insert_admin_user(self):
         users = [
             ( "krugw@hr.nl", "geheim", "Gerard van Kruining", 1),
