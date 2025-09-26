@@ -86,6 +86,7 @@ def inlog():
 def success():
     return render_template('successvol_ingelogd.html')
 
+## OWASP top 10: A01:2021: Broken Access Control
 @app.route("/nieuwe_redacteur", methods=['GET', 'POST'])
 def nieuwe_redacteur():
     gebruikersnaam = ""
