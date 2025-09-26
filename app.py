@@ -89,6 +89,12 @@ def success():
 ## OWASP top 10: A01:2021: Broken Access Control
 @app.route("/nieuwe_redacteur", methods=['GET', 'POST'])
 def nieuwe_redacteur():
+    if 'current_user' not in session:
+        flash("Je moet eerst inloggen om een nieuwe redacteur toe te voegen", "error")
+        return redirect("/inlog")
+    if not session['current_user']['is_admin']:
+        flash("Je hebt geen rechten om een nieuwe redacteur toe te voegen", "error")
+        return redirect("/toetsvragen")
     gebruikersnaam = ""
     email = ""
     wachtwoord = ""
@@ -96,9 +102,8 @@ def nieuwe_redacteur():
         gebruikersnaam = request.form.get('username')
         email = request.form.get('email')
         wachtwoord = request.form.get('password')
-        is_admin = 1 if request.form.get('is_admin') == 'on' else 0
+        is_admin = 0
         date_created = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-
 
         hashed_wachtwoord = bcrypt.generate_password_hash(wachtwoord).decode("utf-8")
 
