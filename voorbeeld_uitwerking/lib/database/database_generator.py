@@ -72,6 +72,11 @@ class WP2DatabaseGenerator:
             ( "krugw@hr.nl", "geheim", "Gerard van Kruining", 1),
             ( "vried@hr.nl", "geheimer", "Diederik de Vries", 0),
         ]
+    # fix van de kwetsbaarheid door bcrypt te importeren en dit stukje code toe te voegen
+        # users = [
+            #( "krugw@hr.nl", bcrypt.hashpw("geheim".encode('utf-8'), bcrypt.gensalt()).decode('utf-8'),"Gerard van Kruining", 1),
+            #( "vried@hr.nl", bcrypt.hashpw("geheimer".encode('utf-8'), bcrypt.gensalt()).decode('utf-8'), "Diederik de Vries", 0),
+        #]
         insert_statement = "INSERT INTO users (login, password, display_name, is_admin) VALUES (?, ?, ?, ?);"
         self.__execute_many_transaction_statement(insert_statement, users)
         print("✅ Default teachers / users created")
